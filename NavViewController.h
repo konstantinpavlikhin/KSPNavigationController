@@ -1,6 +1,3 @@
-////////////////////////////////////////////////////////////////////////////////
-
-#import "ViewController.h"
 
 @class NavigationController;
 
@@ -21,9 +18,9 @@
 
 @property(readwrite, retain) NSString* navigationTitle;
 
-@property(readonly) IBOutlet NSView* navigationBarItem;
+@property(readonly, retain) IBOutlet NSView* navigationBarItem;
 
-@property(readonly) IBOutlet NSView* navigationToolbar;
+@property(readonly, retain) IBOutlet NSView* navigationToolbar;
 
 @property(readonly) IBOutlet NSResponder* theFirstResponder;
 
@@ -39,6 +36,14 @@
 
 - (void) traverseViewHierarchyAndUnbindSilentDisabilityButtons: (NSView*) root;
 
-@end
+//////
 
-////////////////////////////////////////////////////////////////////////////////
+- (void) viewWillAppear: (BOOL) animated;
+
+- (void) viewDidAppear: (BOOL) animated;
+
+- (void) viewWillDisappear: (BOOL) animated;
+
+- (void) viewDidDisappear: (BOOL) animated;
+
+@end

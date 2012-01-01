@@ -1,6 +1,3 @@
-////////////////////////////////////////////////////////////////////////////////
-
-#import "ViewController.h"
 
 @interface NSView (NSImageFromNSView)
 
@@ -18,6 +15,8 @@
 
 - (void) navigationController: (NavigationController*) navigationController willShowViewController: (NavViewController*) viewController animated: (BOOL) animated;
 
+- (void) navigationController: (NavigationController*) navigationController didShowViewController: (NavViewController*) viewController animated: (BOOL) animated;
+
 @end
 
 #pragma mark -
@@ -34,8 +33,6 @@ typedef enum _Side { LeftSide, RightSide } Side;
 {
   IBOutlet NSView* navigationBar;
   
-  IBOutlet PathControl* pathControl;
-  
   IBOutlet NSView* navigationToolbarHost;
   
   NSMutableArray* viewControllers;
@@ -46,16 +43,21 @@ typedef enum _Side { LeftSide, RightSide } Side;
   
   NSView* navigationViewTransitionHost;
   
-  NSView* subviewToAddAfterTransition;
+  NSMutableArray* tempConstraints;
   
-  NSImageView* imageView1;
+  IBOutlet NSImageView* imageView1;
   
-  NSImageView* imageView2;
+  IBOutlet NSImageView* imageView2;
   
   id<NavigationControllerDelegate> delegate;
   
   BOOL transitioning;
 }
+
+@property(readwrite, retain) IBOutlet NSButton* backButton;
+@property(readwrite, retain) IBOutlet NSTextField* titleField;
+
+@property(readwrite, retain) NSView* navigationViewTransitionHost;
 
 @property(readonly) NSView* navigationBar;
 
@@ -76,27 +78,27 @@ typedef enum _Side { LeftSide, RightSide } Side;
 // Заменяет виды текущего NavViewController'а на виды newController'а.
 - (void) replaceCurrentNavViewControllerWith: (NavViewController*) newController animated: (BOOL) animated slideTo: (Side) side;
 
-- (void) animatedReplaceView: (NSView*) oldView with: (NSView*) newView slideTo: (Side) side;
-
-- (void) animationDidStop: (CAAnimation*) theAnimation finished: (BOOL) flag;
+- (void) animatedReplaceView: (NSView*) oldView with: (NSView*) newView slideTo: (Side) side hackyParam: (NavViewController*) newController hackyParam2: (NavViewController*) oldController;
 
 - (void) updatePathControl;
 
-- (void) pathControlClicked: (id) sender;
-
+/*
 #pragma mark Определение фрэймов элементов
 
 - (NSRect) frameForNavigationBarItem: (NSView*) navigationBarItem;
+*/
 
 - (NSRect) frameForNavigationView;
 
+/*
 - (NSRect) frameForNavigationToolbar;
+*/
 
 #pragma mark Пользовательские функции
 
 - (NavViewController*) topViewController;
 
-- (void) setViewControllers: (NSArray*) newViewControllers;
+- (void) setViewControllers: (NSMutableArray*) newViewControllers;
 
 - (void) pushViewController: (NavViewController*) viewController animated: (BOOL) animated;
 
@@ -106,6 +108,6 @@ typedef enum _Side { LeftSide, RightSide } Side;
 
 - (NSArray*) popToViewController: (NavViewController*) viewController animated: (BOOL) animated;
 
-@end
+- (IBAction) backButtonPressed:(id)sender;
 
-////////////////////////////////////////////////////////////////////////////////
+@end

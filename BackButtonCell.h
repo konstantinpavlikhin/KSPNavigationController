@@ -12,7 +12,7 @@
 
 @end
 
-@interface BackButtonCell : NSButtonCell
+@interface BlackButtonCell : NSButtonCell
 {
 }
 

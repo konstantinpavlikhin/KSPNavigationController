@@ -6,7 +6,7 @@
 //  Copyright 2010 Konstantin Pavlikhin. All rights reserved.
 //
 
-#import "BackButtonCell.h"
+#import "BlackButtonCell.h"
 
 
 static NSImage* buttonLeftN;
@@ -22,23 +22,23 @@ static NSImage* buttonFillP;
 static NSImage* buttonRightP;
 
 
-@implementation BlackButtonCell
+@implementation BackButtonCell
 
 + (void) initialize
 {
   NSBundle* bundle = [NSBundle mainBundle];
   
-  buttonLeftN = [[NSImage alloc] initWithContentsOfFile: [bundle pathForImageResource: @"blackButton-N-left.png"]];
+  buttonLeftN = [[NSImage alloc] initWithContentsOfFile: [bundle pathForImageResource: @"backButton-N-left.png"]];
   
   buttonFillN = [[NSImage alloc] initWithContentsOfFile: [bundle pathForImageResource: @"blackButton-N-middle.png"]];
   
   buttonRightN = [[NSImage alloc] initWithContentsOfFile: [bundle pathForImageResource: @"blackButton-N-right.png"]];
   
-  buttonLeftP = [[NSImage alloc] initWithContentsOfFile: [bundle pathForImageResource: @"blackButton-P-left.png"]];
+  buttonLeftP = [[NSImage alloc] initWithContentsOfFile: [bundle pathForImageResource: @"backButton-P-left.png"]];
   
-  buttonFillP = [[NSImage alloc] initWithContentsOfFile: [bundle pathForImageResource: @"blackButton-P-middle.png"]];
+  buttonFillP = [[NSImage alloc] initWithContentsOfFile: [bundle pathForImageResource: @"backButton-P-middle.png"]];
   
-  buttonRightP = [[NSImage alloc] initWithContentsOfFile: [bundle pathForImageResource: @"blackButton-P-right.png"]];
+  buttonRightP = [[NSImage alloc] initWithContentsOfFile: [bundle pathForImageResource: @"backButton-P-right.png"]];
 }
 
 - (void) drawBezelWithFrame: (NSRect) cellFrame inView: (NSView*) controlView
@@ -57,7 +57,7 @@ static NSImage* buttonRightP;
 
 - (NSRect) drawTitle: (NSAttributedString*) title withFrame: (NSRect) frame inView: (NSView*) controlView
 {
-  //frame.origin.y -= 1.0;
+  //frame.origin.y -= 4.0;
   
   return [super drawTitle: title withFrame: frame inView: controlView];
 }
