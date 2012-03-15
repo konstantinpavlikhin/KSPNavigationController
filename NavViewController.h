@@ -26,18 +26,6 @@
 
 - (void) traverseViewHierarchy: (NSView*) root andSetNSButtonCellsBackgroundColor: (NSColor*) backgroundColor;
 
-// Биндит все SilentDisabilityButton'ы в подвидах к флагу navigationController.transitioning.
-- (void) bindSilentDisabilityButtons;
-
-- (void) traverseViewHierarchyAndBindSilentDisabilityButtons: (NSView*) root;
-
-// Отсоединяет все SilentDisabilityButton'ы в подвидах от флага navigationController.transitioning.
-- (void) unbindSilentDisabilityButtons;
-
-- (void) traverseViewHierarchyAndUnbindSilentDisabilityButtons: (NSView*) root;
-
-//////
-
 - (void) viewWillAppear: (BOOL) animated;
 
 - (void) viewDidAppear: (BOOL) animated;

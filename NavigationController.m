@@ -43,8 +43,6 @@
 
 @synthesize delegate;
 
-@synthesize transitioning;
-
 #define TRANSITION_DURATION 0.25
 
 - (id) initWithRootViewController: (NavViewController*) rootViewController
@@ -138,8 +136,6 @@
   
   //*** Биндинг pathControl'а. *************************************************
   //NSDictionary* bindOptions = [NSDictionary dictionaryWithObject: NSNegateBooleanTransformerName forKey: NSValueTransformerNameBindingOption];
-  
-  //[pathControl bind: @"enabled" toObject: self withKeyPath: @"transitioning" options: bindOptions];
   
   return self;
 }
@@ -360,9 +356,6 @@
 // Что будет, если во время анимации сдвига изменить размер окна?
 - (void) animatedReplaceView: (NSView*) oldView with: (NSView*) newView slideTo: (Side) side hackyParam: (NavViewController*) newController hackyParam2: (NavViewController*) oldController
 {
-  // Блокируем элементы интерфейса, чтобы юзер не загнал нас в непредвиденное состояние.
-  [self setTransitioning: YES];
-  
   // Сохраняем изображение текущего вида в картинку.
   imageView1.image = [oldView imageWithSubviews];
   
@@ -427,9 +420,6 @@
     
     // Ставим фокус на нужный контрол.
     [[wndCtrlr window] makeFirstResponder: [[self topViewController] theFirstResponder]];
-    
-    // Разблокируем элементы интерфейса.
-    [self setTransitioning: NO];
     
     if([del respondsToSelector: @selector(navigationController:didShowViewController:animated:)])
     {

@@ -50,8 +50,6 @@ typedef enum _Side { LeftSide, RightSide } Side;
   IBOutlet NSImageView* imageView2;
   
   id<NavigationControllerDelegate> delegate;
-  
-  BOOL transitioning;
 }
 
 @property(readwrite, retain) IBOutlet NSButton* backButton;
@@ -64,8 +62,6 @@ typedef enum _Side { LeftSide, RightSide } Side;
 @property(readonly) NSMutableArray* viewControllers;
 
 @property(readwrite, assign) id<NavigationControllerDelegate> delegate;
-
-@property(readwrite, assign, getter = isTransitioning) BOOL transitioning;
 
 - (id) initWithRootViewController: (NavViewController*) rootViewController;
 
