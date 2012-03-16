@@ -10,8 +10,6 @@
   IBOutlet NSView* navigationBarItem;
   
   IBOutlet NSView* navigationToolbar;
-  
-  IBOutlet NSResponder* theFirstResponder;
 }
 
 @property(readwrite, assign) NavigationController* navigationController;
@@ -21,8 +19,6 @@
 @property(readonly, retain) IBOutlet NSView* navigationBarItem;
 
 @property(readonly, retain) IBOutlet NSView* navigationToolbar;
-
-@property(readonly) IBOutlet NSResponder* theFirstResponder;
 
 - (void) traverseViewHierarchy: (NSView*) root andSetNSButtonCellsBackgroundColor: (NSColor*) backgroundColor;
 

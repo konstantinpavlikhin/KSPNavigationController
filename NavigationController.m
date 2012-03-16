@@ -215,7 +215,7 @@
   [self insertNavigationViewWithAppropriateConstraints: [newController view]];
   
   // ?
-  [[self.windowController window] makeFirstResponder: [newController theFirstResponder]];
+  [[self.windowController window] makeFirstResponder: newController.proposedFirstResponder];
   
   //****************************************************************************
   
@@ -324,7 +324,7 @@
     
     [self.view addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[newNavigationView]|" options: 0 metrics: nil views: dict]];
     
-    [[[self windowController] window] makeFirstResponder: [newController theFirstResponder]];
+    [[[self windowController] window] makeFirstResponder: newController.proposedFirstResponder];
     
     if([delegate respondsToSelector: @selector(navigationController:didShowViewController:animated:)])
     {
@@ -419,7 +419,7 @@
     [self insertNavigationViewWithAppropriateConstraints: newView];
     
     // Ставим фокус на нужный контрол.
-    [[wndCtrlr window] makeFirstResponder: [[self topViewController] theFirstResponder]];
+    [[wndCtrlr window] makeFirstResponder: [self topViewController].proposedFirstResponder];
     
     if([del respondsToSelector: @selector(navigationController:didShowViewController:animated:)])
     {
