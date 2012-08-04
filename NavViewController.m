@@ -3,14 +3,6 @@
 
 @implementation NavViewController
 
-@synthesize navigationController;
-
-@synthesize navigationTitle;
-
-@synthesize navigationBarItem;
-
-@synthesize navigationToolbar;
-
 - (id) initWithNibName: (NSString*) nibNameOrNil bundle: (NSBundle*) nibBundleOrNil
 {
   self = [super initWithNibName: nibNameOrNil bundle: nibBundleOrNil];
@@ -19,14 +11,18 @@
   
   [self loadView];
   
-  [self traverseViewHierarchy: navigationToolbar andSetNSButtonCellsBackgroundColor: [NSColor windowBackgroundColor]];
+  [self traverseViewHierarchy: _navigationToolbar andSetNSButtonCellsBackgroundColor: [NSColor windowBackgroundColor]];
   
   return self;
 }
 
 - (void) dealloc
 {
-  [navigationTitle release]; navigationTitle = nil;
+  [_navigationTitle release]; _navigationTitle = nil;
+  
+  [_navigationBarItem release], _navigationBarItem = nil;
+  
+  [_navigationToolbar release], _navigationToolbar = nil;
   
   [super dealloc];
 }

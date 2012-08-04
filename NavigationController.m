@@ -5,6 +5,12 @@
 
 #import <QuartzCore/CoreAnimation.h>
 
+@interface NSView (NSImageFromNSView)
+
+- (NSImage*) imageWithSubviews;
+
+@end
+
 @implementation NSView (NSImageFromNSView)
 
 - (NSImage*) imageWithSubviews
@@ -30,18 +36,36 @@
 
 #pragma mark -
 
+enum Side { LeftSide, RightSide };
+
+@interface NavigationController ()
+
+@property(readwrite, retain) IBOutlet NSView* navigationBar;
+
+@property(readwrite, retain) IBOutlet NSButton* backButton;
+
+@property(readwrite, retain) IBOutlet NSTextField* titleField;
+
+@property(readwrite, retain) IBOutlet NSView* navigationToolbarHost;
+
+- (IBAction) backButtonPressed: (id) sender;
+
+@end
+
 @implementation NavigationController
-
-@synthesize backButton;
-@synthesize titleField;
-
-@synthesize navigationViewTransitionHost;
-
-@synthesize navigationBar;
+{
+  NSMutableArray* viewControllers;
+  
+  CATransition* pushTransition;
+  
+  NSView* navigationViewTransitionHost;
+  
+  NSImageView* imageView1;
+  
+  NSImageView* imageView2;
+}
 
 @synthesize viewControllers;
-
-@synthesize delegate;
 
 #define TRANSITION_DURATION 0.25
 
@@ -54,39 +78,40 @@
   [self loadView];
   
   //*** Настраиваем параметры представления GradientBox. ***********************
-  [(GradientBox*)navigationBar setHasGradient: YES];
+  [(GradientBox*)self.navigationBar setHasGradient: YES];
   
-  [(GradientBox*)navigationBar setFillStartingColor: [NSColor colorWithCalibratedWhite: 0.18 alpha: 1.0]]; // 0.2 iPhoto
+  [(GradientBox*)self.navigationBar setFillStartingColor: [NSColor colorWithCalibratedWhite: 0.18 alpha: 1.0]]; // 0.2 iPhoto
   
-  [(GradientBox*)navigationBar setFillEndingColor: [NSColor colorWithCalibratedWhite: 0.09 alpha: 1.0]]; // 0.15 iPhoto
+  [(GradientBox*)self.navigationBar setFillEndingColor: [NSColor colorWithCalibratedWhite: 0.09 alpha: 1.0]]; // 0.15 iPhoto
   
   //[(GradientBox*)navigationBar setTopInsetAlpha: 0.15];
   
-  [(GradientBox*)navigationBar setBottomInsetAlpha: 0.03];
+  [(GradientBox*)self.navigationBar setBottomInsetAlpha: 0.03];
   
-  [(GradientBox*)navigationBar setHasBottomBorder: YES];
+  [(GradientBox*)self.navigationBar setHasBottomBorder: YES];
   
-  [(GradientBox*)navigationBar setBottomBorderColor: [NSColor colorWithCalibratedWhite: 0.07 alpha: 1.0]];
-  
+  [(GradientBox*)self.navigationBar setBottomBorderColor: [NSColor colorWithCalibratedWhite: 0.07 alpha: 1.0]];
   
   {
-    [backButton setTranslatesAutoresizingMaskIntoConstraints: NO];
+    [self.backButton setTranslatesAutoresizingMaskIntoConstraints: NO];
     
-    [self.navigationBar addSubview: backButton];
+    [self.navigationBar addSubview: self.backButton];
     
     NSView* title = self.titleField;
     
-    NSDictionary* dict = NSDictionaryOfVariableBindings(backButton, title);
+    NSDictionary* dict = NSDictionaryOfVariableBindings(_backButton, title);
     
-    [self.navigationBar addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"H:|-10-[backButton]-(>=10)-[title]" options: 0 metrics: nil views: dict]];
+    [self.navigationBar addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"H:|-10-[_backButton]-(>=10)-[title]" options: 0 metrics: nil views: dict]];
     
-    [self.navigationBar addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|-7-[backButton]" options: 0 metrics: nil views: dict]];
+    [self.navigationBar addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|-7-[_backButton]" options: 0 metrics: nil views: dict]];
   }
-  
   
   viewControllers = [NSMutableArray new];
   
-  if(rootViewController) [self setViewControllers: [NSArray arrayWithObject: rootViewController]];
+  if(rootViewController)
+  {
+    [self setViewControllers: [NSArray arrayWithObject: rootViewController]];
+  }
   
   //*** Анимация navigationBarItem и navigationToolbar. ************************
   CATransition* fadeTransition = [CATransition animation];
@@ -97,9 +122,9 @@
   
   NSDictionary* animations = [NSDictionary dictionaryWithObject: fadeTransition forKey: @"subviews"];
   
-  [navigationBar setAnimations: animations];
+  [self.navigationBar setAnimations: animations];
   
-  [navigationToolbarHost setAnimations: animations];
+  [self.navigationToolbarHost setAnimations: animations];
   
   //*** Анимация смены navigationView. *****************************************
   pushTransition = [[CATransition animation] retain];
@@ -126,6 +151,7 @@
   
   [imageView1 setIdentifier: @"imageView1"];
   
+  
   imageView2 = [[NSImageView alloc] initWithFrame: NSZeroRect];
   
   [imageView2 setTranslatesAutoresizingMaskIntoConstraints: NO];
@@ -134,25 +160,20 @@
   
   [imageView2 setIdentifier: @"imageView2"];
   
-  //*** Биндинг pathControl'а. *************************************************
-  //NSDictionary* bindOptions = [NSDictionary dictionaryWithObject: NSNegateBooleanTransformerName forKey: NSValueTransformerNameBindingOption];
-  
   return self;
 }
 
 - (void) dealloc
 {
-  [viewControllers release];
+  [viewControllers release], viewControllers = nil;
   
-  [pushTransition release];
+  [pushTransition release], pushTransition = nil;
   
-  [navigationViewTransitionHost release];
+  [navigationViewTransitionHost release], navigationViewTransitionHost = nil;
   
-  [imageView1 release];
+  [imageView1 release], imageView1 = nil;
   
-  [imageView2 release];
-  
-  //[pathControl unbind: @"enabled"];
+  [imageView2 release], imageView2 = nil;
   
   [super dealloc];
 }
@@ -166,11 +187,11 @@
   
   [self.view addSubview: v];
   
-  NSDictionary* views = NSDictionaryOfVariableBindings(navigationBar, v, navigationToolbarHost);
+  NSDictionary* views = NSDictionaryOfVariableBindings(_navigationBar, v, _navigationToolbarHost);
   
   [self.view addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"H:|[v]|" options: 0 metrics: nil views: views]];
   
-  [self.view addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"V:[navigationBar][v][navigationToolbarHost]" options: 0 metrics: nil views: views]];
+  [self.view addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"V:[_navigationBar][v][_navigationToolbarHost]" options: 0 metrics: nil views: views]];
   
   {
     //[v setNeedsLayout: YES];
@@ -186,9 +207,9 @@
 {
   if(!newController) return;
   
-  if([delegate respondsToSelector: @selector(navigationController:willShowViewController:animated:)])
+  if([self.delegate respondsToSelector: @selector(navigationController:willShowViewController:animated:)])
   {
-    [delegate navigationController: self willShowViewController: newController animated: NO];
+    [self.delegate navigationController: self willShowViewController: newController animated: NO];
   }
   
   //*********************
@@ -197,17 +218,17 @@
   
   if(newNavigationBarItem)
   {
-  [navigationBar addSubview: newNavigationBarItem];
-  
-  [newNavigationBarItem setTranslatesAutoresizingMaskIntoConstraints: NO];
-  
-  NSView* title = self.titleField;
-  
-  NSDictionary* views = NSDictionaryOfVariableBindings(title, newNavigationBarItem);
-  
-  [navigationBar addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"H:[title]-(>=10)-[newNavigationBarItem]-(10)-|" options: 0 metrics: nil views: views]];
-  
-  [navigationBar addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|-4-[newNavigationBarItem]" options: 0 metrics: nil views: views]];
+    [self.navigationBar addSubview: newNavigationBarItem];
+    
+    [newNavigationBarItem setTranslatesAutoresizingMaskIntoConstraints: NO];
+    
+    NSView* title = self.titleField;
+    
+    NSDictionary* views = NSDictionaryOfVariableBindings(title, newNavigationBarItem);
+    
+    [self.navigationBar addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"H:[title]-(>=10)-[newNavigationBarItem]-(10)-|" options: 0 metrics: nil views: views]];
+    
+    [self.navigationBar addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|-4-[newNavigationBarItem]" options: 0 metrics: nil views: views]];
   }
 
   //****************************************************************************
@@ -225,15 +246,16 @@
   
   //[newNavigationToolbar setFrame: [self frameForNavigationToolbar]];
   
-  [navigationToolbarHost addSubview: newNavigationToolbar];
+  [self.navigationToolbarHost addSubview: newNavigationToolbar];
   
   NSDictionary* views = NSDictionaryOfVariableBindings(newNavigationToolbar);
   
-  [navigationToolbarHost addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"H:|[newNavigationToolbar]|" options: 0 metrics: nil views: views]];
+  [self.navigationToolbarHost addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"H:|[newNavigationToolbar]|" options: 0 metrics: nil views: views]];
   
-  [navigationToolbarHost addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[newNavigationToolbar]|" options: 0 metrics: nil views: views]];
+  [self.navigationToolbarHost addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[newNavigationToolbar]|" options: 0 metrics: nil views: views]];
 }
 
+// Вынимает виды текущего NavViewController'а из видов NavigationController'а.
 - (void) removeCurrentNavViewController
 {
   NavViewController* currentController = [self topViewController];
@@ -246,13 +268,13 @@
 }
 
 // Снимает текущий контроллер из окна и вставляет в него новый.
-- (void) replaceCurrentNavViewControllerWith: (NavViewController*) newController animated: (BOOL) animated slideTo: (Side) side
+- (void) replaceCurrentNavViewControllerWith: (NavViewController*) newController animated: (BOOL) animated slideTo: (enum Side) side
 {
   if(!newController) return;
   
-  if([delegate respondsToSelector: @selector(navigationController:willShowViewController:animated:)])
+  if([self.delegate respondsToSelector: @selector(navigationController:willShowViewController:animated:)])
   {
-    [delegate navigationController: self willShowViewController: newController animated: animated];
+    [self.delegate navigationController: self willShowViewController: newController animated: animated];
   }
   
   //****************************************************************************
@@ -273,7 +295,7 @@
     // Если navigationBarItem была и будет.
     //[newNavigationBarItem setFrame: [self frameForNavigationBarItem: newNavigationBarItem]];
     
-    [(animated? [navigationBar animator] : navigationBar) replaceSubview: oldNavigationBarItem with: newNavigationBarItem];
+    [(animated? [self.navigationBar animator] : self.navigationBar) replaceSubview: oldNavigationBarItem with: newNavigationBarItem];
   }
   else if(oldNavigationBarItem && !newNavigationBarItem)
   {
@@ -285,7 +307,7 @@
     // Если navigationBarItem не было, но будет.
     //[newNavigationBarItem setFrame: [self frameForNavigationBarItem: newNavigationBarItem]];
     
-    [(animated? [navigationBar animator] : navigationBar) addSubview: newNavigationBarItem];
+    [(animated? [self.navigationBar animator] : self.navigationBar) addSubview: newNavigationBarItem];
   }
   
   if(newNavigationBarItem)
@@ -326,9 +348,9 @@
     
     [[[self windowController] window] makeFirstResponder: newController.proposedFirstResponder];
     
-    if([delegate respondsToSelector: @selector(navigationController:didShowViewController:animated:)])
+    if([self.delegate respondsToSelector: @selector(navigationController:didShowViewController:animated:)])
     {
-      [delegate navigationController: self didShowViewController: newController animated: NO];
+      [self.delegate navigationController: self didShowViewController: newController animated: NO];
     }
     
     [oldController viewDidDisappear: animated];
@@ -338,23 +360,23 @@
   
   //*** NavigationToolbar ******************************************************
   
-  NSView* newNavigationToolbar = [newController navigationToolbar];
+  NSView* newNavigationToolbar = newController.navigationToolbar;
   
   //[newNavigationToolbar setFrame: [self frameForNavigationToolbar]];
   
-  [(animated? [navigationToolbarHost animator] : navigationToolbarHost) replaceSubview: [oldController navigationToolbar] with: newNavigationToolbar];
+  [(animated? [self.navigationToolbarHost animator] : self.navigationToolbarHost) replaceSubview: [oldController navigationToolbar] with: newNavigationToolbar];
   
   [newNavigationToolbar setTranslatesAutoresizingMaskIntoConstraints: NO];
   
   NSDictionary* dict = NSDictionaryOfVariableBindings(newNavigationToolbar);
   
-  [navigationToolbarHost addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"H:|[newNavigationToolbar]|" options: 0 metrics: nil views: dict]];
+  [self.navigationToolbarHost addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"H:|[newNavigationToolbar]|" options: 0 metrics: nil views: dict]];
   
-  [navigationToolbarHost addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[newNavigationToolbar]|" options: 0 metrics: nil views: dict]];
+  [self.navigationToolbarHost addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[newNavigationToolbar]|" options: 0 metrics: nil views: dict]];
 }
 
 // Что будет, если во время анимации сдвига изменить размер окна?
-- (void) animatedReplaceView: (NSView*) oldView with: (NSView*) newView slideTo: (Side) side hackyParam: (NavViewController*) newController hackyParam2: (NavViewController*) oldController
+- (void) animatedReplaceView: (NSView*) oldView with: (NSView*) newView slideTo: (enum Side) side hackyParam: (NavViewController*) newController hackyParam2: (NavViewController*) oldController
 {
   // Сохраняем изображение текущего вида в картинку.
   imageView1.image = [oldView imageWithSubviews];
@@ -395,7 +417,7 @@
   
   NSWindowController* wndCtrlr = self.windowController;
   
-  id del = delegate;
+  id del = self.delegate;
   
   [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* context)
   {
@@ -436,17 +458,17 @@
 
 - (void) updatePathControl
 {
-  titleField.stringValue = [[viewControllers lastObject] navigationTitle];
+  self.titleField.stringValue = [[viewControllers lastObject] navigationTitle];
   
   if([viewControllers count] > 1)
   {
-    [backButton setHidden: NO];
+    [self.backButton setHidden: NO];
     
     self.backButton.title = [NSString stringWithFormat: @"  %@", [[viewControllers objectAtIndex: [viewControllers count] - 2] navigationTitle]];
   }
   else
   {
-    [backButton setHidden: YES];
+    [self.backButton setHidden: YES];
   }
   
   return;
@@ -486,7 +508,7 @@
 {
   NSRect navigationViewFrame;
   
-  CGFloat navigationToolbarHostHeight = [navigationToolbarHost frame].size.height;
+  CGFloat navigationToolbarHostHeight = [self.navigationToolbarHost frame].size.height;
   
   navigationViewFrame.origin.x = 0;
   
@@ -494,7 +516,7 @@
   
   navigationViewFrame.size.width = [[self view] frame].size.width;
   
-  navigationViewFrame.size.height = [navigationBar frame].origin.y - navigationToolbarHostHeight;
+  navigationViewFrame.size.height = [self.navigationBar frame].origin.y - navigationToolbarHostHeight;
   
   return navigationViewFrame;
 }
