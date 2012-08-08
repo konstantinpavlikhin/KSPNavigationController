@@ -5,6 +5,8 @@
 
 #import <QuartzCore/CoreAnimation.h>
 
+#import <KPFoundation/GradientBox.h>
+
 @interface NSView (NSImageFromNSView)
 
 - (NSImage*) imageWithSubviews;

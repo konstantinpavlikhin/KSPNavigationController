@@ -1,4 +1,6 @@
 
+#import <KPFoundation/KPViewController.h>
+
 @class NavigationController, NavViewController;
 
 @protocol NavigationControllerDelegate <NSObject>
@@ -15,7 +17,7 @@
 
 // TODO: переименовать все *ViewController на *NavViewController.
 
-@interface NavigationController : ViewController
+@interface NavigationController : KPViewController
 
 // Кому это надо?
 @property(readonly, retain) NSView* navigationBar;

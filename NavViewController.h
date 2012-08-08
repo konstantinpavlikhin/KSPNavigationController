@@ -1,7 +1,9 @@
 
+#import <KPFoundation/KPViewController.h>
+
 @class NavigationController;
 
-@interface NavViewController : ViewController
+@interface NavViewController : KPViewController
 
 @property(readwrite, assign) NavigationController* navigationController;
 
