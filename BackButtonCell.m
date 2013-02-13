@@ -43,6 +43,8 @@ static NSImage* buttonRightP;
 
 - (void) drawBezelWithFrame: (NSRect) cellFrame inView: (NSView*) controlView
 {
+  
+  
   cellFrame.size.height = buttonFillN.size.height;
   
   if([self isHighlighted])
@@ -58,6 +60,9 @@ static NSImage* buttonRightP;
 - (NSRect) drawTitle: (NSAttributedString*) title withFrame: (NSRect) frame inView: (NSView*) controlView
 {
   //frame.origin.y -= 4.0;
+  [[NSColor blackColor] setFill];
+  
+  NSRectFill(frame);
   
   return [super drawTitle: title withFrame: frame inView: controlView];
 }
