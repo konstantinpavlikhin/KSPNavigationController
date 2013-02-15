@@ -9,7 +9,7 @@
 
 #import <KPFoundation/NSObject+IfResponds.h>
 
-#import "BlackButtonCell.h"
+#import "KPBackButton.h"
 
 @interface NSView (NSImageFromNSView)
 
@@ -48,7 +48,7 @@ enum Side { Backwards, RightSide };
 
 @property(readwrite, retain) IBOutlet NSView* navigationBar;
 
-@property(readwrite, retain) IBOutlet NSButton* backButton;
+@property(readwrite, retain) IBOutlet KPBackButton* backButton;
 
 @property(readwrite, retain) IBOutlet NSTextField* titleField;
 
@@ -225,11 +225,13 @@ enum Side { Backwards, RightSide };
 
 */
 
-+ (NSButton*) newBackButtonWithTitle: (NSString*) string
+- (NSButton*) newBackButtonWithTitle: (NSString*) string
 {
-  NSButton* b = [[NSButton alloc] initWithFrame: NSZeroRect];
+  NSButton* b = [[KPBackButton alloc] initWithFrame: NSZeroRect];
+
+  //[b setButtonType: NSTexturedRoundedBezelStyle];
   
-  [b setCell: [[BackButtonCell alloc] init]];
+  [b setBezelStyle: NSTexturedRoundedBezelStyle];
   
   if(!string) string = NSLocalizedString(@"Back", nil);
   
@@ -661,7 +663,7 @@ enum Side { Backwards, RightSide };
   {
     if([self.viewControllers count] > 1)
     {
-      _backButtonNew = [[self class] newBackButtonWithTitle: [self.viewControllers[[self.viewControllers count] - 2] navigationTitle]];
+      _backButtonNew = [self newBackButtonWithTitle: [self.viewControllers[[self.viewControllers count] - 2] navigationTitle]];
     }
     else
     {
