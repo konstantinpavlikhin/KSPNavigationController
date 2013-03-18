@@ -625,6 +625,8 @@ enum Side { Backwards, RightSide };
 // Снимает текущий контроллер из окна и вставляет в него новый.
 - (void) replaceNavViewController: (KPNavViewController*) oldControllerOrNil with: (KPNavViewController*) newControllerOrNil animated: (BOOL) animated slideTo: (enum Side) side
 {
+  [newControllerOrNil view];
+  
   if(newControllerOrNil)
   {
     [[self.delegate ifResponds] navigationController: self willShowViewController: newControllerOrNil animated: animated];

@@ -9,8 +9,6 @@
   
   if(!self) return nil;
   
-  [self loadView];
-  
   return self;
 }
 
