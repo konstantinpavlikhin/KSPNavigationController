@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C2034</string>
+		<string key="IBDocument.SystemVersion">12D78</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">3084</string>
@@ -52,7 +52,7 @@
 					<object class="NSCustomView" id="978173491">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">301</int>
-						<string key="NSFrameSize">{596, 32}</string>
+						<string key="NSFrameSize">{596, 24}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<string key="NSClassName">NSView</string>
@@ -338,12 +338,12 @@
 								<int key="secondAttribute">0</int>
 								<float key="multiplier">1</float>
 								<object class="IBLayoutConstant" key="constant">
-									<double key="value">32</double>
+									<double key="value">24</double>
 								</object>
 								<float key="priority">1000</float>
 								<reference key="containingView" ref="978173491"/>
-								<int key="scoringType">3</int>
-								<float key="scoringTypeFloat">9</float>
+								<int key="scoringType">9</int>
+								<float key="scoringTypeFloat">40</float>
 								<int key="contentType">1</int>
 							</object>
 						</array>
@@ -375,16 +375,6 @@
 						<string key="objectName">NavigationBar</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">322</int>
-						<reference key="object" ref="740909822"/>
-						<reference key="parent" ref="978173491"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">323</int>
-						<reference key="object" ref="364362855"/>
-						<reference key="parent" ref="1005"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">324</int>
 						<reference key="object" ref="373954631"/>
 						<reference key="parent" ref="1005"/>
@@ -408,6 +398,7 @@
 						<int key="objectID">404</int>
 						<reference key="object" ref="1020634443"/>
 						<reference key="parent" ref="119695324"/>
+						<string key="objectName">Height (32) - NavigationBar</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">406</int>
@@ -453,6 +444,16 @@
 						<reference key="object" ref="2391214"/>
 						<reference key="parent" ref="560834846"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">323</int>
+						<reference key="object" ref="364362855"/>
+						<reference key="parent" ref="1005"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">322</int>
+						<reference key="object" ref="740909822"/>
+						<reference key="parent" ref="978173491"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -481,7 +482,7 @@
 				<string key="227.CustomClassName">BackButtonCell</string>
 				<dictionary class="NSMutableDictionary" key="227.IBAttributePlaceholdersKey"/>
 				<string key="227.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<array class="NSMutableArray" key="30.IBNSViewMetadataConstraints">
+				<array key="30.IBNSViewMetadataConstraints">
 					<reference ref="740909822"/>
 				</array>
 				<boolean value="NO" key="30.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
@@ -522,7 +523,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">420</int>
+			<int key="maxID">445</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -569,19 +570,8 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">KPNavigationController</string>
 					<string key="superclassName">KPViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">backButtonPressed:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">backButtonPressed:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">backButtonPressed:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="backButton">NSButton</string>
+						<string key="backButton">KPBackButton</string>
 						<string key="navigationBar">NSView</string>
 						<string key="navigationToolbarHost">NSView</string>
 						<string key="titleField">NSTextField</string>
@@ -589,7 +579,7 @@
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="backButton">
 							<string key="name">backButton</string>
-							<string key="candidateClassName">NSButton</string>
+							<string key="candidateClassName">KPBackButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="navigationBar">
 							<string key="name">navigationBar</string>
