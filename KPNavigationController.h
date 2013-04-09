@@ -27,7 +27,7 @@
 /// Replaces the view controllers currently managed by the navigation controller with the specified items.
 /// You can use this method to update or replace the current view controller stack without pushing or popping each controller explicitly. In addition, this method lets you update the set of controllers without animating the changes, which might be appropriate at launch time when you want to return the navigation controller to a previous state.
 /// If animations are enabled, this method decides which type of transition to perform based on whether the last item in the items array is already in the navigation stack. If the view controller is currently in the stack, but is not the topmost item, this method uses a pop transition; if it is the topmost item, no transition is performed. If the view controller is not on the stack, this method uses a push transition. Only one transition is performed, but when that transition finishes, the entire contents of the stack are replaced with the new view controllers. For example, if controllers A, B, and C are on the stack and you set controllers D, A, and B, this method uses a pop transition and the resulting stack contains the controllers D, A, and B.
-- (void) setViewControllers: (NSMutableArray*) newViewControllers animated: (BOOL) animated;
+//- (void) setViewControllers: (NSMutableArray*) newViewControllers animated: (BOOL) animated;
 
 #pragma mark - Pushing and Popping Stack Items
 
@@ -53,16 +53,5 @@
 
 /// The receiver’s delegate or nil if it doesn’t have a delegate.
 @property(readwrite, assign) NSObject<KPNavigationControllerDelegate>* delegate;
-
-#pragma mark - Presentation Details
-
-/// Sets the background image.
-- (void)setBackgroundImage:(NSImage*)backgroundImage;
-
-/// Returns the background image.
-- (NSImage*)backgroundImage;
-
-/// Display attributes for the bar’s title text.
-@property(nonatomic, copy) NSDictionary* titleTextAttributes;
 
 @end
