@@ -72,7 +72,7 @@ static NSImage* buttonRightP;
   
   [attributes setObject: [NSColor colorWithCalibratedWhite: 0.9 alpha: 1.0] forKey: NSForegroundColorAttributeName];
   
-  NSShadow* shadow = [[NSShadow new] autorelease];
+  NSShadow* shadow = [NSShadow new];
   shadow.shadowOffset = NSMakeSize(0, 0);
   shadow.shadowBlurRadius = 1.5;
   shadow.shadowColor = [NSColor colorWithCalibratedWhite: 0.05 alpha: 1.0];
