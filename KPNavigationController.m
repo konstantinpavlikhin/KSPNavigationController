@@ -167,7 +167,7 @@ enum Side { Backwards, RightSide };
   
   [b setBezelStyle: NSTexturedRoundedBezelStyle];
   
-  if(!string) string = NSLocalizedString(@"Back", nil);
+  if(!string) string = NSLocalizedStringFromTable(@"Back", @"KPNavigationViewController", nil);
   
   [b setTitle: string];
   
