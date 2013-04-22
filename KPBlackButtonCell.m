@@ -97,6 +97,11 @@ NSImage* _highlighted_left, *_highlighted_center, *_highlighted_right;
   return r;
 }
 
+- (NSBackgroundStyle)interiorBackgroundStyle
+{
+  return NSBackgroundStyleDark;
+}
+
 /*
 - (NSSize)ce1llSize
 {
