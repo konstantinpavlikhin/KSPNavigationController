@@ -11,6 +11,8 @@
 
 #import "KPBackButton.h"
 
+#import "HitTestView.h"
+
 @interface NSView (NSImageFromNSView)
 
 - (NSImage*) imageWithSubviews;
@@ -559,6 +561,8 @@ enum Side { Backwards, RightSide };
 // Снимает текущий контроллер из окна и вставляет в него новый.
 - (void) replaceNavViewController: (KPNavViewController*) oldControllerOrNil with: (KPNavViewController*) newControllerOrNil animated: (BOOL) animated slideTo: (enum Side) side
 {
+  if(animated) ((HitTestView*)self.view).rejectHitTest = YES;
+  
   [newControllerOrNil view];
   
   if(newControllerOrNil)
@@ -757,6 +761,8 @@ enum Side { Backwards, RightSide };
     
     [newController viewDidAppear: YES];
     //NSLog(@"Push animation completion handler done.");
+    
+    ((HitTestView*)self.view).rejectHitTest = NO;
   }];
 }
 

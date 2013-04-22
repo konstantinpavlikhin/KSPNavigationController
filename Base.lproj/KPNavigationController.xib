@@ -55,6 +55,7 @@
 						<string key="NSFrameSize">{596, 24}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSClassName">NSView</string>
 					</object>
 				</array>
@@ -62,7 +63,7 @@
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="119695324"/>
-				<string key="NSClassName">NSView</string>
+				<string key="NSClassName">HitTestView</string>
 			</object>
 			<object class="NSButton" id="480072505">
 				<reference key="NSNextResponder"/>
@@ -70,6 +71,7 @@
 				<string key="NSFrameSize">{56, 28}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView"/>
 				<string key="NSReuseIdentifierKey">_NS:687</string>
 				<string key="NSHuggingPriority">{250, 750}</string>
 				<bool key="NSEnabled">YES</bool>
@@ -99,6 +101,7 @@
 				<string key="NSFrameSize">{82, 28}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView"/>
 				<string key="NSReuseIdentifierKey">_NS:687</string>
 				<bool key="NSEnabled">YES</bool>
 				<object class="NSButtonCell" key="NSCell" id="627546568">
@@ -123,6 +126,7 @@
 				<string key="NSFrameSize">{56, 28}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView"/>
 				<string key="NSReuseIdentifierKey">_NS:687</string>
 				<string key="NSHuggingPriority">{250, 750}</string>
 				<bool key="NSEnabled">YES</bool>
@@ -533,6 +537,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/BackButtonCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">HitTestView</string>
+					<string key="superclassName">NSView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/HitTestView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
