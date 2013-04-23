@@ -1,13 +1,14 @@
-
 #import <KPFoundation/KPViewController.h>
 
 @class KPNavigationController;
 
 @interface KPNavViewController : KPViewController
 
-@property(readwrite, assign) KPNavigationController* navigationController;
+@property(readwrite, weak) KPNavigationController* navigationController;
 
 @property(readwrite, strong) NSString* navigationTitle;
+
+@property(readwrite, strong) NSButton* backButton;
 
 @property(readwrite, strong) IBOutlet NSView* leftNavigationBarView;
 
