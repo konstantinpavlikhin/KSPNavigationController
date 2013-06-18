@@ -1,4 +1,4 @@
-#import <KPFoundation/KPViewController.h>
+#import <KPToolbox/KPViewController.h>
 
 @class KPNavigationController;
 

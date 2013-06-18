@@ -12,7 +12,7 @@
 
 #import "NSView+Screenshot.h"
 
-#import <KPFoundation/NSObject+IfResponds.h>
+#import <KPToolbox/NSObject+IfResponds.h>
 
 #import <QuartzCore/CoreAnimation.h>
 
