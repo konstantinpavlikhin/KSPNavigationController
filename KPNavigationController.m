@@ -16,7 +16,7 @@
 
 #import <QuartzCore/CoreAnimation.h>
 
-enum Side { Backward, Forward };
+typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 #define RESIZE_DURATION (1.0 / 5.0)
 
@@ -102,7 +102,7 @@ enum Side { Backward, Forward };
 #pragma mark - Back button & left view
 
 // Константы для позиции вывода с экрана.
-+ (NSArray*) constraintsForBackView: (NSView*) backView andLeftView: (NSView*) leftView inNavigationBar: (NSView*) navigationBar complementaryPositionSide: (enum Side) side
++ (NSArray*) constraintsForBackView: (NSView*) backView andLeftView: (NSView*) leftView inNavigationBar: (NSView*) navigationBar complementaryPositionSide: (Side) side
 {
   NSMutableArray* allConstraints = [NSMutableArray new];
   
@@ -166,7 +166,7 @@ enum Side { Backward, Forward };
   return allConstraints;
 }
 
-+ (void) removeBackView: (NSView*) backView andLeftView: (NSView*) leftView fromNavigationBar: (NSView*) navigationBar slideTo: (enum Side) side animated: (BOOL) animated
++ (void) removeBackView: (NSView*) backView andLeftView: (NSView*) leftView fromNavigationBar: (NSView*) navigationBar slideTo: (Side) side animated: (BOOL) animated
 {
   // Мы не можем вычленить нужные константы, поэтому проще выкинуть вид совсем и добавить его снова с известными константами.
   [@[backView, leftView] enumerateObjectsUsingBlock: ^(NSView* view, NSUInteger idx, BOOL* stop)
@@ -215,7 +215,7 @@ enum Side { Backward, Forward };
   }];
 }
 
-+ (void) insertBackView: (NSView*) backView andLeftView: (NSView*) leftView utilizingCenterView: (NSView*) centerView inNavigationBar: (NSView*) navigationBar slideTo: (enum Side) side animated: (BOOL) animated
++ (void) insertBackView: (NSView*) backView andLeftView: (NSView*) leftView utilizingCenterView: (NSView*) centerView inNavigationBar: (NSView*) navigationBar slideTo: (Side) side animated: (BOOL) animated
 {
   [@[backView, leftView] enumerateObjectsUsingBlock: ^(NSView* view, NSUInteger idx, BOOL* stop)
   {
@@ -262,7 +262,7 @@ enum Side { Backward, Forward };
 #pragma mark - Center view
 
 // Константы для позиции вывода с экрана.
-+ (NSArray*) constraintsForCenterView: (NSView*) centerView inNavigationBar: (NSView*) navigationBar complementaryPositionSide: (enum Side) side
++ (NSArray*) constraintsForCenterView: (NSView*) centerView inNavigationBar: (NSView*) navigationBar complementaryPositionSide: (Side) side
 {
   NSMutableArray* allConstraints = [NSMutableArray new];
   
@@ -293,7 +293,7 @@ enum Side { Backward, Forward };
   return allConstraints;
 }
 
-+ (void) removeCenterView: (NSView*) centerView fromNavigationBar: (NSView*) navigationBar slideTo: (enum Side) side animated: (BOOL) animated
++ (void) removeCenterView: (NSView*) centerView fromNavigationBar: (NSView*) navigationBar slideTo: (Side) side animated: (BOOL) animated
 {
   // Мы не можем вычленить нужные константы, поэтому проще выкинуть вид совсем и добавить его снова с известными константами.
   [centerView removeFromSuperviewWithoutNeedingDisplay];
@@ -333,7 +333,7 @@ enum Side { Backward, Forward };
   }];
 }
 
-+ (void) insertCenterView: (NSView*) centerView inNavigationBar: (NSView*) navigationBar slideTo: (enum Side) side animated: (BOOL) animated
++ (void) insertCenterView: (NSView*) centerView inNavigationBar: (NSView*) navigationBar slideTo: (Side) side animated: (BOOL) animated
 {
   [centerView setTranslatesAutoresizingMaskIntoConstraints: NO];
   
@@ -440,7 +440,7 @@ enum Side { Backward, Forward };
 
 #pragma mark - Main view
 
-+ (NSArray*) constraintsForMainView: (NSView*) mainView inNavigationView: (NavigationView*) navigationView complementaryPositionSide: (enum Side) side
++ (NSArray*) constraintsForMainView: (NSView*) mainView inNavigationView: (NavigationView*) navigationView complementaryPositionSide: (Side) side
 {
   NSMutableArray* allConstraints = [NSMutableArray new];
   
@@ -494,7 +494,7 @@ enum Side { Backward, Forward };
   return allConstraints;
 }
 
-+ (void) removeMainView: (NSView*) mainView fromNavigationView: (NavigationView*) navigationView slideTo: (enum Side) side animated: (BOOL) animated
++ (void) removeMainView: (NSView*) mainView fromNavigationView: (NavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
 {
   // 1. Создать screenshot mainView.
   NSImageView* screenshot = [[NSImageView alloc] initWithFrame: NSZeroRect];
@@ -553,7 +553,7 @@ enum Side { Backward, Forward };
   }];
 }
 
-+ (void) insertMainView: (NSView*) mainView inNavigationView: (NavigationView*) navigationView slideTo: (enum Side) side animated: (BOOL) animated
++ (void) insertMainView: (NSView*) mainView inNavigationView: (NavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
 {
   // 1. Добавить mainView в navigationView.
   [mainView setTranslatesAutoresizingMaskIntoConstraints: NO];
@@ -655,7 +655,7 @@ enum Side { Backward, Forward };
 
 #pragma mark - Ядровой метод
 
-+ (void) removeViewController: (KPNavViewController*) viewController fromNavigationView: (NavigationView*) navigationView slideTo: (enum Side) side animated: (BOOL) animated
++ (void) removeViewController: (KPNavViewController*) viewController fromNavigationView: (NavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
 {
   /* Back Navigation Bar Button & Left Navigation Bar View. */
   [self removeBackView: viewController.backButton andLeftView: viewController.leftNavigationBarView fromNavigationBar: navigationView.navigationBar slideTo: side animated: animated];
@@ -673,7 +673,7 @@ enum Side { Backward, Forward };
   [self removeNavigationToolbar: viewController.navigationToolbar];
 }
 
-+ (void) insertViewController: (KPNavViewController*) viewController inNavigationView: (NavigationView*) navigationView slideTo: (enum Side) side animated: (BOOL) animated
++ (void) insertViewController: (KPNavViewController*) viewController inNavigationView: (NavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
 {
   /* Center Navigation Bar View. */
   [self insertCenterView: viewController.centerNavigationBarView inNavigationBar: navigationView.navigationBar slideTo: side animated: animated];
@@ -693,7 +693,7 @@ enum Side { Backward, Forward };
 
 #define COPY_VIEW(x) [NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: x]]
 
-+ (void) insertCopyOfViewController: (KPNavViewController*) viewController inNavigationView: (NavigationView*) navigationView slideTo: (enum Side) side animated: (BOOL) animated
++ (void) insertCopyOfViewController: (KPNavViewController*) viewController inNavigationView: (NavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
 {
   /* Center Navigation Bar View. */
   NSView* asd = COPY_VIEW(viewController.centerNavigationBarView);
@@ -778,7 +778,7 @@ enum Side { Backward, Forward };
 }
 
 // Снимает текущий контроллер из окна и вставляет в него новый.
-- (void) replaceNavViewController: (KPNavViewController*) oldControllerOrNil with: (KPNavViewController*) newController animated: (BOOL) animated slideTo: (enum Side) side
+- (void) replaceNavViewController: (KPNavViewController*) oldControllerOrNil with: (KPNavViewController*) newController animated: (BOOL) animated slideTo: (Side) side
 {
   NSParameterAssert(newController);
   
