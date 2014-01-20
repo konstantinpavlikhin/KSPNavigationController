@@ -18,17 +18,17 @@ static NSImage* _highlighted_left, *_highlighted_center, *_highlighted_right;
 
 + (void) initialize
 {
-  _disabled_left = [NSImage imageNamed: @"back-button-disabled-left"];
-  _disabled_center = [NSImage imageNamed: @"black-button-disabled-center"];
-  _disabled_right = [NSImage imageNamed: @"black-button-disabled-right"];
+  _disabled_left = [NSImage imageNamed: @"KPBackButtonLeft-disabled"];
+  _disabled_center = [NSImage imageNamed: @"KPBlackButtonCenter-disabled"];
+  _disabled_right = [NSImage imageNamed: @"KPBlackButtonRight-disabled"];
   
-  _normal_left = [NSImage imageNamed: @"back-button-normal-left"];
-  _normal_center = [NSImage imageNamed: @"black-button-normal-center"];
-  _normal_right = [NSImage imageNamed: @"black-button-normal-right"];
+  _normal_left = [NSImage imageNamed: @"KPBackButtonLeft-normal"];
+  _normal_center = [NSImage imageNamed: @"KPBlackButtonCenter-normal"];
+  _normal_right = [NSImage imageNamed: @"KPBlackButtonRight-normal"];
   
-  _highlighted_left = [NSImage imageNamed: @"back-button-highlighted-left"];
-  _highlighted_center = [NSImage imageNamed: @"black-button-highlighted-center"];
-  _highlighted_right = [NSImage imageNamed: @"black-button-highlighted-right"];
+  _highlighted_left = [NSImage imageNamed: @"KPBackButtonLeft-highlighted"];
+  _highlighted_center = [NSImage imageNamed: @"KPBlackButtonCenter-highlighted"];
+  _highlighted_right = [NSImage imageNamed: @"KPBlackButtonRight-highlighted"];
 }
 
 - (void)drawBezelWithFrame:(NSRect)frame inView:(NSView *)controlView

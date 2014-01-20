@@ -19,7 +19,7 @@
     if (self) {
         // Initialization code here.
     }
-  _background = [NSImage imageNamed: @"navigationBar"];
+  _background = [NSImage imageNamed: @"NavigationBar"];
     return self;
 }
 
