@@ -286,6 +286,9 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   NSLayoutConstraint* c1 = [NSLayoutConstraint constraintWithItem: centerView attribute: NSLayoutAttributeCenterX relatedBy: NSLayoutRelationEqual toItem: navigationBar attribute: NSLayoutAttributeCenterX multiplier: 1.0 constant: 0.0];
   
+  // Центральный вид стремится к середине, но, при необходимости, может быть расположен ассиметрично.
+  c1.priority = 100.0;
+  
   [allConstraints addObject: c1];
   
   [allConstraints addObjectsFromArray: [self constraintsForVerticalFixationOfView: centerView inNavigationBar: navigationBar]];
