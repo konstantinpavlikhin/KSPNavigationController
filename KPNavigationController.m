@@ -694,92 +694,6 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   [self insertNavigationToolbar: viewController.navigationToolbar inNavigationToolbarHost: navigationView.navigationToolbarHost];
 }
 
-#define COPY_VIEW(x) [NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: x]]
-
-+ (void) insertCopyOfViewController: (KPNavViewController*) viewController inNavigationView: (NavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
-{
-  /* Center Navigation Bar View. */
-  NSView* asd = COPY_VIEW(viewController.centerNavigationBarView);
-  
-  [self insertCenterView: asd inNavigationBar: navigationView.navigationBar slideTo: side animated: animated];
-  
-  /* Back Navigation Bar Button & Left Navigation Bar View. */
-  [self insertBackView: COPY_VIEW(viewController.backButton) andLeftView: COPY_VIEW(viewController.leftNavigationBarView) utilizingCenterView: asd inNavigationBar: navigationView.navigationBar slideTo: side animated: animated];
-  
-  /* Right Navigation Bar View. */
-  [self insertRightView: COPY_VIEW(viewController.rightNavigationBarView) utilizingCenterView: asd inNavigationBar: navigationView.navigationBar animated: animated];
-  
-  /* Main View. */
-  [self insertMainView: COPY_VIEW(viewController.view) inNavigationView: navigationView slideTo: side animated: animated];
-  
-  /* Navigation Toolbar. */
-  [self insertNavigationToolbar: COPY_VIEW(viewController.navigationToolbar) inNavigationToolbarHost: navigationView.navigationToolbarHost];
-}
-
-// Возвращает размер, удовлетворяющий обоим контроллерам, максимально близкий к size.
-+ (NSSize) mutuallySatisfyingNavigationViewFrameSizeForOldViewController: (KPNavViewController*) oldControllerOrNil newViewController: (KPNavViewController*) newController closeTo: (NSSize) size utilizingNavigationViewPrototype: (NavigationView*) navigationViewPrototype
-{
-  // Текущий вид.
-  NavigationView* navigationView1 = [NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: navigationViewPrototype]];
-  
-  [navigationView1 setTranslatesAutoresizingMaskIntoConstraints: NO];
-  
-  if(oldControllerOrNil)
-  {
-    [self insertCopyOfViewController: oldControllerOrNil inNavigationView: navigationView1 slideTo: Backward animated: NO];
-  }
-  
-  // * * *.
-  
-  // Новый вид.
-  NSParameterAssert(newController);
-  
-  NavigationView* navigationView2 = [NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: navigationViewPrototype]];
-  
-  [navigationView2 setTranslatesAutoresizingMaskIntoConstraints: NO];
-  
-  [self insertCopyOfViewController: newController inNavigationView: navigationView2 slideTo: Backward animated: NO];
-  
-  // Контейнер.
-  NSView* container = [[NSView alloc] initWithFrame: NSZeroRect];
-  
-  [container setTranslatesAutoresizingMaskIntoConstraints: NO];
-  
-  [container addSubview: navigationView1];
-  
-  [container addSubview: navigationView2];
-  
-  // * * *.
-  
-  // Накладываем вид «один на другой».
-  NSDictionary* views = NSDictionaryOfVariableBindings(navigationView1, navigationView2);
-  
-  [container addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"H:|[navigationView1]|" options: 0 metrics: nil views: views]];
-  
-  [container addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[navigationView1]|" options: 0 metrics: nil views: views]];
-  
-  [container addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"H:|[navigationView2]|" options: 0 metrics: nil views: views]];
-  
-  [container addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[navigationView2]|" options: 0 metrics: nil views: views]];
-  
-  // Внедряем желаемый размер.
-  NSDictionary* metrics = @{@"width": @(size.width), @"height": @(size.height)};
-  
-  NSDictionary* view = NSDictionaryOfVariableBindings(container);
-  
-  [container addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"H:[container(==width@700)]" options: 0 metrics: metrics views: view]];
-  
-  [container addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"V:[container(==height@700)]" options: 0 metrics: metrics views: view]];
-  
-  //***
-  
-  [container layoutSubtreeIfNeeded];
-  
-  //***
-  
-  return container.frame.size;
-}
-
 // Снимает текущий контроллер из окна и вставляет в него новый.
 - (void) replaceNavViewController: (KPNavViewController*) oldControllerOrNil with: (KPNavViewController*) newController animated: (BOOL) animated slideTo: (Side) side
 {
@@ -829,87 +743,36 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   // * * *.
   
-  // Рассчитываем размеры навигационных видов.
-  NSSize currentNavigationViewSize = self.navigationView.frame.size;
-  
-  NSSize mutuallySatisfyingSize = NSZeroSize;
-  
-  NSLayoutConstraint *w, *h;
-  
-  BOOL shouldResizeNavigationView = NO;
-  
-  if(oldControllerOrNil)
-  {
-    mutuallySatisfyingSize = [[self class] mutuallySatisfyingNavigationViewFrameSizeForOldViewController: oldControllerOrNil newViewController: newController closeTo: currentNavigationViewSize utilizingNavigationViewPrototype: self.navigationViewPrototype];
-    
-    if(!NSEqualSizes(currentNavigationViewSize, mutuallySatisfyingSize))
-    {
-      shouldResizeNavigationView = YES;
-      
-      w = [NSLayoutConstraint constraintWithItem: self.navigationView attribute: NSLayoutAttributeWidth relatedBy: NSLayoutRelationEqual toItem: nil attribute: NSLayoutAttributeNotAnAttribute multiplier: 1.0 constant: currentNavigationViewSize.width];
-      
-      [self.navigationView addConstraint: w];
-      
-      h = [NSLayoutConstraint constraintWithItem: self.navigationView attribute: NSLayoutAttributeHeight relatedBy: NSLayoutRelationEqual toItem: nil attribute: NSLayoutAttributeNotAnAttribute multiplier: 1.0 constant: currentNavigationViewSize.height];
-      
-      [self.navigationView addConstraint: h];
-    }
-  }
-  
-  // Анимация изменения размеров навигационного вида.
+  // Анимация смены главного вида.
   [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* context)
   {
-    if(shouldResizeNavigationView)
+    [context setDuration: animated? TRANSITION_DURATION : 0.0];
+    
+    [context setTimingFunction: [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut]];
+    
+    if(oldControllerOrNil)
     {
-      // Анимируем временные константы.
-      context.duration = animated? RESIZE_DURATION : 0.0;
-      
-      [[w animator] setConstant: mutuallySatisfyingSize.width];
-      
-      [[h animator] setConstant: mutuallySatisfyingSize.height];
+      [[self class] removeViewController: oldControllerOrNil fromNavigationView: self.navigationView slideTo: side animated: animated];
     }
+    
+    [[self class] insertViewController: newController inNavigationView: self.navigationView slideTo: side animated: animated];
   }
   completionHandler: ^
   {
-    // Выкидываем временные константы.
-    if(shouldResizeNavigationView)
-    {
-      [self.navigationView removeConstraint: w];
-      
-      [self.navigationView removeConstraint: h];
-    }
+    [oldControllerOrNil viewDidDisappear: animated];
     
-    // Анимация смены главного вида.
-    [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* context)
-    {
-      [context setDuration: animated? TRANSITION_DURATION : 0.0];
-      
-      [context setTimingFunction: [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut]];
-      
-      if(oldControllerOrNil)
-      {
-        [[self class] removeViewController: oldControllerOrNil fromNavigationView: self.navigationView slideTo: side animated: animated];
-      }
-      
-      [[self class] insertViewController: newController inNavigationView: self.navigationView slideTo: side animated: animated];
-    }
-    completionHandler: ^
-    {
-      [oldControllerOrNil viewDidDisappear: animated];
-      
-      [newController viewDidAppear: animated];
-      
-      [[self.delegate ifResponds] navigationController: self didShowViewController: newController animated: animated];
-      
-      // Окно снова можно ресайзить.
-      [self.windowController.window setStyleMask:[self.windowController.window styleMask] | NSResizableWindowMask];
-      
-      // Навигационный вид снова реагирует на клики.
-      ((HitTestView*)self.view).rejectHitTest = NO;
-      
-      // Ставим фокус на нужный контрол.
-      [self.windowController.window makeFirstResponder: [self topViewController].proposedFirstResponder];
-    }];
+    [newController viewDidAppear: animated];
+    
+    [[self.delegate ifResponds] navigationController: self didShowViewController: newController animated: animated];
+    
+    // Окно снова можно ресайзить.
+    [self.windowController.window setStyleMask: [self.windowController.window styleMask] | NSResizableWindowMask];
+    
+    // Навигационный вид снова реагирует на клики.
+    ((HitTestView*)self.view).rejectHitTest = NO;
+    
+    // Ставим фокус на нужный контрол.
+    [self.windowController.window makeFirstResponder: [self topViewController].proposedFirstResponder];
   }];
 }
 
