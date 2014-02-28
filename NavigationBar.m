@@ -13,17 +13,18 @@
   NSImage* _background;
 }
 
-- (id)initWithFrame:(NSRect)frame
+- (id) initWithFrame: (NSRect) frame
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code here.
-    }
+  self = [super initWithFrame: frame];
+  
+  if(!self) return nil;
+  
   _background = [NSImage imageNamed: @"NavigationBar"];
-    return self;
+  
+  return self;
 }
 
-- (void)drawRect:(NSRect)dirtyRect
+- (void) drawRect: (NSRect) dirtyRect
 {
   NSDrawThreePartImage(self.bounds, nil, _background, nil, NO, NSCompositeSourceOver, 1.0, NO);
 }
