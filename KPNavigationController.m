@@ -76,7 +76,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   [b setBezelStyle: NSTexturedRoundedBezelStyle];
   
-  if(!string) string = NSLocalizedStringFromTable(@"Back", @"KPNavigationViewController", nil);
+  if(!string) string = NSLocalizedStringFromTable(@"BackButton_Title", @"KPNavigationViewController", nil);
   
   [b setTitle: string];
   
