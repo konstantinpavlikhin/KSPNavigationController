@@ -812,7 +812,6 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   [_viewControllers addObject: viewController];
   
-  // TODO: Делать это в обозревателе свойства _viewControllers.
   [viewController setNavigationController: self];
   
   [self replaceNavViewController: current with: viewController animated: animated slideTo: Backward];
