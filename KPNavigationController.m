@@ -18,7 +18,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 #define RESIZE_DURATION (1.0 / 5.0)
 
-#define TRANSITION_DURATION (1.0 / 3.0)
+#define TRANSITION_DURATION (1.0 / 2.0)
 
 #define STANDART_SPACE 8.0
 
@@ -34,11 +34,13 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   return @"KPNavigationController";
 }
 
-- (id) initWithRootViewController: (KPNavViewController*) rootViewController
+- (instancetype) initWithNavigationBar: (NSView*) navigationBar rootViewController: (KPNavViewController*) rootViewController
 {
   self = [self initWithNibName: [[self class] nibFilename] bundle: nil];
   
   if(!self) return nil;
+  
+  self.navigationBar = navigationBar;
   
   _viewControllers = [NSMutableArray new];
   
@@ -49,6 +51,8 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 - (void) awakeFromNib
 {
+  self.navigationView.navigationBar = self.navigationBar;
+  
   [[self.navigationView.mainViewTransitionHost layer] setOpaque: YES];
   
   self.navigationViewPrototype = [NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: self.navigationView]];
@@ -460,7 +464,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   // * * *.
   
-  NSArray* vertical = [NSLayoutConstraint constraintsWithVisualFormat: @"V:[navigationBar][mainView][navigationToolbarHost]" options: 0 metrics: nil views: views];
+  NSArray* vertical = [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[mainView][navigationToolbarHost]" options: 0 metrics: nil views: views];
   
   [allConstraints addObjectsFromArray: vertical];
   
@@ -488,7 +492,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   NSDictionary* views2 = NSDictionaryOfVariableBindings(navigationBar, mainView, navigationToolbarHost);
   
-  NSArray* vertical = [NSLayoutConstraint constraintsWithVisualFormat: @"V:[navigationBar][mainView][navigationToolbarHost]" options: 0 metrics: nil views: views2];
+  NSArray* vertical = [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[mainView][navigationToolbarHost]" options: 0 metrics: nil views: views2];
   
   [allConstraints addObjectsFromArray: vertical];
   

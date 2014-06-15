@@ -6,7 +6,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="KPNavigationController">
             <connections>
-                <outlet property="navigationBar" destination="50" id="51"/>
                 <outlet property="navigationToolbarHost" destination="30" id="32"/>
                 <outlet property="navigationView" destination="1" id="495"/>
                 <outlet property="navigationViewPrototype" destination="1" id="496"/>
@@ -21,14 +20,8 @@
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="1" userLabel="Navigation view" customClass="NavigationView">
                     <rect key="frame" x="0.0" y="0.0" width="400" height="200"/>
                     <subviews>
-                        <customView identifier="Navigation bar" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="50" userLabel="Navigation bar">
-                            <rect key="frame" x="0.0" y="168" width="400" height="32"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="32" id="404" userLabel="Height (32) - NavigationBar"/>
-                            </constraints>
-                        </customView>
                         <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="508" userLabel="main view transition host">
-                            <rect key="frame" x="0.0" y="24" width="400" height="144"/>
+                            <rect key="frame" x="0.0" y="24" width="400" height="176"/>
                         </customView>
                         <customView identifier="Navigation toolbar host" translatesAutoresizingMaskIntoConstraints="NO" id="30" userLabel="Navigation toolbar host">
                             <rect key="frame" x="0.0" y="0.0" width="400" height="24"/>
@@ -41,17 +34,13 @@
                         <constraint firstItem="30" firstAttribute="bottom" secondItem="1" secondAttribute="bottom" id="323"/>
                         <constraint firstItem="30" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="324"/>
                         <constraint firstItem="30" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="325"/>
-                        <constraint firstItem="50" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="335"/>
-                        <constraint firstItem="50" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="400"/>
-                        <constraint firstItem="50" firstAttribute="top" secondItem="1" secondAttribute="top" id="406"/>
                         <constraint firstItem="508" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="517"/>
-                        <constraint firstItem="508" firstAttribute="top" secondItem="50" secondAttribute="bottom" id="520"/>
                         <constraint firstItem="508" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="523"/>
                         <constraint firstItem="30" firstAttribute="top" secondItem="508" secondAttribute="bottom" id="524"/>
+                        <constraint firstItem="508" firstAttribute="top" secondItem="1" secondAttribute="top" id="0uu-x1-ZsI"/>
                     </constraints>
                     <connections>
                         <outlet property="mainViewTransitionHost" destination="508" id="527"/>
-                        <outlet property="navigationBar" destination="50" id="493"/>
                         <outlet property="navigationToolbarHost" destination="30" id="494"/>
                     </connections>
                 </customView>
@@ -62,6 +51,7 @@
                 <constraint firstItem="1" firstAttribute="bottom" secondItem="446" secondAttribute="bottom" id="490"/>
                 <constraint firstItem="1" firstAttribute="top" secondItem="446" secondAttribute="top" id="491"/>
             </constraints>
+            <point key="canvasLocation" x="59" y="2"/>
         </customView>
     </objects>
 </document>
