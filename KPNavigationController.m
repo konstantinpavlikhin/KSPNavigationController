@@ -8,8 +8,6 @@
 
 #import "NavigationView.h"
 
-#import "KPBackButton.h"
-
 #import "NSView+Screenshot.h"
 
 #import <KPToolbox/NSObject+IfResponds.h>
@@ -72,7 +70,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 - (NSButton*) newBackButtonWithTitle: (NSString*) string
 {
-  NSButton* b = [[KPBackButton alloc] initWithFrame: NSZeroRect];
+  NSButton* b = [[NSButton alloc] initWithFrame: NSZeroRect];
   
   [b setBezelStyle: NSTexturedRoundedBezelStyle];
   

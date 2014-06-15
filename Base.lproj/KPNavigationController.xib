@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="KPNavigationController">
@@ -17,26 +17,21 @@
         <customObject id="-3" userLabel="Application"/>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="446" userLabel="Hit test view" customClass="HitTestView">
             <rect key="frame" x="0.0" y="0.0" width="400" height="200"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="1" userLabel="Navigation view" customClass="NavigationView">
                     <rect key="frame" x="0.0" y="0.0" width="400" height="200"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <customView identifier="Navigation bar" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="50" userLabel="Navigation bar" customClass="NavigationBar">
+                        <customView identifier="Navigation bar" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="50" userLabel="Navigation bar">
                             <rect key="frame" x="0.0" y="168" width="400" height="32"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="32" id="404" userLabel="Height (32) - NavigationBar"/>
                             </constraints>
                         </customView>
                         <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="508" userLabel="main view transition host">
                             <rect key="frame" x="0.0" y="24" width="400" height="144"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         </customView>
                         <customView identifier="Navigation toolbar host" translatesAutoresizingMaskIntoConstraints="NO" id="30" userLabel="Navigation toolbar host">
                             <rect key="frame" x="0.0" y="0.0" width="400" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="322"/>
                             </constraints>
