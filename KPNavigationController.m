@@ -168,7 +168,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   return allConstraints;
 }
 
-+ (void) removeBackView: (NSView*) backView andLeftView: (NSView*) leftView fromNavigationBar: (NSView*) navigationBar slideTo: (Side) side animated: (BOOL) animated
++ (void) removeBackView: (NSView*) backView andLeftView: (NSView*) leftView fromNavigationBar: (NSView*) navigationBar width: (CGFloat) width slideTo: (Side) side animated: (BOOL) animated
 {
   // Мы не можем вычленить нужные константы, поэтому проще выкинуть вид совсем и добавить его снова с известными константами.
   [@[backView, leftView] enumerateObjectsUsingBlock: ^(NSView* view, NSUInteger idx, BOOL* stop)
@@ -184,6 +184,9 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   NSArray* startConstraints = [[self class] constraintsForBackView: backView andLeftView: leftView utilizingCenterView: nil inNavigationBar: navigationBar];
   
   [navigationBar addConstraints: startConstraints];
+  
+  // Принудительно фиксируем ширину левосторонней конструкции (backView + пробел + leftView).
+  [navigationBar addConstraint: [NSLayoutConstraint constraintWithItem: backView attribute: NSLayoutAttributeLeft relatedBy: NSLayoutRelationEqual toItem: leftView attribute: NSLayoutAttributeRight multiplier: 1.0 constant: -width]];
   
   // Тут надо какой-то перерасчет.
   [navigationBar layoutSubtreeIfNeeded];
@@ -298,7 +301,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   return allConstraints;
 }
 
-+ (void) removeCenterView: (NSView*) centerView fromNavigationBar: (NSView*) navigationBar slideTo: (Side) side animated: (BOOL) animated
++ (void) removeCenterView: (NSView*) centerView fromNavigationBar: (NSView*) navigationBar width: (CGFloat) width slideTo: (Side) side animated: (BOOL) animated
 {
   // Мы не можем вычленить нужные константы, поэтому проще выкинуть вид совсем и добавить его снова с известными константами.
   [centerView removeFromSuperviewWithoutNeedingDisplay];
@@ -311,6 +314,13 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   NSArray* startConstraints = [self constraintsForCenterView: centerView inNavigationBar: navigationBar];
   
   [navigationBar addConstraints: startConstraints];
+  
+  // Принудительно фиксируем ширину центральной плашки.
+  NSDictionary* metrics = @{@"currentWidth": @(width)};
+  
+  NSDictionary* views = NSDictionaryOfVariableBindings(centerView);
+  
+  [navigationBar addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"[centerView(==currentWidth)]" options: 0 metrics: metrics views: views]];
   
   // Тут надо какой-то перерасчет.
   [navigationBar layoutSubtreeIfNeeded];
@@ -403,8 +413,17 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   return allConstraints;
 }
 
-+ (void) removeRightView: (NSView*) rightView fromNavigationBar: (NSView*) navigationBar animated: (BOOL) animated
++ (void) removeRightView: (NSView*) rightView fromNavigationBar: (NSView*) navigationBar width: (CGFloat) width animated: (BOOL) animated
 {
+  // Принудительно фиксируем ширину rightView.
+  NSDictionary* metrics = @{@"currentWidth": @(width)};
+  
+  NSDictionary* views = NSDictionaryOfVariableBindings(rightView);
+  
+  [navigationBar addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"[rightView(==currentWidth)]" options: 0 metrics: metrics views: views]];
+  
+  // * * *.
+  
   [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* context)
   {
     [context setAllowsImplicitAnimation: YES];
@@ -662,14 +681,25 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 + (void) removeViewController: (KPNavViewController*) viewController fromNavigationView: (NavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
 {
+  /* Рассчитываем текущую ширину всех вьюшек на навигационной плашке. */
+  
+  // Запоминаем текущую ширину всей левосторонней конструкции (backView + пробел + leftView).
+  const CGFloat backPlusLeftWidth = viewController.leftNavigationBarView.frame.origin.x + viewController.leftNavigationBarView.frame.size.width - viewController.backButton.frame.origin.x;
+  
+  // Запоминаем текущую ширину центральной плашки.
+  const CGFloat centerWidth = viewController.centerNavigationBarView.frame.size.width;
+  
+  // Запоминаем текущую ширину rightView.
+  const CGFloat rightWidth = viewController.rightNavigationBarView.frame.size.width;
+  
   /* Back Navigation Bar Button & Left Navigation Bar View. */
-  [self removeBackView: viewController.backButton andLeftView: viewController.leftNavigationBarView fromNavigationBar: navigationView.navigationBar slideTo: side animated: animated];
+  [self removeBackView: viewController.backButton andLeftView: viewController.leftNavigationBarView fromNavigationBar: navigationView.navigationBar width: backPlusLeftWidth slideTo: side animated: animated];
   
   /* Center Navigation Bar View. */
-  [self removeCenterView: viewController.centerNavigationBarView fromNavigationBar: navigationView.navigationBar slideTo: side animated: animated];
+  [self removeCenterView: viewController.centerNavigationBarView fromNavigationBar: navigationView.navigationBar width: centerWidth slideTo: side animated: animated];
   
   /* Right Navigation Bar View. */
-  [self removeRightView: viewController.rightNavigationBarView fromNavigationBar: navigationView.navigationBar animated: animated];
+  [self removeRightView: viewController.rightNavigationBarView fromNavigationBar: navigationView.navigationBar width: rightWidth animated: animated];
   
   /* Main View. */
   [self removeMainView: viewController.view fromNavigationView: navigationView slideTo: side animated: animated];
