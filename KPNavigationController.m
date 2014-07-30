@@ -301,7 +301,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   return allConstraints;
 }
 
-+ (void) removeCenterView: (NSView*) centerView fromNavigationBar: (NSView*) navigationBar width: (CGFloat) width slideTo: (Side) side animated: (BOOL) animated
++ (void) removeCenterView: (NSView*) centerView fromNavigationBar: (NSView*) navigationBar x: (CGFloat) x width: (CGFloat) width slideTo: (Side) side animated: (BOOL) animated
 {
   // Мы не можем вычленить нужные константы, поэтому проще выкинуть вид совсем и добавить его снова с известными константами.
   [centerView removeFromSuperviewWithoutNeedingDisplay];
@@ -312,6 +312,13 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   // Начальное условие.
   NSArray* startConstraints = [self constraintsForCenterView: centerView inNavigationBar: navigationBar];
+  
+  // Принудительно фиксируем левый край центральной плашки.
+  id c = [NSLayoutConstraint constraintWithItem: centerView attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: navigationBar attribute: NSLayoutAttributeLeading multiplier: 1.0 constant: x];
+  
+  startConstraints = [startConstraints arrayByAddingObject: c];
+  
+  // * * *.
   
   [navigationBar addConstraints: startConstraints];
   
@@ -689,6 +696,8 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   // Запоминаем текущую ширину центральной плашки.
   const CGFloat centerWidth = viewController.centerNavigationBarView.frame.size.width;
   
+  const CGFloat centerX = viewController.centerNavigationBarView.frame.origin.x;
+  
   // Запоминаем текущую ширину rightView.
   const CGFloat rightWidth = viewController.rightNavigationBarView.frame.size.width;
   
@@ -696,7 +705,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   [self removeBackView: viewController.backButton andLeftView: viewController.leftNavigationBarView fromNavigationBar: navigationView.navigationBar width: backPlusLeftWidth slideTo: side animated: animated];
   
   /* Center Navigation Bar View. */
-  [self removeCenterView: viewController.centerNavigationBarView fromNavigationBar: navigationView.navigationBar width: centerWidth slideTo: side animated: animated];
+  [self removeCenterView: viewController.centerNavigationBarView fromNavigationBar: navigationView.navigationBar x: centerX width: centerWidth slideTo: side animated: animated];
   
   /* Right Navigation Bar View. */
   [self removeRightView: viewController.rightNavigationBarView fromNavigationBar: navigationView.navigationBar width: rightWidth animated: animated];
