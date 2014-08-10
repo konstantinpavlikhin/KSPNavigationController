@@ -821,11 +821,6 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 #pragma mark - Пользовательские функции
 
-- (KPNavViewController*) topViewController
-{
-  return [_viewControllers lastObject];
-}
-
 // Replaces the view controllers currently managed by the navigation controller with the specified items.
 - (void) setViewControllers: (NSArray*) newViewControllers animated: (BOOL) animated
 {
@@ -840,6 +835,8 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   [_viewControllers addObjectsFromArray: newViewControllers];
   
   [_viewControllers makeObjectsPerformSelector: @selector(setNavigationController:) withObject: self];
+  
+  self.topViewController = [_viewControllers lastObject];
   
   [self replaceNavViewController: current with: [newViewControllers lastObject] animated: animated slideTo: Backward];
 }
@@ -856,6 +853,8 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   [_viewControllers addObject: viewController];
   
   [viewController setNavigationController: self];
+  
+  self.topViewController = viewController;
   
   [self replaceNavViewController: current with: viewController animated: animated slideTo: Backward];
 }
@@ -899,6 +898,8 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   NSArray* ejectedControllers = [_viewControllers subarrayWithRange: ejectedRange];
   
   [_viewControllers removeObjectsInRange: ejectedRange];
+  
+  self.topViewController = viewController;
   
   [self replaceNavViewController: current with: viewController animated: animated slideTo: Forward];
   

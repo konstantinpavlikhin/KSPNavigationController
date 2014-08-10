@@ -20,4 +20,6 @@
 
 @property(readwrite, strong) IBOutlet NSView* navigationToolbarHost;
 
+@property(readwrite, strong) KPNavViewController* topViewController;
+
 @end

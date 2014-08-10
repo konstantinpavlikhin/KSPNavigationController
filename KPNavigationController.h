@@ -19,6 +19,8 @@
 
 #pragma mark - Accessing Items on the Navigation Stack
 
+@property(readonly, strong) KPNavViewController* topViewController;
+
 - (KPNavViewController*) topViewController;
 
 #pragma mark - Pushing and Popping Stack Items
