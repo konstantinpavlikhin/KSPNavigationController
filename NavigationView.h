@@ -8,9 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class HitTestView;
+
 @interface NavigationView : NSView
 
-@property(readwrite, strong) IBOutlet NSView* navigationBar;
+@property(readwrite, strong) IBOutlet HitTestView* navigationBar;
 
 @property(readwrite, strong) IBOutlet NSView* mainViewTransitionHost;
 

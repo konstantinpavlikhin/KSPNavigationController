@@ -42,7 +42,17 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   if(!self) return nil;
   
-  self.navigationBar = navigationBar;
+  HitTestView* host = [[HitTestView alloc] initWithFrame: NSZeroRect];
+  
+  host.translatesAutoresizingMaskIntoConstraints = NO;
+  
+  [navigationBar addSubview: host];
+  
+  [navigationBar addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"H:|[host]|" options: 0 metrics: nil views: @{@"host": host}]];
+  
+  [navigationBar addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[host]|" options: 0 metrics: nil views: @{@"host": host}]];
+  
+  self.navigationBar = host;
   
   _viewControllers = [NSMutableArray new];
   
@@ -69,7 +79,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   NSDictionary* animations = [NSDictionary dictionaryWithObject: fadeTransition forKey: @"subviews"];
   
-  [self.navigationBar setAnimations: animations];
+  [self.navigationView.navigationBar setAnimations: animations];
   
   [self.navigationToolbarHost setAnimations: animations];
 }
@@ -746,7 +756,12 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   if(!self.view) [self loadView];
   
   // Вид контроллера навигации перестает реагировать на клики.
-  if(animated) ((HitTestView*)self.view).rejectHitTest = YES;
+  if(animated)
+  {
+    self.navigationBar.rejectHitTest = YES;
+    
+    ((HitTestView*)self.view).rejectHitTest = YES;
+  }
   
   // Размер окна с навигационным контроллером больше не может быть изменен.
   [self.windowController.window setStyleMask: [self.windowController.window styleMask] & ~NSResizableWindowMask];
@@ -813,6 +828,8 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
     
     // Навигационный вид снова реагирует на клики.
     ((HitTestView*)self.view).rejectHitTest = NO;
+    
+    self.navigationBar.rejectHitTest = NO;
     
     // Ставим фокус на нужный контрол.
     [self.windowController.window makeFirstResponder: [self topViewController].proposedFirstResponder];

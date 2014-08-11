@@ -4,9 +4,11 @@
 
 @protocol KPNavigationControllerDelegate;
 
+@class HitTestView;
+
 @interface KPNavigationController : KPViewController
 
-@property(readonly, strong) IBOutlet NSView* navigationBar;
+@property(readonly, strong) IBOutlet HitTestView* navigationBar;
 
 #pragma mark - Accessing the Delegate
 

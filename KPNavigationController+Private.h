@@ -16,7 +16,7 @@
 
 @property(readwrite, strong) NavigationView* navigationViewPrototype;
 
-@property(readwrite, strong) NSView* navigationBar;
+@property(readwrite, strong) HitTestView* navigationBar;
 
 @property(readwrite, strong) IBOutlet NSView* navigationToolbarHost;
 
