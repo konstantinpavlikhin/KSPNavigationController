@@ -12,7 +12,8 @@
 
 @implementation KPBackButton
 
-+ (Class)cellClass {
++ (Class) cellClass
+{
 	return [KPBackButtonCell class];
 }
 
@@ -26,7 +27,8 @@
   [self setCellClass: [KPBackButtonCell class]];
 }
 
-- (void) awakeFromNib {
+- (void) awakeFromNib
+{
 	[[self class] setCellClass:[KPBackButtonCell class]];
 }
 
@@ -34,7 +36,7 @@
 {
   NSSize bzz = [super intrinsicContentSize];
   
-  return NSMakeSize(bzz.width + 8.0, bzz.height);
+  return NSMakeSize(bzz.width + 4.0, bzz.height);
 }
 
 @end

@@ -8,8 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "KPBlackButton.h"
-
-@interface KPBackButton : KPBlackButton
+@interface KPBackButton : NSButton
 
 @end

@@ -8,97 +8,47 @@
 
 #import "KPBackButtonCell.h"
 
-static NSImage* _disabled_left, *_disabled_center, *_disabled_right;
-
-static NSImage* _normal_left, *_normal_center, *_normal_right;
-
-static NSImage* _highlighted_left, *_highlighted_center, *_highlighted_right;
+static NSImage* arrowDisabled, *arrowNormal, *arrowHighlighted;
 
 @implementation KPBackButtonCell
 
 + (void) initialize
 {
-  _disabled_left = [NSImage imageNamed: @"KPBackButtonLeft-disabled"];
-  _disabled_center = [NSImage imageNamed: @"KPBlackButtonCenter-disabled"];
-  _disabled_right = [NSImage imageNamed: @"KPBlackButtonRight-disabled"];
+  arrowDisabled = [NSImage imageNamed: @"Arrow-disabled"];
   
-  _normal_left = [NSImage imageNamed: @"KPBackButtonLeft-normal"];
-  _normal_center = [NSImage imageNamed: @"KPBlackButtonCenter-normal"];
-  _normal_right = [NSImage imageNamed: @"KPBlackButtonRight-normal"];
+  arrowNormal = [NSImage imageNamed: @"Arrow-normal"];
   
-  _highlighted_left = [NSImage imageNamed: @"KPBackButtonLeft-highlighted"];
-  _highlighted_center = [NSImage imageNamed: @"KPBlackButtonCenter-highlighted"];
-  _highlighted_right = [NSImage imageNamed: @"KPBlackButtonRight-highlighted"];
+  arrowHighlighted = [NSImage imageNamed: @"Arrow-highlighted"];
 }
 
-- (void)drawBezelWithFrame:(NSRect)frame inView:(NSView *)controlView
+- (void) drawBezelWithFrame: (NSRect) frame inView: (NSView*) controlView
 {
+  //[[NSColor redColor] setFill], NSRectFill(frame);
+  
+  NSRect r = NSMakeRect(0, 0, arrowNormal.size.width, arrowNormal.size.height);
+  
   if(self.isEnabled)
   {
     if(self.isHighlighted)
     {
-      NSDrawThreePartImage(frame, _highlighted_left, _highlighted_center, _highlighted_right, NO, NSCompositeSourceOver, 1.0, YES);
+      [arrowHighlighted drawAtPoint: NSMakePoint(0, 1) fromRect: r operation: NSCompositeSourceOver fraction: 1.0];
     }
     else
     {
-      NSDrawThreePartImage(frame, _normal_left, _normal_center, _normal_right, NO, NSCompositeSourceOver, 1.0, YES);
+      [arrowNormal drawAtPoint: NSMakePoint(0, 1) fromRect: r operation: NSCompositeSourceOver fraction: 1.0];
     }
   }
   else
   {
-    NSDrawThreePartImage(frame, _disabled_left, _disabled_center, _disabled_right, NO, NSCompositeSourceOver, 1.0, YES);
+    [arrowDisabled drawAtPoint: NSMakePoint(0, 1) fromRect: r operation: NSCompositeSourceOver fraction: 1.0];
   }
 }
 
-#pragma mark - NSButtonCell Overrides
-
-/*
-- (void)drawImage: (NSImage *)image withFrame:(NSRect)frame inView:(NSView *)controlView
+- (NSRect) titleRectForBounds: (NSRect) bounds
 {
+  NSRect supers = [super titleRectForBounds: bounds];
   
+  return NSMakeRect(bounds.size.width - supers.size.width, supers.origin.y, supers.size.width, supers.size.height);
 }
-*/
-
-
-#pragma mark - NSCell Overrides
-
-- (NSRect) titleRectForBounds:(NSRect)theRect
-{
-  return NSOffsetRect(theRect, 3.0, -1.0);
-}
-
-
-
-
-/*
- - (NSSize)cellSizeForBounds:(NSRect)aRect
- {
- return NSMakeSize(aRect.size.width, 10.0);
- }
-
-
-- (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{
-}
-
-- (NSRect)titleRectForBounds:(NSRect)theRect
-{
-}
-
-- (NSRect)imageRectForBounds:(NSRect)theRect
-{
-}
-
-- (NSRect)drawingRectForBounds:(NSRect)theRect
-{
-}
-
-// To support constraint-based layout, when the content of a custom cell changes in such a way that the return value of this method would change, it needs to notify its control of the change via invalidateIntrinsicContentSizeForCell:.
-
-
-- (NSUInteger)hitTestForEvent:(NSEvent *)event inRect:(NSRect)cellFrame ofView:(NSView *)controlView
-{
-}
-*/
 
 @end
