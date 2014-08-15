@@ -48,7 +48,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   [navigationBar addSubview: host];
   
-  [navigationBar addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"H:|[host]|" options: 0 metrics: nil views: @{@"host": host}]];
+  [navigationBar addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"H:[host]|" options: 0 metrics: nil views: @{@"host": host}]];
   
   [navigationBar addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[host]|" options: 0 metrics: nil views: @{@"host": host}]];
   
