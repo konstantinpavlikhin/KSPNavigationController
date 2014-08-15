@@ -494,11 +494,22 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   NSDictionary* views = NSDictionaryOfVariableBindings(navigationView, navigationBar, mainView, navigationToolbarHost);
   
-  NSString* format = (side == Forward)? @"H:[navigationView][mainView(==navigationView)]" : @"H:[mainView(==navigationView)][navigationView]";
-  
-  NSArray* horizontal = [NSLayoutConstraint constraintsWithVisualFormat: format options: 0 metrics: nil views: views];
-  
-  [allConstraints addObjectsFromArray: horizontal];
+  if(side == Forward)
+  {
+    id c = [NSLayoutConstraint constraintsWithVisualFormat: @"H:[navigationView][mainView(==navigationView)]" options: 0 metrics: nil views: views];
+    
+    [allConstraints addObjectsFromArray: c];
+  }
+  else
+  {
+    id c = [NSLayoutConstraint constraintsWithVisualFormat: @"H:[mainView(==navigationView)]" options: 0 metrics: nil views: views];
+    
+    [allConstraints addObjectsFromArray: c];
+    
+    id c2 = [NSLayoutConstraint constraintWithItem: mainView attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: navigationView attribute: NSLayoutAttributeLeading multiplier: -(1.0 / 3.0) constant: 0.0];
+    
+    [allConstraints addObject: c2];
+  }
   
   // * * *.
   
@@ -575,9 +586,18 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   NSDictionary* views2 = NSDictionaryOfVariableBindings(screenshot, mainViewTransitionHost);
   
-  NSString* format = (side == Backward)? @"H:[screenshot][mainViewTransitionHost]" : @"H:[mainViewTransitionHost][screenshot]";
-  
-  [finishConstraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat: format options: 0 metrics: nil views: views2]];
+  if(side == Forward)
+  {
+    id c = [NSLayoutConstraint constraintsWithVisualFormat: @"H:[mainViewTransitionHost][screenshot]" options: 0 metrics: nil views: views2];
+    
+    [finishConstraints addObjectsFromArray: c];
+  }
+  else
+  {
+    id c2 = [NSLayoutConstraint constraintWithItem: screenshot attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: mainViewTransitionHost attribute: NSLayoutAttributeLeading multiplier: 1.0 constant: -(mainViewTransitionHost.frame.size.width / 3.0)];
+    
+    [finishConstraints addObject: c2];
+  }
   
   [finishConstraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[screenshot]" options: 0 metrics: nil views: views2]];
   
@@ -617,7 +637,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   [mainView removeFromSuperviewWithoutNeedingDisplay];
   
   // 3. Внедрить screenshot в mainViewTransitionHost на стартовую позицию.
-  [navigationView.mainViewTransitionHost addSubview: screenshot];
+  [navigationView.mainViewTransitionHost addSubview: screenshot positioned: side == Forward? NSWindowBelow : NSWindowAbove relativeTo: [[navigationView.mainViewTransitionHost subviews] lastObject]];
   
   NSMutableArray* startConstraints = [NSMutableArray array];
   
@@ -625,9 +645,18 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   NSDictionary* views2 = NSDictionaryOfVariableBindings(screenshot, mainViewTransitionHost);
   
-  NSString* format = (side == Forward)? @"H:[screenshot][mainViewTransitionHost]" : @"H:[mainViewTransitionHost][screenshot]";
-  
-  [startConstraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat: format options: 0 metrics: nil views: views2]];
+  if(side == Backward)
+  {
+    id c = [NSLayoutConstraint constraintsWithVisualFormat: @"H:[mainViewTransitionHost][screenshot]" options: 0 metrics: nil views: views2];
+    
+    [startConstraints addObjectsFromArray: c];
+  }
+  else
+  {
+    id c2 = [NSLayoutConstraint constraintWithItem: screenshot attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: mainViewTransitionHost attribute: NSLayoutAttributeLeading multiplier: 1.0 constant: -(mainViewTransitionHost.frame.size.width / 3.0)];
+    
+    [startConstraints addObject: c2];
+  }
   
   [startConstraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[screenshot]" options: 0 metrics: nil views: views2]];
   
