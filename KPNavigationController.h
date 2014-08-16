@@ -16,8 +16,11 @@
 
 #pragma mark - Creating Navigation Controllers
 
-/// Initializes and returns a newly created navigation controller.
-- (instancetype) initWithNavigationBar: (NSView*) navigationBar rootViewController: (KPNavViewController*) rootViewController;
+- (instancetype) initWithNavigationBar: (NSView*) navigationBar rootViewController: (KPNavViewController*) rootViewControllerOrNil NS_DESIGNATED_INITIALIZER;
+
+- (instancetype) initWithNibName: (NSString*) nibNameOrNil bundle: (NSBundle*) nibBundleOrNil UNAVAILABLE_ATTRIBUTE;
+
+- (instancetype) initWithCoder: (NSCoder*) coder UNAVAILABLE_ATTRIBUTE;
 
 #pragma mark - Accessing Items on the Navigation Stack
 

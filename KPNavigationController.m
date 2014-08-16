@@ -31,14 +31,11 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   NSMutableArray* _viewControllers;
 }
 
-+ (NSString*) nibFilename
+- (instancetype) initWithNavigationBar: (NSView*) navigationBar rootViewController: (KPNavViewController*) rootViewControllerOrNil
 {
-  return @"KPNavigationController";
-}
-
-- (instancetype) initWithNavigationBar: (NSView*) navigationBar rootViewController: (KPNavViewController*) rootViewController
-{
-  self = [self initWithNibName: [[self class] nibFilename] bundle: nil];
+  NSParameterAssert(navigationBar);
+  
+  self = [super initWithNibName: @"KPNavigationController" bundle: nil];
   
   if(!self) return nil;
   
@@ -56,10 +53,28 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   _viewControllers = [NSMutableArray new];
   
-  if(rootViewController) [self setViewControllers: @[rootViewController] animated: NO];
+  if(rootViewControllerOrNil) [self setViewControllers: @[rootViewControllerOrNil] animated: NO];
   
   return self;
 }
+
+#pragma mark - Designated Initializers суперкласса
+
+- (instancetype) initWithNibName: (NSString*) nibNameOrNil bundle: (NSBundle*) nibBundleOrNil
+{
+  NSAssert(NO, @"KPNavigationController можно инициализировать только с помощью -initWithNavigationBar:rootViewController:");
+  
+  return nil;
+}
+
+- (instancetype) initWithCoder: (NSCoder*) coder
+{
+  NSAssert(NO, @"KPNavigationController можно инициализировать только с помощью -initWithNavigationBar:rootViewController:");
+  
+  return nil;
+}
+
+#pragma mark -
 
 - (void) awakeFromNib
 {
