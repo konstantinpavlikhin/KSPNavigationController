@@ -49,7 +49,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   [navigationBar addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[host]|" options: 0 metrics: nil views: @{@"host": host}]];
   
-  self.navigationBar = host;
+  _navigationBar = host;
   
   _viewControllers = [NSMutableArray new];
   
