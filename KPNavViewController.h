@@ -6,7 +6,7 @@
 
 @property(readwrite, weak) KPNavigationController* navigationController;
 
-@property(readwrite, strong) NSString* navigationTitle;
+@property(readwrite, copy) NSString* navigationTitle;
 
 @property(readwrite, strong) NSButton* backButton;
 
