@@ -92,7 +92,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   [fadeTransition setDuration: TRANSITION_DURATION];
   
-  NSDictionary* animations = [NSDictionary dictionaryWithObject: fadeTransition forKey: @"subviews"];
+  NSDictionary* animations = @{@"subviews": fadeTransition};
   
   [self.navigationView.navigationBar setAnimations: animations];
   

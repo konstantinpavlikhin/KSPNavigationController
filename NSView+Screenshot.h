@@ -10,6 +10,6 @@
 
 @interface NSView (Screenshot)
 
-- (NSImage*) imageWithSubviews;
+@property(nonatomic, readonly, copy) NSImage* imageWithSubviews;
 
 @end
