@@ -821,26 +821,26 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   // * * *.
   
   {{ /* Готовим кнопку «Назад» */
-    NSButton* _backButtonNew = nil;
+    NSButton* backButtonNew = nil;
     
     if([_viewControllers count] > 1)
     {
       NSString* title = [_viewControllers[[_viewControllers count] - 2] navigationTitle];
       
-      _backButtonNew = [self newBackButtonWithTitle: title];
+      backButtonNew = [self newBackButtonWithTitle: title];
     }
     else
     {
-      _backButtonNew = [[NSButton alloc] initWithFrame: NSZeroRect];
+      backButtonNew = [[NSButton alloc] initWithFrame: NSZeroRect];
       
-      NSDictionary* views = NSDictionaryOfVariableBindings(_backButtonNew);
+      NSDictionary* views = NSDictionaryOfVariableBindings(backButtonNew);
       
-      [_backButtonNew addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"H:[_backButtonNew(==0@1000)]" options: 0 metrics: nil views: views]];
+      [backButtonNew addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"H:[backButtonNew(==0@1000)]" options: 0 metrics: nil views: views]];
     }
     
-    [_backButtonNew setTarget: self];
+    [backButtonNew setTarget: self];
     
-    newController.backButton = _backButtonNew;
+    newController.backButton = backButtonNew;
   }}
   
   // * * *.
