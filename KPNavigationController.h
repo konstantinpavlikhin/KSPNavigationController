@@ -1,4 +1,4 @@
-#import <KPToolbox/KPViewController.h>
+#import <KSPToolbox/KPViewController.h>
 
 @class KPNavViewController;
 
