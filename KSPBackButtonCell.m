@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Konstantin Pavlikhin. All rights reserved.
 //
 
-#import "KPBackButtonCell.h"
+#import "KSPBackButtonCell.h"
 
 static NSImage* arrowDisabled, *arrowNormal, *arrowHighlighted;
 
-@implementation KPBackButtonCell
+@implementation KSPBackButtonCell
 
 + (void) initialize
 {

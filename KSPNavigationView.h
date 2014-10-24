@@ -8,11 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class HitTestView;
+@class KSPHitTestView;
 
-@interface NavigationView : NSView
+@interface KSPNavigationView : NSView
 
-@property(readwrite, strong) IBOutlet HitTestView* navigationBar;
+@property(readwrite, strong) IBOutlet KSPHitTestView* navigationBar;
 
 @property(readwrite, strong) IBOutlet NSView* mainViewTransitionHost;
 

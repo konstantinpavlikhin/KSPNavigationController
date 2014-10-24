@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Konstantin Pavlikhin. All rights reserved.
 //
 
-#import "NavigationView.h"
+#import "KSPNavigationView.h"
 
-@implementation NavigationView
+@implementation KSPNavigationView
 
 - (instancetype) initWithCoder:(NSCoder *)aDecoder
 {

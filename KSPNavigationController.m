@@ -1,16 +1,16 @@
-#import "KPNavigationController+Private.h"
+#import "KSPNavigationController+Private.h"
 
-#import "KPNavigationControllerDelegate.h"
+#import "KSPNavigationControllerDelegate.h"
 
-#import "KPNavViewController.h"
+#import "KSPNavViewController.h"
 
-#import "HitTestView.h"
+#import "KSPHitTestView.h"
 
-#import "NavigationView.h"
+#import "KSPNavigationView.h"
 
 #import "NSView+Screenshot.h"
 
-#import "KPBackButton.h"
+#import "KSPBackButton.h"
 
 #import <KSPToolbox/NSObject+IfResponds.h>
 
@@ -26,20 +26,20 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 #define INVERT_SIDE(x) ((x == Backward)? Forward : Backward)
 
-@implementation KPNavigationController
+@implementation KSPNavigationController
 {
   NSMutableArray* _viewControllers;
 }
 
-- (instancetype) initWithNavigationBar: (NSView*) navigationBar rootViewController: (KPNavViewController*) rootViewControllerOrNil
+- (instancetype) initWithNavigationBar: (NSView*) navigationBar rootViewController: (KSPNavViewController*) rootViewControllerOrNil
 {
   NSParameterAssert(navigationBar);
   
-  self = [super initWithNibName: @"KPNavigationController" bundle: nil];
+  self = [super initWithNibName: @"KSPNavigationController" bundle: nil];
   
   if(!self) return nil;
   
-  HitTestView* host = [[HitTestView alloc] initWithFrame: NSZeroRect];
+  KSPHitTestView* host = [[KSPHitTestView alloc] initWithFrame: NSZeroRect];
   
   host.translatesAutoresizingMaskIntoConstraints = NO;
   
@@ -101,11 +101,11 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 - (NSButton*) newBackButtonWithTitle: (NSString*) string
 {
-  NSButton* b = [[KPBackButton alloc] initWithFrame: NSZeroRect];
+  NSButton* b = [[KSPBackButton alloc] initWithFrame: NSZeroRect];
   
   [b setBezelStyle: NSTexturedRoundedBezelStyle];
   
-  if(!string) string = NSLocalizedStringFromTable(@"BackButton_Title", @"KPNavigationViewController", nil);
+  if(!string) string = NSLocalizedStringFromTable(@"BackButton_Title", [self className], nil);
   
   [b setTitle: string];
   
@@ -498,7 +498,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 #pragma mark - Main view
 
-+ (NSArray*) constraintsForMainView: (NSView*) mainView inNavigationView: (NavigationView*) navigationView complementaryPositionSide: (Side) side
++ (NSArray*) constraintsForMainView: (NSView*) mainView inNavigationView: (KSPNavigationView*) navigationView complementaryPositionSide: (Side) side
 {
   NSMutableArray* allConstraints = [NSMutableArray new];
   
@@ -535,7 +535,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   return allConstraints;
 }
 
-+ (NSArray*) constraintsForMainView: (NSView*) mainView inNavigationView: (NavigationView*) navigationView
++ (NSArray*) constraintsForMainView: (NSView*) mainView inNavigationView: (KSPNavigationView*) navigationView
 {
   NSMutableArray* allConstraints = [NSMutableArray new];
   
@@ -563,14 +563,14 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   return allConstraints;
 }
 
-+ (void) removeMainView: (NSView*) mainView fromNavigationView: (NavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
++ (void) removeMainView: (NSView*) mainView fromNavigationView: (KSPNavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
 {
   // 1. Создать screenshot mainView.
   NSImageView* screenshot = [[NSImageView alloc] initWithFrame: NSZeroRect];
   
   [screenshot setTranslatesAutoresizingMaskIntoConstraints: NO];
   
-  [screenshot setImage: [mainView imageWithSubviews]];
+  [screenshot setImage: [mainView ss_imageWithSubviews]];
   
   // 2. Выкинуть mainView.
   [mainView removeFromSuperview];
@@ -631,7 +631,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   }];
 }
 
-+ (void) insertMainView: (NSView*) mainView inNavigationView: (NavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
++ (void) insertMainView: (NSView*) mainView inNavigationView: (KSPNavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
 {
   // 1. Добавить mainView в navigationView.
   [mainView setTranslatesAutoresizingMaskIntoConstraints: NO];
@@ -647,7 +647,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   [screenshot setTranslatesAutoresizingMaskIntoConstraints: NO];
   
-  [screenshot setImage: [mainView imageWithSubviews]];
+  [screenshot setImage: [mainView ss_imageWithSubviews]];
   
   [mainView removeFromSuperviewWithoutNeedingDisplay];
   
@@ -742,7 +742,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 #pragma mark - Ядровой метод
 
-+ (void) removeViewController: (KPNavViewController*) viewController fromNavigationView: (NavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
++ (void) removeViewController: (KSPNavViewController*) viewController fromNavigationView: (KSPNavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
 {
   /* Рассчитываем текущую ширину всех вьюшек на навигационной плашке. */
   
@@ -773,7 +773,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   [self removeNavigationToolbar: viewController.navigationToolbar];
 }
 
-+ (void) insertViewController: (KPNavViewController*) viewController inNavigationView: (NavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
++ (void) insertViewController: (KSPNavViewController*) viewController inNavigationView: (KSPNavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
 {
   /* Center Navigation Bar View. */
   [self insertCenterView: viewController.centerNavigationBarView inNavigationBar: navigationView.navigationBar slideTo: side animated: animated];
@@ -792,7 +792,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 }
 
 // Снимает текущий контроллер из окна и вставляет в него новый.
-- (void) replaceNavViewController: (KPNavViewController*) oldControllerOrNil with: (KPNavViewController*) newController animated: (BOOL) animated slideTo: (Side) side
+- (void) replaceNavViewController: (KSPNavViewController*) oldControllerOrNil with: (KSPNavViewController*) newController animated: (BOOL) animated slideTo: (Side) side
 {
   NSParameterAssert(newController);
   
@@ -804,7 +804,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   {
     self.navigationBar.rejectHitTest = YES;
     
-    ((HitTestView*)self.view).rejectHitTest = YES;
+    ((KSPHitTestView*)self.view).rejectHitTest = YES;
   }
   
   // Размер окна с навигационным контроллером больше не может быть изменен.
@@ -871,7 +871,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
     [self.windowController.window setStyleMask: [self.windowController.window styleMask] | NSResizableWindowMask];
     
     // Навигационный вид снова реагирует на клики.
-    ((HitTestView*)self.view).rejectHitTest = NO;
+    ((KSPHitTestView*)self.view).rejectHitTest = NO;
     
     self.navigationBar.rejectHitTest = NO;
     
@@ -889,7 +889,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   NSAssert([newViewControllers count] > 0, @"Unable to set void view controllers array.");
   
-  KPNavViewController* current = [self topViewController];
+  KSPNavViewController* current = [self topViewController];
   
   [_viewControllers removeAllObjects];
   
@@ -903,13 +903,13 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 }
 
 // Pushes a view controller onto the receiver’s stack and updates the display.
-- (void) pushViewController: (KPNavViewController*) viewController animated: (BOOL) animated
+- (void) pushViewController: (KSPNavViewController*) viewController animated: (BOOL) animated
 {
   NSParameterAssert(viewController);
   
   NSAssert(![_viewControllers containsObject: viewController], @"View controller already on the stack.");
   
-  KPNavViewController* current = [self topViewController];
+  KSPNavViewController* current = [self topViewController];
   
   [_viewControllers addObject: viewController];
   
@@ -921,7 +921,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 }
 
 // Pops the top view controller from the navigation stack and updates the display.
-- (KPNavViewController*) popViewControllerAnimated: (BOOL) animated
+- (KSPNavViewController*) popViewControllerAnimated: (BOOL) animated
 {
   NSInteger controllersCount = [_viewControllers count];
   
@@ -943,13 +943,13 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 }
 
 // Pops view controllers until the specified view controller is at the top of the navigation stack.
-- (NSArray*) popToViewController: (KPNavViewController*) viewController animated: (BOOL) animated
+- (NSArray*) popToViewController: (KSPNavViewController*) viewController animated: (BOOL) animated
 {
   NSParameterAssert(viewController);
   
   NSAssert([_viewControllers containsObject: viewController], @"View controller not on the stack.");
   
-  KPNavViewController* current = [self topViewController];
+  KSPNavViewController* current = [self topViewController];
   
   NSUInteger indexOfViewController = [_viewControllers indexOfObject: viewController];
   

@@ -1,5 +1,5 @@
 //
-//  KPBackButton.h
+//  KPBackButtonCell.h
 //  KSPNavigationController
 //
 //  Created by Konstantin Pavlikhin on 2/14/13.
@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface KPBackButton : NSButton
+@interface KSPBackButtonCell : NSButtonCell
 
 @end

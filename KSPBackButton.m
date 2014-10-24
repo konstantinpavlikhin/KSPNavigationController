@@ -6,30 +6,30 @@
 //  Copyright (c) 2013 Konstantin Pavlikhin. All rights reserved.
 //
 
-#import "KPBackButton.h"
+#import "KSPBackButton.h"
 
-#import "KPBackButtonCell.h"
+#import "KSPBackButtonCell.h"
 
-@implementation KPBackButton
+@implementation KSPBackButton
 
 + (Class) cellClass
 {
-	return [KPBackButtonCell class];
+	return [KSPBackButtonCell class];
 }
 
 + (void) initialize
 {
-  [self setCellClass: [KPBackButtonCell class]];
+  [self setCellClass: [KSPBackButtonCell class]];
 }
 
 + (void) load
 {
-  [self setCellClass: [KPBackButtonCell class]];
+  [self setCellClass: [KSPBackButtonCell class]];
 }
 
 - (void) awakeFromNib
 {
-	[[self class] setCellClass:[KPBackButtonCell class]];
+	[[self class] setCellClass:[KSPBackButtonCell class]];
 }
 
 - (NSSize) intrinsicContentSize

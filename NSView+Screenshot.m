@@ -10,7 +10,7 @@
 
 @implementation NSView (Screenshot)
 
-- (NSImage*) imageWithSubviews
+- (NSImage*) ss_imageWithSubviews
 {
   NSSize mySize = self.bounds.size;
   

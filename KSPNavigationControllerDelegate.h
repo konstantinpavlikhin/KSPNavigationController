@@ -8,16 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@class KPNavigationController, KPNavViewController;
+@class KSPNavigationController, KSPNavViewController;
 
-@protocol KPNavigationControllerDelegate <NSObject>
+@protocol KSPNavigationControllerDelegate <NSObject>
 
 @optional
 
 /// Sent to the receiver just before the navigation controller displays a view controller’s view and navigation item properties.
-- (void) navigationController: (KPNavigationController*) navigationController willShowViewController: (KPNavViewController*) viewController animated: (BOOL) animated;
+- (void) navigationController: (KSPNavigationController*) navigationController willShowViewController: (KSPNavViewController*) viewController animated: (BOOL) animated;
 
 /// Sent to the receiver just after the navigation controller displays a view controller’s view and navigation item properties.
-- (void) navigationController: (KPNavigationController*) navigationController didShowViewController: (KPNavViewController*) viewController animated: (BOOL) animated;
+- (void) navigationController: (KSPNavigationController*) navigationController didShowViewController: (KSPNavViewController*) viewController animated: (BOOL) animated;
 
 @end

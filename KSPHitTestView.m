@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Konstantin Pavlikhin. All rights reserved.
 //
 
-#import "HitTestView.h"
+#import "KSPHitTestView.h"
 
-@implementation HitTestView
+@implementation KSPHitTestView
 
 - (NSView*) hitTest: (NSPoint) aPoint
 {

@@ -1,6 +1,6 @@
-#import "KPNavViewController.h"
+#import "KSPNavViewController.h"
 
-@implementation KPNavViewController
+@implementation KSPNavViewController
 
 - (void) viewWillAppear: (BOOL) animated
 {

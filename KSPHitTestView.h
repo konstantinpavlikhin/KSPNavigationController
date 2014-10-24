@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface HitTestView : NSView
+@interface KSPHitTestView : NSView
 
 @property(readwrite, assign) BOOL rejectHitTest;
 

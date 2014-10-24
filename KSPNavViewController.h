@@ -1,10 +1,10 @@
 #import <KSPToolbox/KPViewController.h>
 
-@class KPNavigationController;
+@class KSPNavigationController;
 
-@interface KPNavViewController : KPViewController
+@interface KSPNavViewController : KPViewController
 
-@property(readwrite, weak) KPNavigationController* navigationController;
+@property(readwrite, weak) KSPNavigationController* navigationController;
 
 @property(readwrite, copy) NSString* navigationTitle;
 
