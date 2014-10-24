@@ -1,8 +1,8 @@
-#import <KSPToolbox/KPViewController.h>
+#import "KSPViewController+Private.h"
 
 @class KSPNavigationController;
 
-@interface KSPNavViewController : KPViewController
+@interface KSPNavViewController : KSPViewController
 
 @property(readwrite, weak) KSPNavigationController* navigationController;
 

@@ -1,4 +1,4 @@
-#import "KPViewController.h"
+#import "KSPViewController+Private.h"
 
 @class KSPNavViewController;
 
@@ -6,7 +6,7 @@
 
 @class KSPHitTestView;
 
-@interface KSPNavigationController : KPViewController
+@interface KSPNavigationController : KSPViewController
 
 @property(readonly, strong) IBOutlet KSPHitTestView* navigationBar;
 
