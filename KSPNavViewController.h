@@ -6,8 +6,6 @@
 
 @property(readwrite, weak) KSPNavigationController* navigationController;
 
-@property(readwrite, copy) NSString* navigationTitle;
-
 @property(readwrite, strong) NSButton* backButton;
 
 @property(readwrite, strong) IBOutlet NSView* leftNavigationBarView;

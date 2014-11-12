@@ -825,7 +825,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
     
     if([_viewControllers count] > 1)
     {
-      NSString* title = [_viewControllers[[_viewControllers count] - 2] navigationTitle];
+      NSString* title = ((KSPNavViewController*)_viewControllers[_viewControllers.count - 2]).title;
       
       backButtonNew = [self newBackButtonWithTitle: title];
     }
