@@ -20,8 +20,6 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 #define RESIZE_DURATION (1.0 / 5.0)
 
-#define TRANSITION_DURATION (1.0 / 2.0)
-
 #define STANDART_SPACE 8.0
 
 #define INVERT_SIDE(x) ((x == Backward)? Forward : Backward)
@@ -40,6 +38,8 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   if(!self) return nil;
   
   _transitionStyle = KSPNavigationControllerTransitionStyleLengthy;
+  
+  _transitionDuration = (1.0 / 2.0);
   
   KSPHitTestView* host = [[KSPHitTestView alloc] initWithFrame: NSZeroRect];
   
@@ -92,7 +92,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   [fadeTransition setType: kCATransitionFade];
   
-  [fadeTransition setDuration: TRANSITION_DURATION];
+  [fadeTransition setDuration: self.transitionDuration];
   
   NSDictionary* animations = @{@"subviews": fadeTransition};
   
@@ -856,7 +856,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   // Анимация смены главного вида.
   [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* context)
   {
-    [context setDuration: animated? TRANSITION_DURATION : 0.0];
+    [context setDuration: animated? self.transitionDuration : 0.0];
     
     [context setTimingFunction: [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut]];
     

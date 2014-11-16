@@ -20,6 +20,9 @@ typedef NS_ENUM(NSUInteger, KSPNavigationControllerTransitionStyle)
 /// KSPNavigationControllerTransitionStyleLengthy by default.
 @property(readwrite, assign, nonatomic) KSPNavigationControllerTransitionStyle transitionStyle;
 
+/// 1/2 of a second by default.
+@property(readwrite, assign, nonatomic) CFTimeInterval transitionDuration;
+
 #pragma mark - Accessing the Delegate
 
 @property(readwrite, weak) NSObject<KSPNavigationControllerDelegate>* delegate;
