@@ -321,7 +321,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   NSLayoutConstraint* c1 = [NSLayoutConstraint constraintWithItem: centerView attribute: NSLayoutAttributeCenterX relatedBy: NSLayoutRelationEqual toItem: navigationBar attribute: NSLayoutAttributeCenterX multiplier: 1.0 constant: 0.0];
   
   // Центральный вид стремится к середине, но, при необходимости, может быть расположен ассиметрично.
-  c1.priority = 100.0;
+  c1.priority = 10.0;
   
   [allConstraints addObject: c1];
   
@@ -496,6 +496,26 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   completionHandler: ^
   {
   }];
+}
+
+#pragma mark - Measurement
+
++ (NSSize) fittingSizeForNavigationBarOfNavViewController: (KSPNavViewController*) viewController
+{
+  NSView* imaginaryNavigationBar = [[NSView alloc] initWithFrame: NSZeroRect];
+  
+  imaginaryNavigationBar.translatesAutoresizingMaskIntoConstraints = NO;
+  
+  // Center Navigation Bar View.
+  [self insertCenterView: viewController.centerNavigationBarView inNavigationBar: imaginaryNavigationBar slideTo: Forward animated: NO];
+  
+  // Back Navigation Bar Button & Left Navigation Bar View.
+  [self insertBackView: viewController.backButton andLeftView: viewController.leftNavigationBarView utilizingCenterView: viewController.centerNavigationBarView inNavigationBar: imaginaryNavigationBar slideTo: Forward animated: NO];
+  
+  // Right Navigation Bar View.
+  [self insertRightView: viewController.rightNavigationBarView utilizingCenterView: viewController.centerNavigationBarView inNavigationBar: imaginaryNavigationBar animated: NO];
+  
+  return [imaginaryNavigationBar fittingSize];
 }
 
 #pragma mark - Main view
@@ -815,17 +835,6 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
     ((KSPHitTestView*)self.view).rejectHitTest = YES;
   }
   
-  // Размер окна с навигационным контроллером больше не может быть изменен.
-  [self.windowController.window setStyleMask: [self.windowController.window styleMask] & ~NSResizableWindowMask];
-  
-  [[self.delegate ifResponds] navigationController: self willShowViewController: newController animated: animated];
-  
-  [oldControllerOrNil viewWillDisappear: animated];
-  
-  [newController viewWillAppear: animated];
-  
-  [newController view];
-  
   // * * *.
   
   {{ /* Готовим кнопку «Назад» */
@@ -853,39 +862,89 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   // * * *.
   
-  // Анимация смены главного вида.
-  [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* context)
+  [newController view];
+  
+  NSSize fittingSize = [[self class] fittingSizeForNavigationBarOfNavViewController: newController];
+  
+  BOOL shouldResize = fittingSize.width > self.view.frame.size.width;
+  
+  void (^actualNavigationTransition)(void) = ^()
   {
-    [context setDuration: animated? self.transitionDuration : 0.0];
+    // Размер окна с навигационным контроллером больше не может быть изменен.
+    [self.windowController.window setStyleMask: [self.windowController.window styleMask] & ~NSResizableWindowMask];
     
-    [context setTimingFunction: [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut]];
+    [[self.delegate ifResponds] navigationController: self willShowViewController: newController animated: animated];
     
-    if(oldControllerOrNil)
-    {
-      [[self class] removeViewController: oldControllerOrNil fromNavigationView: self.navigationView slideTo: side animated: animated transitionStyle: self.transitionStyle];
-    }
+    [oldControllerOrNil viewWillDisappear: animated];
     
-    [[self class] insertViewController: newController inNavigationView: self.navigationView slideTo: side animated: animated transitionStyle: self.transitionStyle];
+    [newController viewWillAppear: animated];
+    
+    [newController view];
+    
+    // * * *.
+    
+    // Анимация смены главного вида.
+    [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* context)
+     {
+       [context setDuration: animated? self.transitionDuration : 0.0];
+       
+       [context setTimingFunction: [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut]];
+       
+       if(oldControllerOrNil)
+       {
+         [[self class] removeViewController: oldControllerOrNil fromNavigationView: self.navigationView slideTo: side animated: animated transitionStyle: self.transitionStyle];
+       }
+       
+       [[self class] insertViewController: newController inNavigationView: self.navigationView slideTo: side animated: animated transitionStyle: self.transitionStyle];
+     }
+     completionHandler: ^
+     {
+       [oldControllerOrNil viewDidDisappear: animated];
+       
+       [newController viewDidAppear: animated];
+       
+       [[self.delegate ifResponds] navigationController: self didShowViewController: newController animated: animated];
+       
+       // Окно снова можно ресайзить.
+       [self.windowController.window setStyleMask: [self.windowController.window styleMask] | NSResizableWindowMask];
+       
+       // Навигационный вид снова реагирует на клики.
+       ((KSPHitTestView*)self.view).rejectHitTest = NO;
+       
+       self.navigationBar.rejectHitTest = NO;
+       
+       // Ставим фокус на нужный контрол.
+       [self.windowController.window makeFirstResponder: [self topViewController].proposedFirstResponder];
+     }];
+  };
+  
+  // * * *.
+  
+  if(shouldResize)
+  {
+    NSLayoutConstraint* constraint = [NSLayoutConstraint constraintWithItem: self.navigationBar attribute:NSLayoutAttributeWidth relatedBy: NSLayoutRelationEqual toItem: nil attribute: NSLayoutAttributeNotAnAttribute multiplier: 1.0 constant: self.view.frame.size.width];
+    
+    [self.navigationBar addConstraint: constraint];
+    
+    [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* context)
+     {
+       [context setDuration: animated? (1.0 / 3.0) : 0.0];
+       
+       [context setTimingFunction: [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut]];
+       
+       [constraint animator].constant = fittingSize.width;
+     }
+     completionHandler: ^
+     {
+       [self.navigationBar removeConstraint: constraint];
+       
+       actualNavigationTransition();
+     }];
   }
-  completionHandler: ^
+  else
   {
-    [oldControllerOrNil viewDidDisappear: animated];
-    
-    [newController viewDidAppear: animated];
-    
-    [[self.delegate ifResponds] navigationController: self didShowViewController: newController animated: animated];
-    
-    // Окно снова можно ресайзить.
-    [self.windowController.window setStyleMask: [self.windowController.window styleMask] | NSResizableWindowMask];
-    
-    // Навигационный вид снова реагирует на клики.
-    ((KSPHitTestView*)self.view).rejectHitTest = NO;
-    
-    self.navigationBar.rejectHitTest = NO;
-    
-    // Ставим фокус на нужный контрол.
-    [self.windowController.window makeFirstResponder: [self topViewController].proposedFirstResponder];
-  }];
+    actualNavigationTransition();
+  }
 }
 
 #pragma mark - Пользовательские функции
