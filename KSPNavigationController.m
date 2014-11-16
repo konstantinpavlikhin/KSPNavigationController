@@ -39,6 +39,8 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   if(!self) return nil;
   
+  _transitionStyle = KSPNavigationControllerTransitionStyleLengthy;
+  
   KSPHitTestView* host = [[KSPHitTestView alloc] initWithFrame: NSZeroRect];
   
   host.translatesAutoresizingMaskIntoConstraints = NO;
@@ -498,7 +500,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 #pragma mark - Main view
 
-+ (NSArray*) constraintsForMainView: (NSView*) mainView inNavigationView: (KSPNavigationView*) navigationView complementaryPositionSide: (Side) side
++ (NSArray*) constraintsForMainView: (NSView*) mainView inNavigationView: (KSPNavigationView*) navigationView complementaryPositionSide: (Side) side transitionStyle: (KSPNavigationControllerTransitionStyle) transitionStyle
 {
   NSMutableArray* allConstraints = [NSMutableArray new];
   
@@ -521,7 +523,9 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
     
     [allConstraints addObjectsFromArray: c];
     
-    id c2 = [NSLayoutConstraint constraintWithItem: mainView attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: navigationView attribute: NSLayoutAttributeLeading multiplier: -(1.0 / 3.0) constant: 0.0];
+    CGFloat m = (transitionStyle == KSPNavigationControllerTransitionStyleLengthy)? 1.0 : (1.0 / 3.0);
+    
+    id c2 = [NSLayoutConstraint constraintWithItem: mainView attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: navigationView attribute: NSLayoutAttributeLeading multiplier: -m constant: 0.0];
     
     [allConstraints addObject: c2];
   }
@@ -563,7 +567,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   return allConstraints;
 }
 
-+ (void) removeMainView: (NSView*) mainView fromNavigationView: (KSPNavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
++ (void) removeMainView: (NSView*) mainView fromNavigationView: (KSPNavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated transitionStyle: (KSPNavigationControllerTransitionStyle) transitionStyle
 {
   // 1. Создать screenshot mainView.
   NSImageView* screenshot = [[NSImageView alloc] initWithFrame: NSZeroRect];
@@ -609,7 +613,9 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   }
   else
   {
-    id c2 = [NSLayoutConstraint constraintWithItem: screenshot attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: mainViewTransitionHost attribute: NSLayoutAttributeLeading multiplier: 1.0 constant: -(mainViewTransitionHost.frame.size.width / 3.0)];
+    CGFloat divider = (transitionStyle == KSPNavigationControllerTransitionStyleLengthy)? 1.0 : 3.0;
+    
+    id c2 = [NSLayoutConstraint constraintWithItem: screenshot attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: mainViewTransitionHost attribute: NSLayoutAttributeLeading multiplier: 1.0 constant: -(mainViewTransitionHost.frame.size.width / divider)];
     
     [finishConstraints addObject: c2];
   }
@@ -631,7 +637,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   }];
 }
 
-+ (void) insertMainView: (NSView*) mainView inNavigationView: (KSPNavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
++ (void) insertMainView: (NSView*) mainView inNavigationView: (KSPNavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated transitionStyle: (KSPNavigationControllerTransitionStyle) transitionStyle
 {
   // 1. Добавить mainView в navigationView.
   [mainView setTranslatesAutoresizingMaskIntoConstraints: NO];
@@ -668,7 +674,9 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   }
   else
   {
-    id c2 = [NSLayoutConstraint constraintWithItem: screenshot attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: mainViewTransitionHost attribute: NSLayoutAttributeLeading multiplier: 1.0 constant: -(mainViewTransitionHost.frame.size.width / 3.0)];
+    CGFloat divider = (transitionStyle == KSPNavigationControllerTransitionStyleLengthy)? 1.0 : 3.0;
+    
+    id c2 = [NSLayoutConstraint constraintWithItem: screenshot attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: mainViewTransitionHost attribute: NSLayoutAttributeLeading multiplier: 1.0 constant: -(mainViewTransitionHost.frame.size.width / divider)];
     
     [startConstraints addObject: c2];
   }
@@ -742,7 +750,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 #pragma mark - Ядровой метод
 
-+ (void) removeViewController: (KSPNavViewController*) viewController fromNavigationView: (KSPNavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
++ (void) removeViewController: (KSPNavViewController*) viewController fromNavigationView: (KSPNavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated transitionStyle: (KSPNavigationControllerTransitionStyle) transitionStyle
 {
   /* Рассчитываем текущую ширину всех вьюшек на навигационной плашке. */
   
@@ -767,13 +775,13 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   [self removeRightView: viewController.rightNavigationBarView fromNavigationBar: navigationView.navigationBar width: rightWidth animated: animated];
   
   /* Main View. */
-  [self removeMainView: viewController.view fromNavigationView: navigationView slideTo: side animated: animated];
+  [self removeMainView: viewController.view fromNavigationView: navigationView slideTo: side animated: animated transitionStyle: transitionStyle];
   
   /* Navigation Toolbar. */
   [self removeNavigationToolbar: viewController.navigationToolbar];
 }
 
-+ (void) insertViewController: (KSPNavViewController*) viewController inNavigationView: (KSPNavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated
++ (void) insertViewController: (KSPNavViewController*) viewController inNavigationView: (KSPNavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated transitionStyle: (KSPNavigationControllerTransitionStyle) transitionStyle
 {
   /* Center Navigation Bar View. */
   [self insertCenterView: viewController.centerNavigationBarView inNavigationBar: navigationView.navigationBar slideTo: side animated: animated];
@@ -785,7 +793,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   [self insertRightView: viewController.rightNavigationBarView utilizingCenterView: viewController.centerNavigationBarView inNavigationBar: navigationView.navigationBar animated: animated];
   
   /* Main View. */
-  [self insertMainView: viewController.view inNavigationView: navigationView slideTo: side animated: animated];
+  [self insertMainView: viewController.view inNavigationView: navigationView slideTo: side animated: animated transitionStyle: transitionStyle];
   
   /* Navigation Toolbar. */
   [self insertNavigationToolbar: viewController.navigationToolbar inNavigationToolbarHost: navigationView.navigationToolbarHost];
@@ -854,10 +862,10 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
     
     if(oldControllerOrNil)
     {
-      [[self class] removeViewController: oldControllerOrNil fromNavigationView: self.navigationView slideTo: side animated: animated];
+      [[self class] removeViewController: oldControllerOrNil fromNavigationView: self.navigationView slideTo: side animated: animated transitionStyle: self.transitionStyle];
     }
     
-    [[self class] insertViewController: newController inNavigationView: self.navigationView slideTo: side animated: animated];
+    [[self class] insertViewController: newController inNavigationView: self.navigationView slideTo: side animated: animated transitionStyle: self.transitionStyle];
   }
   completionHandler: ^
   {
