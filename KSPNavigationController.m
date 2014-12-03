@@ -875,9 +875,9 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
     
     [[self.delegate ifResponds] navigationController: self willShowViewController: newController animated: animated];
     
-    [oldControllerOrNil viewWillDisappear: animated];
+    [oldControllerOrNil navigationViewWillDisappear: animated];
     
-    [newController viewWillAppear: animated];
+    [newController navigationViewWillAppear: animated];
     
     [newController view];
     
@@ -899,9 +899,9 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
      }
      completionHandler: ^
      {
-       [oldControllerOrNil viewDidDisappear: animated];
+       [oldControllerOrNil navigationViewDidDisappear: animated];
        
-       [newController viewDidAppear: animated];
+       [newController navigationViewDidAppear: animated];
        
        [[self.delegate ifResponds] navigationController: self didShowViewController: newController animated: animated];
        

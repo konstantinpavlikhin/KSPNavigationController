@@ -2,19 +2,19 @@
 
 @implementation KSPNavViewController
 
-- (void) viewWillAppear: (BOOL) animated
+- (void) navigationViewWillAppear: (BOOL) animated
 {
 }
 
-- (void) viewDidAppear: (BOOL) animated
+- (void) navigationViewDidAppear: (BOOL) animated
 {
 }
 
-- (void) viewWillDisappear: (BOOL) animated
+- (void) navigationViewWillDisappear: (BOOL) animated
 {
 }
 
-- (void) viewDidDisappear: (BOOL) animated
+- (void) navigationViewDidDisappear: (BOOL) animated
 {
 }
 
