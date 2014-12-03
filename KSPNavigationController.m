@@ -118,7 +118,23 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 - (IBAction) backButtonPressed: (id) sender
 {
-  [self popViewControllerAnimated: YES];
+  // We don't need no warnings let the motherfucker crash. Crash motherfucker.
+  SEL selector = NSSelectorFromString(@"customBackButtonAction:");
+
+  if([self.topViewController respondsToSelector: selector])
+  {
+    #pragma clang diagnostic push
+
+    #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+
+    [self.topViewController performSelector: selector withObject: self];
+
+    #pragma clang diagnostic pop
+  }
+  else
+  {
+    [self popViewControllerAnimated: YES];
+  }
 }
 
 + (NSArray*) constraintsForVerticalFixationOfView: (NSView*) view inNavigationBar: (NSView*) navigationBar
