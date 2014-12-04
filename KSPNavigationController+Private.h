@@ -20,6 +20,8 @@
 
 @property(readwrite, strong) IBOutlet NSView* navigationToolbarHost;
 
+@property(readwrite, strong) IBOutlet NSLayoutConstraint* navigationToolbarHostHeight;
+
 @property(readwrite, strong) KSPNavViewController* topViewController;
 
 @end

@@ -23,6 +23,9 @@ typedef NS_ENUM(NSUInteger, KSPNavigationControllerTransitionStyle)
 /// 1/2 of a second by default.
 @property(readwrite, assign, nonatomic) CFTimeInterval transitionDuration;
 
+/// 24 points by default.
+@property(readonly, strong) IBOutlet NSLayoutConstraint* navigationToolbarHostHeight;
+
 #pragma mark - Accessing the Delegate
 
 @property(readwrite, weak) NSObject<KSPNavigationControllerDelegate>* delegate;
