@@ -23,9 +23,7 @@ static void* NextResponderKVOContext;
 
 + (BOOL) runningOnPreYosemite
 {
-  NSOperatingSystemVersion currentSystemVersion = [[NSProcessInfo processInfo] operatingSystemVersion];
-  
-  return (currentSystemVersion.majorVersion <= 10) && (currentSystemVersion.minorVersion < 10);
+  return (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_9);
 }
 
 - (void) loadView
