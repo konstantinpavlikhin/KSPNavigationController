@@ -930,7 +930,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
        self.navigationBar.rejectHitTest = NO;
        
        // Ставим фокус на нужный контрол.
-       [self.windowController.window makeFirstResponder: [self topViewController].proposedFirstResponder];
+       [self.windowController.window makeFirstResponder: self.topViewController.proposedFirstResponder];
      }];
   };
   
@@ -972,7 +972,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   NSAssert([newViewControllers count] > 0, @"Unable to set void view controllers array.");
   
-  KSPNavViewController* current = [self topViewController];
+  KSPNavViewController* current = self.topViewController;
   
   [_viewControllers removeAllObjects];
   
@@ -992,7 +992,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   NSAssert(![_viewControllers containsObject: viewController], @"View controller already on the stack.");
   
-  KSPNavViewController* current = [self topViewController];
+  KSPNavViewController* current = self.topViewController;
   
   [_viewControllers addObject: viewController];
   
@@ -1032,7 +1032,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   NSAssert([_viewControllers containsObject: viewController], @"View controller not on the stack.");
   
-  KSPNavViewController* current = [self topViewController];
+  KSPNavViewController* current = self.topViewController;
   
   NSUInteger indexOfViewController = [_viewControllers indexOfObject: viewController];
   

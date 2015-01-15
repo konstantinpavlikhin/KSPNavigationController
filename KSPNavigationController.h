@@ -42,8 +42,6 @@ typedef NS_ENUM(NSUInteger, KSPNavigationControllerTransitionStyle)
 
 @property(readonly, strong) KSPNavViewController* topViewController;
 
-- (KSPNavViewController*) topViewController;
-
 #pragma mark - Pushing and Popping Stack Items
 
 - (void) setViewControllers: (NSArray*) newViewControllers animated: (BOOL) animated;
