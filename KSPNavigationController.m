@@ -27,6 +27,8 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 @implementation KSPNavigationController
 {
   NSMutableArray* _viewControllers;
+
+  BOOL _windowWasResizable;
 }
 
 - (instancetype) initWithNavigationBar: (NSView*) navigationBar rootViewController: (KSPNavViewController*) rootViewControllerOrNil
@@ -886,9 +888,16 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   void (^actualNavigationTransition)(void) = ^()
   {
-    // Размер окна с навигационным контроллером больше не может быть изменен.
-    [self.windowController.window setStyleMask: [self.windowController.window styleMask] & ~NSResizableWindowMask];
-    
+    _windowWasResizable = self.windowController.window.styleMask & NSResizableWindowMask;
+
+    if(_windowWasResizable)
+    {
+      // Размер окна с навигационным контроллером больше не может быть изменен.
+      [self.windowController.window setStyleMask: [self.windowController.window styleMask] & ~NSResizableWindowMask];
+    }
+
+    // * * *.
+
     [[self.delegate ifResponds] navigationController: self willShowViewController: newController animated: animated];
     
     [oldControllerOrNil navigationViewWillDisappear: animated];
@@ -920,9 +929,12 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
        [newController navigationViewDidAppear: animated];
        
        [[self.delegate ifResponds] navigationController: self didShowViewController: newController animated: animated];
-       
-       // Окно снова можно ресайзить.
-       [self.windowController.window setStyleMask: [self.windowController.window styleMask] | NSResizableWindowMask];
+
+       if(_windowWasResizable)
+       {
+         // Окно снова можно ресайзить.
+         [self.windowController.window setStyleMask: self.windowController.window.styleMask | NSResizableWindowMask];
+       }
        
        // Навигационный вид снова реагирует на клики.
        ((KSPHitTestView*)self.view).rejectHitTest = NO;
