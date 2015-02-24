@@ -880,7 +880,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   // * * *.
   
-  [newController view];
+  (void)[newController view];
   
   NSSize fittingSize = [[self class] fittingSizeForNavigationBarOfNavViewController: newController];
   
@@ -904,7 +904,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
     
     [newController navigationViewWillAppear: animated];
     
-    [newController view];
+    (void)newController.view;
     
     // * * *.
     
