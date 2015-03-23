@@ -1043,7 +1043,9 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   NSParameterAssert(viewController);
   
   NSAssert([_viewControllers containsObject: viewController], @"View controller not on the stack.");
-  
+
+  if(viewController == self.topViewController) return @[];
+
   KSPNavViewController* current = self.topViewController;
   
   NSUInteger indexOfViewController = [_viewControllers indexOfObject: viewController];
