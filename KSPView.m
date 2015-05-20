@@ -19,13 +19,21 @@
 
 - (void) setNextResponder: (NSResponder* const) nextResponder
 {
-  if(_viewController)
+  if(rint(NSAppKitVersionNumber) > NSAppKitVersionNumber10_9)
   {
-    _viewController.nextResponder = nextResponder;
+    // Yosemite does the right thing out of the box.
+    super.nextResponder = nextResponder;
   }
   else
   {
-    super.nextResponder = nextResponder;
+    if(_viewController)
+    {
+      _viewController.nextResponder = nextResponder;
+    }
+    else
+    {
+      super.nextResponder = nextResponder;
+    }
   }
 }
 
@@ -38,40 +46,47 @@
 
   // * * *.
 
-  if(_viewController)
+  if(rint(NSAppKitVersionNumber) > NSAppKitVersionNumber10_9)
   {
-    // If the current view already had a view controller...
-
-    NSResponder* const currentViewControllersNextResponder = _viewController.nextResponder;
-
-    _viewController.nextResponder = nil;
-
     _viewController = newViewControllerOrNil;
-
-    if(newViewControllerOrNil)
-    {
-      super.nextResponder = newViewControllerOrNil;
-
-      newViewControllerOrNil.nextResponder = currentViewControllersNextResponder;
-    }
-    else
-    {
-      super.nextResponder = currentViewControllersNextResponder;
-    }
   }
   else
   {
-    // If the current view had not a view controller...
-
-    if(newViewControllerOrNil)
+    if(_viewController)
     {
+      // If the current view already had a view controller...
+
+      NSResponder* const currentViewControllersNextResponder = _viewController.nextResponder;
+
+      _viewController.nextResponder = nil;
+
       _viewController = newViewControllerOrNil;
 
-      NSResponder* const currentViewsNextResponder = self.nextResponder;
+      if(newViewControllerOrNil)
+      {
+        super.nextResponder = newViewControllerOrNil;
 
-      super.nextResponder = newViewControllerOrNil;
+        newViewControllerOrNil.nextResponder = currentViewControllersNextResponder;
+      }
+      else
+      {
+        super.nextResponder = currentViewControllersNextResponder;
+      }
+    }
+    else
+    {
+      // If the current view had not a view controller...
 
-      newViewControllerOrNil.nextResponder = currentViewsNextResponder;
+      if(newViewControllerOrNil)
+      {
+        _viewController = newViewControllerOrNil;
+
+        NSResponder* const currentViewsNextResponder = self.nextResponder;
+
+        super.nextResponder = newViewControllerOrNil;
+
+        newViewControllerOrNil.nextResponder = currentViewsNextResponder;
+      }
     }
   }
 }
