@@ -8,9 +8,7 @@
 
 #import "KSPViewController+Private.h"
 
-static NSString* const NextResponder = @"nextResponder";
-
-static void* NextResponderKVOContext;
+#import "KSPView.h"
 
 @implementation KSPViewController
 
@@ -19,49 +17,43 @@ static void* NextResponderKVOContext;
   return self.view.window.windowController;
 }
 
-#pragma mark - Responder Chain Patching
+#pragma mark - NSViewController Overrides
 
-+ (BOOL) runningOnPreYosemite
+- (void) setView: (NSView* const) newView
 {
-  return (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_9);
-}
-
-- (void) setView: (NSView*) view
-{
-  [super setView: view];
-  
-  if([[self class] runningOnPreYosemite])
+  if(rint(NSAppKitVersionNumber) > NSAppKitVersionNumber10_9)
   {
-    // Подписываемся на обновления свойства nextResponder своего вида.
-    [self.view addObserver: self forKeyPath: NextResponder options: NSKeyValueObservingOptionInitial context: &NextResponderKVOContext];
+    // Yosemite does the right thing out of the box.
+    super.view = newView;
   }
-}
-
-- (void) observeValueForKeyPath: (NSString*) keyPath ofObject: (id) object change: (NSDictionary*) change context: (void*) context
-{
-  // Если это то, чего мы ждем...
-  if([keyPath isEqualToString: NextResponder] && object == self.view && context == &NextResponderKVOContext)
+  else
   {
-    // Избегаем бесконечной рекурсии...
-    if(self.view.nextResponder != self) [self patchResponderChain];
-  }
-}
+    // 'view' property is declared as atomic.
+    @synchronized(self)
+    {
+      if(newView != self.view)
+      {
+        if(self.view && [self.view isKindOfClass: [KSPView class]])
+        {
+          KSPView* const castedView = (KSPView*)self.view;
 
-- (void) patchResponderChain
-{
-  // Ставим после себя существующий next responder нашего вида.
-  self.nextResponder = self.view.nextResponder;
-  
-  // Ставим себя next responder'ом нашего вида.
-  self.view.nextResponder = self;
-}
+          castedView.viewController = nil;
+        }
 
-- (void) dealloc
-{
-  if([[self class] runningOnPreYosemite])
-  {
-    // Отписываемся от нотификаций.
-    [self.view removeObserver: self forKeyPath: NextResponder context: &NextResponderKVOContext];
+        // * * *.
+
+        super.view = newView;
+
+        // * * *.
+
+        if(newView && [newView isKindOfClass: [KSPView class]])
+        {
+          KSPView* const castedNewView = (KSPView*)newView;
+
+          castedNewView.viewController = self;
+        }
+      }
+    }
   }
 }
 
