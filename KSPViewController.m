@@ -26,16 +26,6 @@ static void* NextResponderKVOContext;
   return (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_9);
 }
 
-- (void) loadView
-{
-  [super loadView];
-  
-  if([[self class] runningOnPreYosemite] && [self respondsToSelector: @selector(viewDidLoad)])
-  {
-    [self viewDidLoad];
-  }
-}
-
 - (void) setView: (NSView*) view
 {
   [super setView: view];
