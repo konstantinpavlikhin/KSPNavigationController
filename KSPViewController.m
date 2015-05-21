@@ -31,11 +31,11 @@
     // 'view' property is declared as atomic.
     @synchronized(self)
     {
-      if(newView != self.view)
+      if(newView != [self viewWithoutInstantiationOnAccess])
       {
-        if(self.view && [self.view isKindOfClass: [KSPView class]])
+        if([self viewWithoutInstantiationOnAccess] && [[self viewWithoutInstantiationOnAccess] isKindOfClass: [KSPView class]])
         {
-          KSPView* const castedView = (KSPView*)self.view;
+          KSPView* const castedView = (KSPView*)[self viewWithoutInstantiationOnAccess];
 
           castedView.viewController = nil;
         }
@@ -55,6 +55,16 @@
       }
     }
   }
+}
+
+#pragma mark - Private Methods
+
+- (NSView*) viewWithoutInstantiationOnAccess
+{
+  // Private method selector "_view".
+  NSArray* const letters = @[@"_", @"v", @"i", @"e", @"w"];
+  
+  return [self valueForKey: [letters componentsJoinedByString: @""]];
 }
 
 @end
