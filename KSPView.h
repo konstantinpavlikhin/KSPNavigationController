@@ -12,6 +12,6 @@
 
 @interface KSPView : NSView
 
-@property(readwrite, unsafe_unretained, nonatomic) KSPViewController* viewController;
+@property(readwrite, weak, nonatomic) KSPViewController* viewController;
 
 @end

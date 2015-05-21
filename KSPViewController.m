@@ -17,6 +17,25 @@
   return self.view.window.windowController;
 }
 
+#pragma mark - Cleanup
+
+- (void) dealloc
+{
+  if(rint(NSAppKitVersionNumber) > NSAppKitVersionNumber10_9)
+  {
+    // Nothing to do.
+  }
+  else
+  {
+    if([self viewWithoutInstantiationOnAccess] && [[self viewWithoutInstantiationOnAccess] isKindOfClass: [KSPView class]])
+    {
+      KSPView* const castedView = (KSPView*)[self viewWithoutInstantiationOnAccess];
+      
+      castedView.viewController = nil;
+    }
+  }
+}
+
 #pragma mark - NSViewController Overrides
 
 - (void) setView: (NSView* const) newView

@@ -12,8 +12,10 @@
 
 @implementation KSPView
 {
-  __unsafe_unretained KSPViewController* _viewController;
+  __weak KSPViewController* _viewController;
 }
+
+@synthesize viewController = _viewController;
 
 #pragma mark - NSResponder Overrides
 
