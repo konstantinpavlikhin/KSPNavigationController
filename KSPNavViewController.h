@@ -4,17 +4,17 @@
 
 @interface KSPNavViewController : KSPViewController
 
-@property(readwrite, weak) KSPNavigationController* navigationController;
+@property(readwrite, weak, nonatomic) KSPNavigationController* navigationController;
 
-@property(readwrite, strong) NSButton* backButton;
+@property(readwrite, strong, nonatomic) NSButton* backButton;
 
-@property(readwrite, strong) IBOutlet NSView* leftNavigationBarView;
+@property(readonly, strong, nonatomic) IBOutlet NSView* leftNavigationBarView;
 
-@property(readwrite, strong) IBOutlet NSView* centerNavigationBarView;
+@property(readonly, strong, nonatomic) IBOutlet NSView* centerNavigationBarView;
 
-@property(readwrite, strong) IBOutlet NSView* rightNavigationBarView;
+@property(readonly, strong, nonatomic) IBOutlet NSView* rightNavigationBarView;
 
-@property(readwrite, strong) IBOutlet NSView* navigationToolbar;
+@property(readonly, strong, nonatomic) IBOutlet NSView* navigationToolbar;
 
 - (void) navigationViewWillAppear: (BOOL) animated;
 

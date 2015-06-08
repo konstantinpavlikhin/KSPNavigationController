@@ -10,6 +10,6 @@
 
 @interface KSPHitTestView : NSView
 
-@property(readwrite, assign) BOOL rejectHitTest;
+@property(readwrite, assign, nonatomic) BOOL rejectHitTest;
 
 @end

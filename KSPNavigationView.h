@@ -12,10 +12,10 @@
 
 @interface KSPNavigationView : NSView
 
-@property(readwrite, strong) IBOutlet KSPHitTestView* navigationBar;
+@property(readwrite, strong, nonatomic) IBOutlet KSPHitTestView* navigationBar;
 
-@property(readwrite, strong) IBOutlet NSView* mainViewTransitionHost;
+@property(readwrite, strong, nonatomic) IBOutlet NSView* mainViewTransitionHost;
 
-@property(readwrite, strong) IBOutlet NSView* navigationToolbarHost;
+@property(readwrite, strong, nonatomic) IBOutlet NSView* navigationToolbarHost;
 
 @end

@@ -1,5 +1,7 @@
 #import "KSPViewController+Private.h"
 
+// * * *.
+
 typedef NS_ENUM(NSUInteger, KSPNavigationControllerTransitionStyle)
 {
   KSPNavigationControllerTransitionStyleLengthy,
@@ -7,15 +9,19 @@ typedef NS_ENUM(NSUInteger, KSPNavigationControllerTransitionStyle)
   KSPNavigationControllerTransitionStyleShort
 };
 
+// * * *.
+
+@class KSPHitTestView;
+
 @class KSPNavViewController;
 
 @protocol KSPNavigationControllerDelegate;
 
-@class KSPHitTestView;
+// * * *.
 
 @interface KSPNavigationController : KSPViewController
 
-@property(readonly, strong) IBOutlet KSPHitTestView* navigationBar;
+@property(readonly, strong, nonatomic) IBOutlet KSPHitTestView* navigationBar;
 
 /// KSPNavigationControllerTransitionStyleLengthy by default.
 @property(readwrite, assign, nonatomic) KSPNavigationControllerTransitionStyle transitionStyle;
@@ -24,11 +30,11 @@ typedef NS_ENUM(NSUInteger, KSPNavigationControllerTransitionStyle)
 @property(readwrite, assign, nonatomic) CFTimeInterval transitionDuration;
 
 /// 24 points by default.
-@property(readonly, strong) IBOutlet NSLayoutConstraint* navigationToolbarHostHeight;
+@property(readonly, strong, nonatomic) IBOutlet NSLayoutConstraint* navigationToolbarHostHeight;
 
 #pragma mark - Accessing the Delegate
 
-@property(readwrite, weak) NSObject<KSPNavigationControllerDelegate>* delegate;
+@property(readwrite, weak, nonatomic) id<KSPNavigationControllerDelegate> delegate;
 
 #pragma mark - Creating Navigation Controllers
 
@@ -40,7 +46,7 @@ typedef NS_ENUM(NSUInteger, KSPNavigationControllerTransitionStyle)
 
 #pragma mark - Accessing Items on the Navigation Stack
 
-@property(readonly, strong) KSPNavViewController* topViewController;
+@property(readonly, strong, nonatomic) KSPNavViewController* topViewController;
 
 #pragma mark - Pushing and Popping Stack Items
 

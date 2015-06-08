@@ -12,16 +12,16 @@
 
 @interface KSPNavigationController ()
 
-@property(readwrite, strong) IBOutlet KSPNavigationView* navigationView;
+@property(readwrite, strong, nonatomic) IBOutlet KSPNavigationView* navigationView;
 
-@property(readwrite, strong) KSPNavigationView* navigationViewPrototype;
+@property(readwrite, strong, nonatomic) KSPNavigationView* navigationViewPrototype;
 
-@property(readwrite, strong) KSPHitTestView* navigationBar;
+@property(readwrite, strong, nonatomic) KSPHitTestView* navigationBar;
 
-@property(readwrite, strong) IBOutlet NSView* navigationToolbarHost;
+@property(readwrite, strong, nonatomic) IBOutlet NSView* navigationToolbarHost;
 
-@property(readwrite, strong) IBOutlet NSLayoutConstraint* navigationToolbarHostHeight;
+@property(readwrite, strong, nonatomic) IBOutlet NSLayoutConstraint* navigationToolbarHostHeight;
 
-@property(readwrite, strong) KSPNavViewController* topViewController;
+@property(readwrite, strong, nonatomic) KSPNavViewController* topViewController;
 
 @end

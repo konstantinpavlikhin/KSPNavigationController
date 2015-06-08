@@ -12,17 +12,24 @@
 
 #import "KSPBackButton.h"
 
-#import <KSPToolbox/NSObject+IfResponds.h>
-
 #import <QuartzCore/CoreAnimation.h>
 
-typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
+// * * *.
 
-#define RESIZE_DURATION (1.0 / 5.0)
+typedef NS_ENUM(NSUInteger, Side)
+{
+  Backward,
+
+  Forward
+};
+
+// * * *.
 
 #define STANDART_SPACE 8.0
 
 #define INVERT_SIDE(x) ((x == Backward)? Forward : Backward)
+
+// * * *.
 
 @implementation KSPNavigationController
 {
@@ -31,19 +38,25 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   BOOL _windowWasResizable;
 }
 
+#pragma mark - Initialization
+
 - (instancetype) initWithNavigationBar: (NSView*) navigationBar rootViewController: (KSPNavViewController*) rootViewControllerOrNil
 {
   NSParameterAssert(navigationBar);
-  
+
+  // * * *.
+
   self = [super initWithNibName: @"KSPNavigationController" bundle: nil];
   
   if(!self) return nil;
-  
+
+  // * * *.
+
   _transitionStyle = KSPNavigationControllerTransitionStyleLengthy;
   
-  _transitionDuration = (1.0 / 2.0);
+  _transitionDuration = 0.35;
   
-  KSPHitTestView* host = [[KSPHitTestView alloc] initWithFrame: NSZeroRect];
+  KSPHitTestView* const host = [[KSPHitTestView alloc] initWithFrame: NSZeroRect];
   
   host.translatesAutoresizingMaskIntoConstraints = NO;
   
@@ -57,12 +70,17 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   _viewControllers = [NSMutableArray new];
   
-  if(rootViewControllerOrNil) [self setViewControllers: @[rootViewControllerOrNil] animated: NO];
-  
+  if(rootViewControllerOrNil)
+  {
+    [self setViewControllers: @[rootViewControllerOrNil] animated: NO];
+  }
+
+  // * * *.
+
   return self;
 }
 
-#pragma mark - Designated Initializers суперкласса
+#pragma mark - NSViewController Overrides
 
 - (instancetype) initWithNibName: (NSString*) nibNameOrNil bundle: (NSBundle*) nibBundleOrNil
 {
@@ -70,6 +88,8 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   return nil;
 }
+
+#pragma mark - NSCoder Protocol Implementation
 
 - (instancetype) initWithCoder: (NSCoder*) coder
 {
@@ -82,46 +102,57 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 - (void) awakeFromNib
 {
+  [super awakeFromNib];
+
+  // * * *.
+
   self.navigationView.navigationBar = self.navigationBar;
   
-  [[self.navigationView.mainViewTransitionHost layer] setOpaque: YES];
+  self.navigationView.mainViewTransitionHost.layer.opaque = YES;
   
   self.navigationViewPrototype = [NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: self.navigationView]];
   
   // * * *.
   
-  CATransition* fadeTransition = [CATransition animation];
+  CATransition* const fadeTransition = [CATransition animation];
   
-  [fadeTransition setType: kCATransitionFade];
+  fadeTransition.type = kCATransitionFade;
   
-  [fadeTransition setDuration: self.transitionDuration];
+  fadeTransition.duration = self.transitionDuration;
   
-  NSDictionary* animations = @{@"subviews": fadeTransition};
+  NSDictionary* const animations = @{@"subviews": fadeTransition};
   
   [self.navigationView.navigationBar setAnimations: animations];
   
   [self.navigationToolbarHost setAnimations: animations];
 }
 
+#pragma mark - Private Methods
+
 - (NSButton*) newBackButtonWithTitle: (NSString*) string
 {
-  NSButton* b = [[KSPBackButton alloc] initWithFrame: NSZeroRect];
+  NSButton* const b = [[KSPBackButton alloc] initWithFrame: NSZeroRect];
   
-  [b setBezelStyle: NSTexturedRoundedBezelStyle];
+  b.bezelStyle = NSTexturedRoundedBezelStyle;
   
-  if(!string) string = NSLocalizedStringFromTable(@"BackButton_Title", [self className], nil);
+  if(!string)
+  {
+    string = NSLocalizedStringFromTable(@"BackButtonTitle", NSStringFromClass([KSPNavigationController class]), nil);
+  }
   
-  [b setTitle: string];
+  b.title = string;
   
-  [b setAction: @selector(backButtonPressed:)];
+  b.action = @selector(backButtonPressed:);
   
   return b;
 }
 
+#pragma mark - Interface Callbacks
+
 - (IBAction) backButtonPressed: (id) sender
 {
   // We don't need no warnings let the motherfucker crash. Crash motherfucker.
-  SEL selector = NSSelectorFromString(@"customBackButtonAction:");
+  const SEL selector = NSSelectorFromString(@"customBackButtonAction:");
 
   if([self.topViewController respondsToSelector: selector])
   {
@@ -141,10 +172,8 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 + (NSArray*) constraintsForVerticalFixationOfView: (NSView*) view inNavigationBar: (NSView*) navigationBar
 {
-  NSLayoutConstraint* c1 = [NSLayoutConstraint constraintWithItem: view attribute: NSLayoutAttributeCenterY relatedBy: NSLayoutRelationEqual toItem: navigationBar attribute: NSLayoutAttributeCenterY multiplier: 1.0 constant: 0.0];
-  
-  // TODO: сделать тут растягивание навигационной плашки если суют слишком толстые кнопки.
-  
+  NSLayoutConstraint* const c1 = [NSLayoutConstraint constraintWithItem: view attribute: NSLayoutAttributeCenterY relatedBy: NSLayoutRelationEqual toItem: navigationBar attribute: NSLayoutAttributeCenterY multiplier: 1 constant: 0];
+
   return @[c1];
 }
 
@@ -153,11 +182,11 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 // Константы для позиции вывода с экрана.
 + (NSArray*) constraintsForBackView: (NSView*) backView andLeftView: (NSView*) leftView inNavigationBar: (NSView*) navigationBar complementaryPositionSide: (Side) side
 {
-  NSMutableArray* allConstraints = [NSMutableArray new];
+  NSMutableArray* const allConstraints = [NSMutableArray new];
   
   // * * *.
   
-  NSLayoutConstraint* c1 = [NSLayoutConstraint constraintWithItem: backView attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: navigationBar attribute: NSLayoutAttributeLeading multiplier: 1.0 constant: STANDART_SPACE];
+  NSLayoutConstraint* const c1 = [NSLayoutConstraint constraintWithItem: backView attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: navigationBar attribute: NSLayoutAttributeLeading multiplier: 1 constant: STANDART_SPACE];
   
   c1.constant += ((side == Backward)? -1.0 : 1.0) * (navigationBar.bounds.size.width / 3.0);
   
@@ -165,9 +194,9 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   // * * *.
   
-  NSDictionary* views = NSDictionaryOfVariableBindings(backView, leftView);
+  NSDictionary* const views = NSDictionaryOfVariableBindings(backView, leftView);
   
-  NSArray* c2 = [NSLayoutConstraint constraintsWithVisualFormat: @"[backView]-[leftView]" options: 0 metrics: nil views: views];
+  NSArray* const c2 = [NSLayoutConstraint constraintsWithVisualFormat: @"[backView]-[leftView]" options: 0 metrics: nil views: views];
   
   [allConstraints addObjectsFromArray: c2];
   
@@ -183,26 +212,26 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 // Константы для рабочей позиции вида.
 + (NSArray*) constraintsForBackView: (NSView*) backView andLeftView: (NSView*) leftView utilizingCenterView: (NSView*) centerView inNavigationBar: (NSView*) navigationBar
 {
-  NSMutableArray* allConstraints = [NSMutableArray new];
+  NSMutableArray* const allConstraints = [NSMutableArray new];
   
   // Фиксация левой стороны.
-  NSLayoutConstraint* c1 = [NSLayoutConstraint constraintWithItem: backView attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: navigationBar attribute: NSLayoutAttributeLeading multiplier: 1.0 constant: STANDART_SPACE];
+  NSLayoutConstraint* const c1 = [NSLayoutConstraint constraintWithItem: backView attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: navigationBar attribute: NSLayoutAttributeLeading multiplier: 1 constant: STANDART_SPACE];
   
   [allConstraints addObject: c1];
   
   // Фиксация видов между собой.
-  NSDictionary* views = NSDictionaryOfVariableBindings(backView, leftView);
+  NSDictionary* const views = NSDictionaryOfVariableBindings(backView, leftView);
   
-  NSArray* c2 = [NSLayoutConstraint constraintsWithVisualFormat: @"[backView]-[leftView]" options: 0 metrics: nil views: views];
+  NSArray* const c2 = [NSLayoutConstraint constraintsWithVisualFormat: @"[backView]-[leftView]" options: 0 metrics: nil views: views];
   
   [allConstraints addObjectsFromArray: c2];
   
   // Фиксация правой стороны.
   if(centerView)
   {
-    NSDictionary* views = NSDictionaryOfVariableBindings(leftView, centerView);
+    NSDictionary* const views = NSDictionaryOfVariableBindings(leftView, centerView);
     
-    NSArray* c3 = [NSLayoutConstraint constraintsWithVisualFormat: @"[leftView]-(>=20)-[centerView]" options: 0 metrics: nil views: views];
+    NSArray* const c3 = [NSLayoutConstraint constraintsWithVisualFormat: @"[leftView]-(>=20)-[centerView]" options: 0 metrics: nil views: views];
     
     [allConstraints addObjectsFromArray: c3];
   }
@@ -218,22 +247,22 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 + (void) removeBackView: (NSView*) backView andLeftView: (NSView*) leftView fromNavigationBar: (NSView*) navigationBar width: (CGFloat) width slideTo: (Side) side animated: (BOOL) animated
 {
   // Мы не можем вычленить нужные константы, поэтому проще выкинуть вид совсем и добавить его снова с известными константами.
-  [@[backView, leftView] enumerateObjectsUsingBlock: ^(NSView* view, NSUInteger idx, BOOL* stop)
+  [@[backView, leftView] enumerateObjectsUsingBlock: ^(NSView* const view, const NSUInteger idx, BOOL* stop)
   {
     [view removeFromSuperviewWithoutNeedingDisplay];
     
-    [view setTranslatesAutoresizingMaskIntoConstraints: NO];
+    view.translatesAutoresizingMaskIntoConstraints = NO;
     
     [navigationBar addSubview: view];
   }];
   
   // Начальное условие.
-  NSArray* startConstraints = [[self class] constraintsForBackView: backView andLeftView: leftView utilizingCenterView: nil inNavigationBar: navigationBar];
+  NSArray* const startConstraints = [[self class] constraintsForBackView: backView andLeftView: leftView utilizingCenterView: nil inNavigationBar: navigationBar];
   
   [navigationBar addConstraints: startConstraints];
   
   // Принудительно фиксируем ширину левосторонней конструкции (backView + пробел + leftView).
-  [navigationBar addConstraint: [NSLayoutConstraint constraintWithItem: backView attribute: NSLayoutAttributeLeft relatedBy: NSLayoutRelationEqual toItem: leftView attribute: NSLayoutAttributeRight multiplier: 1.0 constant: -width]];
+  [navigationBar addConstraint: [NSLayoutConstraint constraintWithItem: backView attribute: NSLayoutAttributeLeft relatedBy: NSLayoutRelationEqual toItem: leftView attribute: NSLayoutAttributeRight multiplier: 1 constant: -width]];
   
   // Тут надо какой-то перерасчет.
   [navigationBar layoutSubtreeIfNeeded];
@@ -242,25 +271,25 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   [navigationBar removeConstraints: startConstraints];
   
   // Окончательное условие.
-  NSArray* finishConstraints = [[self class] constraintsForBackView: backView andLeftView: leftView inNavigationBar: navigationBar complementaryPositionSide: side];
+  NSArray* const finishConstraints = [[self class] constraintsForBackView: backView andLeftView: leftView inNavigationBar: navigationBar complementaryPositionSide: side];
   
   [navigationBar addConstraints: finishConstraints];
   
   // Сама анимация.
-  [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* context)
+  [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* const context)
   {
-    [context setAllowsImplicitAnimation: YES];
+    context.allowsImplicitAnimation = YES;
     
     [navigationBar layoutSubtreeIfNeeded];
     
-    [@[backView, leftView] enumerateObjectsUsingBlock: ^(NSView* view, NSUInteger idx, BOOL* stop)
+    [@[backView, leftView] enumerateObjectsUsingBlock: ^(NSView* const view, const NSUInteger idx, BOOL* stop)
     {
-      [view setAlphaValue: 0.0];
+      view.alphaValue = 0;
     }];
   }
   completionHandler: ^
   {
-    [@[backView, leftView] enumerateObjectsUsingBlock: ^(NSView* view, NSUInteger idx, BOOL* stop)
+    [@[backView, leftView] enumerateObjectsUsingBlock: ^(NSView* const view, const NSUInteger idx, BOOL* stop)
     {
       [view removeFromSuperviewWithoutNeedingDisplay];
     }];
@@ -269,17 +298,17 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 + (void) insertBackView: (NSView*) backView andLeftView: (NSView*) leftView utilizingCenterView: (NSView*) centerView inNavigationBar: (NSView*) navigationBar slideTo: (Side) side animated: (BOOL) animated
 {
-  [@[backView, leftView] enumerateObjectsUsingBlock: ^(NSView* view, NSUInteger idx, BOOL* stop)
+  [@[backView, leftView] enumerateObjectsUsingBlock: ^(NSView* const view, const NSUInteger idx, BOOL* stop)
   {
-    [view setTranslatesAutoresizingMaskIntoConstraints: NO];
+    view.translatesAutoresizingMaskIntoConstraints = NO;
     
     [navigationBar addSubview: view];
     
-    [view setAlphaValue: 0.0];
+    view.alphaValue = 0;
   }];
   
   // Начальное условие.
-  NSArray* startConstraints = [[self class] constraintsForBackView: backView andLeftView: leftView inNavigationBar: navigationBar complementaryPositionSide: INVERT_SIDE(side)];
+  NSArray* const startConstraints = [[self class] constraintsForBackView: backView andLeftView: leftView inNavigationBar: navigationBar complementaryPositionSide: INVERT_SIDE(side)];
   
   [navigationBar addConstraints: startConstraints];
   
@@ -290,20 +319,20 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   [navigationBar removeConstraints: startConstraints];
   
   // Окончательное условие.
-  NSArray* finishConstraints = [self constraintsForBackView: backView andLeftView: leftView utilizingCenterView: centerView inNavigationBar: navigationBar];
+  NSArray* const finishConstraints = [self constraintsForBackView: backView andLeftView: leftView utilizingCenterView: centerView inNavigationBar: navigationBar];
   
   [navigationBar addConstraints: finishConstraints];
   
   // Сама анимация.
-  [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* context)
+  [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* const context)
   {
-    [context setAllowsImplicitAnimation: YES];
+    context.allowsImplicitAnimation = YES;
     
     [navigationBar layoutSubtreeIfNeeded];
     
-    [@[backView, leftView] enumerateObjectsUsingBlock: ^(NSView* view, NSUInteger idx, BOOL* stop)
+    [@[backView, leftView] enumerateObjectsUsingBlock: ^(NSView* const view, const NSUInteger idx, BOOL* stop)
     {
-      [view setAlphaValue: 1.0];
+      view.alphaValue = 1;
     }];
   }
   completionHandler: ^
@@ -316,13 +345,13 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 // Константы для позиции вывода с экрана.
 + (NSArray*) constraintsForCenterView: (NSView*) centerView inNavigationBar: (NSView*) navigationBar complementaryPositionSide: (Side) side
 {
-  NSMutableArray* allConstraints = [NSMutableArray new];
+  NSMutableArray* const allConstraints = [NSMutableArray new];
   
-  NSDictionary* views = NSDictionaryOfVariableBindings(navigationBar, centerView);
+  NSDictionary* const views = NSDictionaryOfVariableBindings(navigationBar, centerView);
   
-  NSString* format = (side == Backward)? @"[centerView][navigationBar]" : @"[navigationBar][centerView]";
+  NSString* const format = ((side == Backward)? @"[centerView][navigationBar]" : @"[navigationBar][centerView]");
   
-  NSArray* c1 = [NSLayoutConstraint constraintsWithVisualFormat: format options: 0 metrics: nil views: views];
+  NSArray* const c1 = [NSLayoutConstraint constraintsWithVisualFormat: format options: 0 metrics: nil views: views];
   
   [allConstraints addObjectsFromArray: c1];
   
@@ -334,12 +363,12 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 // Константы для рабочей позиции вида.
 + (NSArray*) constraintsForCenterView: (NSView*) centerView inNavigationBar: (NSView*) navigationBar
 {
-  NSMutableArray* allConstraints = [NSMutableArray new];
+  NSMutableArray* const allConstraints = [NSMutableArray new];
   
-  NSLayoutConstraint* c1 = [NSLayoutConstraint constraintWithItem: centerView attribute: NSLayoutAttributeCenterX relatedBy: NSLayoutRelationEqual toItem: navigationBar attribute: NSLayoutAttributeCenterX multiplier: 1.0 constant: 0.0];
+  NSLayoutConstraint* const c1 = [NSLayoutConstraint constraintWithItem: centerView attribute: NSLayoutAttributeCenterX relatedBy: NSLayoutRelationEqual toItem: navigationBar attribute: NSLayoutAttributeCenterX multiplier: 1 constant: 0];
   
   // Центральный вид стремится к середине, но, при необходимости, может быть расположен ассиметрично.
-  c1.priority = 10.0;
+  c1.priority = 10;
   
   [allConstraints addObject: c1];
   
@@ -353,7 +382,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   // Мы не можем вычленить нужные константы, поэтому проще выкинуть вид совсем и добавить его снова с известными константами.
   [centerView removeFromSuperviewWithoutNeedingDisplay];
   
-  [centerView setTranslatesAutoresizingMaskIntoConstraints: NO];
+  centerView.translatesAutoresizingMaskIntoConstraints = NO;
   
   [navigationBar addSubview: centerView];
   
@@ -361,7 +390,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   NSArray* startConstraints = [self constraintsForCenterView: centerView inNavigationBar: navigationBar];
   
   // Принудительно фиксируем левый край центральной плашки.
-  id c = [NSLayoutConstraint constraintWithItem: centerView attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: navigationBar attribute: NSLayoutAttributeLeading multiplier: 1.0 constant: x];
+  id const c = [NSLayoutConstraint constraintWithItem: centerView attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: navigationBar attribute: NSLayoutAttributeLeading multiplier: 1 constant: x];
   
   startConstraints = [startConstraints arrayByAddingObject: c];
   
@@ -370,9 +399,9 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   [navigationBar addConstraints: startConstraints];
   
   // Принудительно фиксируем ширину центральной плашки.
-  NSDictionary* metrics = @{@"currentWidth": @(width)};
+  NSDictionary* const metrics = @{@"currentWidth": @(width)};
   
-  NSDictionary* views = NSDictionaryOfVariableBindings(centerView);
+  NSDictionary* const views = NSDictionaryOfVariableBindings(centerView);
   
   [navigationBar addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"[centerView(==currentWidth)]" options: 0 metrics: metrics views: views]];
   
@@ -383,18 +412,18 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   [navigationBar removeConstraints: startConstraints];
   
   // Окончательное условие.
-  NSArray* finishConstraints = [self constraintsForCenterView: centerView inNavigationBar: navigationBar complementaryPositionSide: side];
+  NSArray* const finishConstraints = [self constraintsForCenterView: centerView inNavigationBar: navigationBar complementaryPositionSide: side];
   
   [navigationBar addConstraints: finishConstraints];
   
   // Сама анимация.
-  [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* context)
+  [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* const context)
   {
-    [context setAllowsImplicitAnimation: YES];
+    context.allowsImplicitAnimation = YES;
     
     [navigationBar layoutSubtreeIfNeeded];
     
-    [centerView setAlphaValue: 0.0];
+    centerView.alphaValue = 0;
   }
   completionHandler: ^
   {
@@ -404,14 +433,14 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 + (void) insertCenterView: (NSView*) centerView inNavigationBar: (NSView*) navigationBar slideTo: (Side) side animated: (BOOL) animated
 {
-  [centerView setTranslatesAutoresizingMaskIntoConstraints: NO];
+  centerView.translatesAutoresizingMaskIntoConstraints = NO;
   
   [navigationBar addSubview: centerView];
   
   // Начальное условие.
-  [centerView setAlphaValue: 0.0];
+  centerView.alphaValue = 0;
   
-  NSArray* startConstraints = [self constraintsForCenterView: centerView inNavigationBar: navigationBar complementaryPositionSide: INVERT_SIDE(side)];
+  NSArray* const startConstraints = [self constraintsForCenterView: centerView inNavigationBar: navigationBar complementaryPositionSide: INVERT_SIDE(side)];
   
   [navigationBar addConstraints: startConstraints];
   
@@ -422,18 +451,18 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   [navigationBar removeConstraints: startConstraints];
   
   // Окончательное условие.
-  NSArray* finishConstraints = [self constraintsForCenterView: centerView inNavigationBar: navigationBar];
+  NSArray* const finishConstraints = [self constraintsForCenterView: centerView inNavigationBar: navigationBar];
   
   [navigationBar addConstraints: finishConstraints];
   
   // Сама анимация.
-  [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* context)
+  [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* const context)
   {
-    [context setAllowsImplicitAnimation: YES];
+    context.allowsImplicitAnimation = YES;
     
     [navigationBar layoutSubtreeIfNeeded];
     
-    [centerView setAlphaValue: 1.0];
+    centerView.alphaValue = 1;
   }
   completionHandler: ^
   {
@@ -444,19 +473,19 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 + (NSArray*) constraintsForRightView: (NSView*) rightView utilizingCenterView: (NSView*) centerView inNavigationBar: (NSView*) navigationBar
 {
-  NSMutableArray* allConstraints = [NSMutableArray new];
+  NSMutableArray* const allConstraints = [NSMutableArray new];
   
   // Фиксация левой стороны.
-  NSLayoutConstraint* c1 = [NSLayoutConstraint constraintWithItem: rightView attribute: NSLayoutAttributeTrailing relatedBy: NSLayoutRelationEqual toItem: navigationBar attribute: NSLayoutAttributeTrailing multiplier: 1.0 constant: -STANDART_SPACE];
+  NSLayoutConstraint* const c1 = [NSLayoutConstraint constraintWithItem: rightView attribute: NSLayoutAttributeTrailing relatedBy: NSLayoutRelationEqual toItem: navigationBar attribute: NSLayoutAttributeTrailing multiplier: 1 constant: -STANDART_SPACE];
   
   [allConstraints addObject: c1];
   
   // Фиксация правой стороны.
   if(centerView)
   {
-    NSDictionary* views = NSDictionaryOfVariableBindings(centerView, rightView);
+    NSDictionary* const views = NSDictionaryOfVariableBindings(centerView, rightView);
     
-    NSArray* c2 = [NSLayoutConstraint constraintsWithVisualFormat: @"[centerView]-(>=20)-[rightView]" options: 0 metrics: nil views: views];
+    NSArray* const c2 = [NSLayoutConstraint constraintsWithVisualFormat: @"[centerView]-(>=20)-[rightView]" options: 0 metrics: nil views: views];
     
     [allConstraints addObjectsFromArray: c2];
   }
@@ -470,19 +499,19 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 + (void) removeRightView: (NSView*) rightView fromNavigationBar: (NSView*) navigationBar width: (CGFloat) width animated: (BOOL) animated
 {
   // Принудительно фиксируем ширину rightView.
-  NSDictionary* metrics = @{@"currentWidth": @(width)};
+  NSDictionary* const metrics = @{@"currentWidth": @(width)};
   
-  NSDictionary* views = NSDictionaryOfVariableBindings(rightView);
+  NSDictionary* const views = NSDictionaryOfVariableBindings(rightView);
   
   [navigationBar addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"[rightView(==currentWidth)]" options: 0 metrics: metrics views: views]];
   
   // * * *.
   
-  [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* context)
+  [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* const context)
   {
-    [context setAllowsImplicitAnimation: YES];
+    context.allowsImplicitAnimation = YES;
     
-    [rightView setAlphaValue: 0.0];
+    rightView.alphaValue = 0;
   }
   completionHandler: ^
   {
@@ -492,24 +521,24 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 + (void) insertRightView: (NSView*) rightView utilizingCenterView: (NSView*) centerView inNavigationBar: (NSView*) navigationBar animated: (BOOL) animated
 {
-  [rightView setTranslatesAutoresizingMaskIntoConstraints: NO];
+  rightView.translatesAutoresizingMaskIntoConstraints = NO;
   
   [navigationBar addSubview: rightView];
   
   // Окончательное условие.
-  [rightView setAlphaValue: 0.0];
+  rightView.alphaValue = 0;
   
-  NSArray* constraints = [[self class] constraintsForRightView: rightView utilizingCenterView: centerView inNavigationBar: navigationBar];
+  NSArray* const constraints = [[self class] constraintsForRightView: rightView utilizingCenterView: centerView inNavigationBar: navigationBar];
   
   [navigationBar addConstraints: constraints];
   
   [navigationBar layoutSubtreeIfNeeded];
   
-  [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* context)
+  [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* const context)
   {
-    [context setAllowsImplicitAnimation: YES];
+    context.allowsImplicitAnimation = YES;
     
-    [rightView setAlphaValue: 1.0];
+    rightView.alphaValue = 1;
   }
   completionHandler: ^
   {
@@ -520,7 +549,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 + (NSSize) fittingSizeForNavigationBarOfNavViewController: (KSPNavViewController*) viewController
 {
-  NSView* imaginaryNavigationBar = [[NSView alloc] initWithFrame: NSZeroRect];
+  NSView* const imaginaryNavigationBar = [[NSView alloc] initWithFrame: NSZeroRect];
   
   imaginaryNavigationBar.translatesAutoresizingMaskIntoConstraints = NO;
   
@@ -533,44 +562,44 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   // Right Navigation Bar View.
   [self insertRightView: viewController.rightNavigationBarView utilizingCenterView: viewController.centerNavigationBarView inNavigationBar: imaginaryNavigationBar animated: NO];
   
-  return [imaginaryNavigationBar fittingSize];
+  return imaginaryNavigationBar.fittingSize;
 }
 
 #pragma mark - Main view
 
 + (NSArray*) constraintsForMainView: (NSView*) mainView inNavigationView: (KSPNavigationView*) navigationView complementaryPositionSide: (Side) side transitionStyle: (KSPNavigationControllerTransitionStyle) transitionStyle
 {
-  NSMutableArray* allConstraints = [NSMutableArray new];
+  NSMutableArray* const allConstraints = [NSMutableArray new];
   
   // Переменные для биндингов форматной строки.
-  NSView* navigationBar = navigationView.navigationBar;
+  NSView* const navigationBar = navigationView.navigationBar;
   
-  NSView* navigationToolbarHost = navigationView.navigationToolbarHost;
+  NSView* const navigationToolbarHost = navigationView.navigationToolbarHost;
   
-  NSDictionary* views = NSDictionaryOfVariableBindings(navigationView, navigationBar, mainView, navigationToolbarHost);
+  NSDictionary* const views = NSDictionaryOfVariableBindings(navigationView, navigationBar, mainView, navigationToolbarHost);
   
   if(side == Forward)
   {
-    id c = [NSLayoutConstraint constraintsWithVisualFormat: @"H:[navigationView][mainView(==navigationView)]" options: 0 metrics: nil views: views];
+    id const c = [NSLayoutConstraint constraintsWithVisualFormat: @"H:[navigationView][mainView(==navigationView)]" options: 0 metrics: nil views: views];
     
     [allConstraints addObjectsFromArray: c];
   }
   else
   {
-    id c = [NSLayoutConstraint constraintsWithVisualFormat: @"H:[mainView(==navigationView)]" options: 0 metrics: nil views: views];
+    id const c = [NSLayoutConstraint constraintsWithVisualFormat: @"H:[mainView(==navigationView)]" options: 0 metrics: nil views: views];
     
     [allConstraints addObjectsFromArray: c];
     
-    CGFloat m = (transitionStyle == KSPNavigationControllerTransitionStyleLengthy)? 1.0 : (1.0 / 3.0);
+    const CGFloat m = (transitionStyle == KSPNavigationControllerTransitionStyleLengthy)? 1 : (1.0 / 3.0);
     
-    id c2 = [NSLayoutConstraint constraintWithItem: mainView attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: navigationView attribute: NSLayoutAttributeLeading multiplier: -m constant: 0.0];
+    id const c2 = [NSLayoutConstraint constraintWithItem: mainView attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: navigationView attribute: NSLayoutAttributeLeading multiplier: -m constant: 0];
     
     [allConstraints addObject: c2];
   }
   
   // * * *.
   
-  NSArray* vertical = [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[mainView][navigationToolbarHost]" options: 0 metrics: nil views: views];
+  NSArray* const vertical = [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[mainView][navigationToolbarHost]" options: 0 metrics: nil views: views];
   
   [allConstraints addObjectsFromArray: vertical];
   
@@ -579,26 +608,26 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 + (NSArray*) constraintsForMainView: (NSView*) mainView inNavigationView: (KSPNavigationView*) navigationView
 {
-  NSMutableArray* allConstraints = [NSMutableArray new];
+  NSMutableArray* const allConstraints = [NSMutableArray new];
   
   // * * *.
   
-  NSDictionary* views1 = NSDictionaryOfVariableBindings(mainView);
+  NSDictionary* const views1 = NSDictionaryOfVariableBindings(mainView);
   
-  NSArray* horizontal = [NSLayoutConstraint constraintsWithVisualFormat: @"H:|[mainView]|" options: 0 metrics: nil views: views1];
+  NSArray* const horizontal = [NSLayoutConstraint constraintsWithVisualFormat: @"H:|[mainView]|" options: 0 metrics: nil views: views1];
   
   [allConstraints addObjectsFromArray: horizontal];
   
   // * * *.
   
   // Переменные для биндингов форматной строки.
-  NSView* navigationBar = navigationView.navigationBar;
+  NSView* const navigationBar = navigationView.navigationBar;
   
-  NSView* navigationToolbarHost = navigationView.navigationToolbarHost;
+  NSView* const navigationToolbarHost = navigationView.navigationToolbarHost;
   
-  NSDictionary* views2 = NSDictionaryOfVariableBindings(navigationBar, mainView, navigationToolbarHost);
+  NSDictionary* const views2 = NSDictionaryOfVariableBindings(navigationBar, mainView, navigationToolbarHost);
   
-  NSArray* vertical = [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[mainView][navigationToolbarHost]" options: 0 metrics: nil views: views2];
+  NSArray* const vertical = [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[mainView][navigationToolbarHost]" options: 0 metrics: nil views: views2];
   
   [allConstraints addObjectsFromArray: vertical];
   
@@ -608,11 +637,11 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 + (void) removeMainView: (NSView*) mainView fromNavigationView: (KSPNavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated transitionStyle: (KSPNavigationControllerTransitionStyle) transitionStyle
 {
   // 1. Создать screenshot mainView.
-  NSImageView* screenshot = [[NSImageView alloc] initWithFrame: NSZeroRect];
+  NSImageView* const screenshot = [[NSImageView alloc] initWithFrame: NSZeroRect];
   
-  [screenshot setTranslatesAutoresizingMaskIntoConstraints: NO];
+  screenshot.translatesAutoresizingMaskIntoConstraints = NO;
   
-  [screenshot setImage: [mainView ss_imageWithSubviews]];
+  screenshot.image = [mainView ss_imageWithSubviews];
   
   // 2. Выкинуть mainView.
   [mainView removeFromSuperview];
@@ -620,9 +649,9 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   // 3. Внедрить screenshot в mainViewTransitionHost на стартовую позицию.
   [navigationView.mainViewTransitionHost addSubview: screenshot];
   
-  NSMutableArray* startConstraints = [NSMutableArray array];
+  NSMutableArray* const startConstraints = [NSMutableArray array];
   
-  NSDictionary* views = NSDictionaryOfVariableBindings(screenshot);
+  NSDictionary* const views = NSDictionaryOfVariableBindings(screenshot);
   
   [startConstraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat: @"H:|[screenshot]|" options: 0 metrics: nil views: views]];
   
@@ -637,11 +666,11 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   [navigationView.mainViewTransitionHost removeConstraints: startConstraints];
   
   // Окончательное условие.
-  NSMutableArray* finishConstraints = [NSMutableArray array];
+  NSMutableArray* const finishConstraints = [NSMutableArray array];
   
-  NSView* mainViewTransitionHost = navigationView.mainViewTransitionHost;
+  NSView* const mainViewTransitionHost = navigationView.mainViewTransitionHost;
   
-  NSDictionary* views2 = NSDictionaryOfVariableBindings(screenshot, mainViewTransitionHost);
+  NSDictionary* const views2 = NSDictionaryOfVariableBindings(screenshot, mainViewTransitionHost);
   
   if(side == Forward)
   {
@@ -651,9 +680,9 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   }
   else
   {
-    CGFloat divider = (transitionStyle == KSPNavigationControllerTransitionStyleLengthy)? 1.0 : 3.0;
+    const CGFloat divider = ((transitionStyle == KSPNavigationControllerTransitionStyleLengthy)? 1.0 : 3.0);
     
-    id c2 = [NSLayoutConstraint constraintWithItem: screenshot attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: mainViewTransitionHost attribute: NSLayoutAttributeLeading multiplier: 1.0 constant: -(mainViewTransitionHost.frame.size.width / divider)];
+    id const c2 = [NSLayoutConstraint constraintWithItem: screenshot attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: mainViewTransitionHost attribute: NSLayoutAttributeLeading multiplier: 1 constant: -(mainViewTransitionHost.frame.size.width / divider)];
     
     [finishConstraints addObject: c2];
   }
@@ -663,9 +692,9 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   [navigationView.mainViewTransitionHost addConstraints: finishConstraints];
   
   // Сама анимация.
-  [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* context)
+  [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* const context)
   {
-    [context setAllowsImplicitAnimation: YES];
+    context.allowsImplicitAnimation = YES;
     
     [navigationView.mainViewTransitionHost layoutSubtreeIfNeeded];
   }
@@ -678,7 +707,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 + (void) insertMainView: (NSView*) mainView inNavigationView: (KSPNavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated transitionStyle: (KSPNavigationControllerTransitionStyle) transitionStyle
 {
   // 1. Добавить mainView в navigationView.
-  [mainView setTranslatesAutoresizingMaskIntoConstraints: NO];
+  mainView.translatesAutoresizingMaskIntoConstraints = NO;
   
   [navigationView addSubview: mainView positioned: NSWindowAbove relativeTo: navigationView.mainViewTransitionHost];
   
@@ -687,34 +716,34 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   [mainView layoutSubtreeIfNeeded];
   
   // 2. Создать screenshot mainView.
-  NSImageView* screenshot = [[NSImageView alloc] initWithFrame: NSZeroRect];
+  NSImageView* const screenshot = [[NSImageView alloc] initWithFrame: NSZeroRect];
   
-  [screenshot setTranslatesAutoresizingMaskIntoConstraints: NO];
+  screenshot.translatesAutoresizingMaskIntoConstraints = NO;
   
-  [screenshot setImage: [mainView ss_imageWithSubviews]];
+  screenshot.image = [mainView ss_imageWithSubviews];
   
   [mainView removeFromSuperviewWithoutNeedingDisplay];
   
   // 3. Внедрить screenshot в mainViewTransitionHost на стартовую позицию.
-  [navigationView.mainViewTransitionHost addSubview: screenshot positioned: side == Forward? NSWindowBelow : NSWindowAbove relativeTo: [[navigationView.mainViewTransitionHost subviews] lastObject]];
+  [navigationView.mainViewTransitionHost addSubview: screenshot positioned: (side == Forward? NSWindowBelow : NSWindowAbove) relativeTo: navigationView.mainViewTransitionHost.subviews.lastObject];
   
-  NSMutableArray* startConstraints = [NSMutableArray array];
+  NSMutableArray* const startConstraints = [NSMutableArray array];
   
-  NSView* mainViewTransitionHost = navigationView.mainViewTransitionHost;
+  NSView* const mainViewTransitionHost = navigationView.mainViewTransitionHost;
   
-  NSDictionary* views2 = NSDictionaryOfVariableBindings(screenshot, mainViewTransitionHost);
+  NSDictionary* const views2 = NSDictionaryOfVariableBindings(screenshot, mainViewTransitionHost);
   
   if(side == Backward)
   {
-    id c = [NSLayoutConstraint constraintsWithVisualFormat: @"H:[mainViewTransitionHost][screenshot]" options: 0 metrics: nil views: views2];
+    id const c = [NSLayoutConstraint constraintsWithVisualFormat: @"H:[mainViewTransitionHost][screenshot]" options: 0 metrics: nil views: views2];
     
     [startConstraints addObjectsFromArray: c];
   }
   else
   {
-    CGFloat divider = (transitionStyle == KSPNavigationControllerTransitionStyleLengthy)? 1.0 : 3.0;
+    const CGFloat divider = ((transitionStyle == KSPNavigationControllerTransitionStyleLengthy)? 1.0 : 3.0);
     
-    id c2 = [NSLayoutConstraint constraintWithItem: screenshot attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: mainViewTransitionHost attribute: NSLayoutAttributeLeading multiplier: 1.0 constant: -(mainViewTransitionHost.frame.size.width / divider)];
+    id const c2 = [NSLayoutConstraint constraintWithItem: screenshot attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: mainViewTransitionHost attribute: NSLayoutAttributeLeading multiplier: 1 constant: -(mainViewTransitionHost.frame.size.width / divider)];
     
     [startConstraints addObject: c2];
   }
@@ -730,9 +759,9 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   [navigationView.mainViewTransitionHost removeConstraints: startConstraints];
   
   // Окончательное условие.
-  NSMutableArray* finishConstraints = [NSMutableArray array];
+  NSMutableArray* const finishConstraints = [NSMutableArray array];
   
-  NSDictionary* views3 = NSDictionaryOfVariableBindings(screenshot);
+  NSDictionary* const views3 = NSDictionaryOfVariableBindings(screenshot);
   
   [finishConstraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat: @"H:|[screenshot]|" options: 0 metrics: nil views: views3]];
   
@@ -741,9 +770,9 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   [navigationView.mainViewTransitionHost addConstraints: finishConstraints];
   
   // Сама анимация.
-  [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* context)
+  [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* const context)
   {
-    [context setAllowsImplicitAnimation: YES];
+    context.allowsImplicitAnimation = YES;
     
     [navigationView.mainViewTransitionHost layoutSubtreeIfNeeded];
   }
@@ -761,9 +790,9 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 + (NSArray*) constraintsForNavigationToolbar: (NSView*) navigationToolbar
 {
-  NSMutableArray* allConstraints = [NSMutableArray array];
+  NSMutableArray* const allConstraints = [NSMutableArray array];
   
-  NSDictionary* dict = NSDictionaryOfVariableBindings(navigationToolbar);
+  NSDictionary* const dict = NSDictionaryOfVariableBindings(navigationToolbar);
   
   [allConstraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat: @"H:|[navigationToolbar]|" options: 0 metrics: nil views: dict]];
   
@@ -779,7 +808,7 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 
 + (void) insertNavigationToolbar: (NSView*) navigationToolbar inNavigationToolbarHost: (NSView*) navigationToolbarHost
 {
-  [navigationToolbar setTranslatesAutoresizingMaskIntoConstraints: NO];
+  navigationToolbar.translatesAutoresizingMaskIntoConstraints = NO;
   
   [navigationToolbarHost addSubview: navigationToolbar];
   
@@ -858,9 +887,9 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   {{ /* Готовим кнопку «Назад» */
     NSButton* backButtonNew = nil;
     
-    if([_viewControllers count] > 1)
+    if(_viewControllers.count > 1)
     {
-      NSString* title = ((KSPNavViewController*)_viewControllers[_viewControllers.count - 2]).title;
+      NSString* const title = ((KSPNavViewController*)_viewControllers[_viewControllers.count - 2]).title;
       
       backButtonNew = [self newBackButtonWithTitle: title];
     }
@@ -868,37 +897,40 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
     {
       backButtonNew = [[NSButton alloc] initWithFrame: NSZeroRect];
       
-      NSDictionary* views = NSDictionaryOfVariableBindings(backButtonNew);
+      NSDictionary* const views = NSDictionaryOfVariableBindings(backButtonNew);
       
       [backButtonNew addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"H:[backButtonNew(==0@1000)]" options: 0 metrics: nil views: views]];
     }
     
-    [backButtonNew setTarget: self];
+    backButtonNew.target = self;
     
     newController.backButton = backButtonNew;
   }}
   
   // * * *.
   
-  (void)[newController view];
+  (void)newController.view;
   
-  NSSize fittingSize = [[self class] fittingSizeForNavigationBarOfNavViewController: newController];
+  const NSSize fittingSize = [[self class] fittingSizeForNavigationBarOfNavViewController: newController];
   
-  BOOL shouldResize = fittingSize.width > self.view.frame.size.width;
+  const BOOL shouldResize = (fittingSize.width > self.view.frame.size.width);
   
   void (^actualNavigationTransition)(void) = ^()
   {
-    _windowWasResizable = self.windowController.window.styleMask & NSResizableWindowMask;
+    _windowWasResizable = (self.windowController.window.styleMask & NSResizableWindowMask);
 
     if(_windowWasResizable)
     {
       // Размер окна с навигационным контроллером больше не может быть изменен.
-      [self.windowController.window setStyleMask: [self.windowController.window styleMask] & ~NSResizableWindowMask];
+      [self.windowController.window setStyleMask: ([self.windowController.window styleMask] & ~NSResizableWindowMask)];
     }
 
     // * * *.
 
-    [[self.delegate ifResponds] navigationController: self willShowViewController: newController animated: animated];
+    if([self.delegate respondsToSelector: @selector(navigationController:willShowViewController:animated:)])
+    {
+      [self.delegate navigationController: self willShowViewController: newController animated: animated];
+    }
     
     [oldControllerOrNil navigationViewWillDisappear: animated];
     
@@ -909,65 +941,68 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
     // * * *.
     
     // Анимация смены главного вида.
-    [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* context)
-     {
-       [context setDuration: animated? self.transitionDuration : 0.0];
-       
-       [context setTimingFunction: [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut]];
-       
-       if(oldControllerOrNil)
-       {
-         [[self class] removeViewController: oldControllerOrNil fromNavigationView: self.navigationView slideTo: side animated: animated transitionStyle: self.transitionStyle];
-       }
-       
-       [[self class] insertViewController: newController inNavigationView: self.navigationView slideTo: side animated: animated transitionStyle: self.transitionStyle];
-     }
-     completionHandler: ^
-     {
-       [oldControllerOrNil navigationViewDidDisappear: animated];
-       
-       [newController navigationViewDidAppear: animated];
-       
-       [[self.delegate ifResponds] navigationController: self didShowViewController: newController animated: animated];
+    [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* const context)
+    {
+      context.duration = (animated? self.transitionDuration : 0);
+      
+      [context setTimingFunction: [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut]];
+      
+      if(oldControllerOrNil)
+      {
+        [[self class] removeViewController: oldControllerOrNil fromNavigationView: self.navigationView slideTo: side animated: animated transitionStyle: self.transitionStyle];
+      }
+      
+      [[self class] insertViewController: newController inNavigationView: self.navigationView slideTo: side animated: animated transitionStyle: self.transitionStyle];
+    }
+    completionHandler: ^
+    {
+      [oldControllerOrNil navigationViewDidDisappear: animated];
+      
+      [newController navigationViewDidAppear: animated];
 
-       if(_windowWasResizable)
-       {
-         // Окно снова можно ресайзить.
-         [self.windowController.window setStyleMask: self.windowController.window.styleMask | NSResizableWindowMask];
-       }
-       
-       // Навигационный вид снова реагирует на клики.
-       ((KSPHitTestView*)self.view).rejectHitTest = NO;
-       
-       self.navigationBar.rejectHitTest = NO;
-       
-       // Ставим фокус на нужный контрол.
-       [self.windowController.window makeFirstResponder: self.topViewController.proposedFirstResponder];
-     }];
+      if([self.delegate respondsToSelector: @selector(navigationController:didShowViewController:animated:)])
+      {
+        [self.delegate navigationController: self didShowViewController: newController animated: animated];
+      }
+
+      if(_windowWasResizable)
+      {
+        // Окно снова можно ресайзить.
+        [self.windowController.window setStyleMask: (self.windowController.window.styleMask | NSResizableWindowMask)];
+      }
+      
+      // Навигационный вид снова реагирует на клики.
+      ((KSPHitTestView*)self.view).rejectHitTest = NO;
+      
+      self.navigationBar.rejectHitTest = NO;
+      
+      // Ставим фокус на нужный контрол.
+      [self.windowController.window makeFirstResponder: self.topViewController.proposedFirstResponder];
+    }];
   };
   
   // * * *.
   
   if(shouldResize)
   {
-    NSLayoutConstraint* constraint = [NSLayoutConstraint constraintWithItem: self.navigationBar attribute:NSLayoutAttributeWidth relatedBy: NSLayoutRelationEqual toItem: nil attribute: NSLayoutAttributeNotAnAttribute multiplier: 1.0 constant: self.view.frame.size.width];
+    NSLayoutConstraint* const constraint = [NSLayoutConstraint constraintWithItem: self.navigationBar attribute:NSLayoutAttributeWidth relatedBy: NSLayoutRelationEqual toItem: nil attribute: NSLayoutAttributeNotAnAttribute multiplier: 1 constant: self.view.frame.size.width];
     
     [self.navigationBar addConstraint: constraint];
     
-    [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* context)
-     {
-       [context setDuration: animated? (1.0 / 3.0) : 0.0];
-       
-       [context setTimingFunction: [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut]];
-       
-       [constraint animator].constant = fittingSize.width;
-     }
-     completionHandler: ^
-     {
-       [self.navigationBar removeConstraint: constraint];
-       
-       actualNavigationTransition();
-     }];
+    [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* const context)
+    {
+      context.duration = (animated? (1.0 / 3.0) : 0);
+      
+      context.timingFunction = [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut];
+      
+      [constraint animator].constant = fittingSize.width;
+    }
+    completionHandler: ^
+    {
+      [self.navigationBar removeConstraint: constraint];
+      
+      actualNavigationTransition();
+    }];
   }
   else
   {
@@ -975,16 +1010,18 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   }
 }
 
-#pragma mark - Пользовательские функции
+#pragma mark - Public Methods
 
 // Replaces the view controllers currently managed by the navigation controller with the specified items.
 - (void) setViewControllers: (NSArray*) newViewControllers animated: (BOOL) animated
 {
   NSParameterAssert(newViewControllers);
   
-  NSAssert([newViewControllers count] > 0, @"Unable to set void view controllers array.");
-  
-  KSPNavViewController* current = self.topViewController;
+  NSAssert(newViewControllers.count > 0, @"Unable to set void view controllers array.");
+
+  // * * *.
+
+  KSPNavViewController* const current = self.topViewController;
   
   [_viewControllers removeAllObjects];
   
@@ -992,9 +1029,9 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   [_viewControllers makeObjectsPerformSelector: @selector(setNavigationController:) withObject: self];
   
-  self.topViewController = [_viewControllers lastObject];
+  self.topViewController = _viewControllers.lastObject;
   
-  [self replaceNavViewController: current with: [newViewControllers lastObject] animated: animated slideTo: Backward];
+  [self replaceNavViewController: current with: newViewControllers.lastObject animated: animated slideTo: Backward];
 }
 
 // Pushes a view controller onto the receiver’s stack and updates the display.
@@ -1003,8 +1040,10 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   NSParameterAssert(viewController);
   
   NSAssert(![_viewControllers containsObject: viewController], @"View controller already on the stack.");
-  
-  KSPNavViewController* current = self.topViewController;
+
+  // * * *.
+
+  KSPNavViewController* const current = self.topViewController;
   
   [_viewControllers addObject: viewController];
   
@@ -1018,21 +1057,21 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
 // Pops the top view controller from the navigation stack and updates the display.
 - (KSPNavViewController*) popViewControllerAnimated: (BOOL) animated
 {
-  NSInteger controllersCount = [_viewControllers count];
+  NSInteger controllersCount = _viewControllers.count;
   
   // Если на стеке только корневой контроллер - ничего не делаем.
   if(controllersCount < 2) return nil;
   
-  NSArray* poppedControllers = [self popToViewController: _viewControllers[controllersCount - 2] animated: animated];
+  NSArray* const poppedControllers = [self popToViewController: _viewControllers[controllersCount - 2] animated: animated];
   
-  return [poppedControllers lastObject];
+  return poppedControllers.lastObject;
 }
 
 // Pops all the view controllers on the stack except the root view controller and updates the display.
 - (NSArray*) popToRootViewControllerAnimated: (BOOL) animated
 {
   // Если на стеке только корневой контроллер - ничего не делаем.
-  if([_viewControllers count] < 2) return nil;
+  if(_viewControllers.count < 2) return nil;
   
   return [self popToViewController: _viewControllers[0] animated: animated];
 }
@@ -1044,16 +1083,18 @@ typedef NS_ENUM(NSUInteger, Side) { Backward, Forward };
   
   NSAssert([_viewControllers containsObject: viewController], @"View controller not on the stack.");
 
+  // * * *.
+
   if(viewController == self.topViewController) return @[];
 
-  KSPNavViewController* current = self.topViewController;
+  KSPNavViewController* const current = self.topViewController;
   
-  NSUInteger indexOfViewController = [_viewControllers indexOfObject: viewController];
+  const NSUInteger indexOfViewController = [_viewControllers indexOfObject: viewController];
   
   // Сохраняем катапультированные контроллеры.
-  NSRange ejectedRange = NSMakeRange(indexOfViewController + 1, [_viewControllers count] - indexOfViewController - 1);
+  const NSRange ejectedRange = NSMakeRange(indexOfViewController + 1, _viewControllers.count - indexOfViewController - 1);
   
-  NSArray* ejectedControllers = [_viewControllers subarrayWithRange: ejectedRange];
+  NSArray* const ejectedControllers = [_viewControllers subarrayWithRange: ejectedRange];
   
   [_viewControllers removeObjectsInRange: ejectedRange];
   

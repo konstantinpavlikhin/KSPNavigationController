@@ -12,9 +12,11 @@
 
 @implementation KSPBackButton
 
-+ (Class) cellClass
+#pragma mark - NSObject Overrides
+
++ (void) load
 {
-	return [KSPBackButtonCell class];
+  [self setCellClass: [KSPBackButtonCell class]];
 }
 
 + (void) initialize
@@ -22,21 +24,31 @@
   [self setCellClass: [KSPBackButtonCell class]];
 }
 
-+ (void) load
+#pragma mark - NSControl Overrides
+
++ (Class) cellClass
 {
-  [self setCellClass: [KSPBackButtonCell class]];
+	return [KSPBackButtonCell class];
 }
 
-- (void) awakeFromNib
-{
-	[[self class] setCellClass:[KSPBackButtonCell class]];
-}
+#pragma mark - NSView Overrides
 
 - (NSSize) intrinsicContentSize
 {
   NSSize bzz = [super intrinsicContentSize];
-  
+
   return NSMakeSize(bzz.width + 4.0, bzz.height);
+}
+
+#pragma mark -
+
+- (void) awakeFromNib
+{
+  [super awakeFromNib];
+
+  // * * *.
+
+	[[self class] setCellClass:[KSPBackButtonCell class]];
 }
 
 @end

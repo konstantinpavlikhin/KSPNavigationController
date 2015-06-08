@@ -1,6 +1,8 @@
-#import "KSPNavViewController.h"
+#import "KSPNavViewController+Private.h"
 
 @implementation KSPNavViewController
+
+#pragma mark - Public Methods
 
 - (void) navigationViewWillAppear: (BOOL) animated
 {

@@ -10,6 +10,8 @@
 
 @implementation KSPHitTestView
 
+#pragma mark - NSView Overrides
+
 - (NSView*) hitTest: (NSPoint) aPoint
 {
   if(self.rejectHitTest) return nil;

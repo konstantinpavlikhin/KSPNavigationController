@@ -8,9 +8,19 @@
 
 #import "KSPBackButtonCell.h"
 
-static NSImage* arrowDisabled, *arrowNormal, *arrowHighlighted;
+// * * *.
+
+static NSImage* arrowDisabled;
+
+static NSImage *arrowNormal;
+
+static NSImage *arrowHighlighted;
+
+// * * *.
 
 @implementation KSPBackButtonCell
+
+#pragma mark - NSObject Overrides
 
 + (void) initialize
 {
@@ -21,34 +31,36 @@ static NSImage* arrowDisabled, *arrowNormal, *arrowHighlighted;
   arrowHighlighted = [NSImage imageNamed: @"Arrow-highlighted"];
 }
 
+#pragma mark - NSCell Overrides
+
+- (NSRect) titleRectForBounds: (NSRect) bounds
+{
+  const NSRect supers = [super titleRectForBounds: bounds];
+
+  return NSMakeRect(bounds.size.width - supers.size.width, supers.origin.y, supers.size.width, supers.size.height);
+}
+
+#pragma mark - NSButtonCell Overrides
+
 - (void) drawBezelWithFrame: (NSRect) frame inView: (NSView*) controlView
 {
-  //[[NSColor redColor] setFill], NSRectFill(frame);
-  
-  NSRect r = NSMakeRect(0, 0, arrowNormal.size.width, arrowNormal.size.height);
+  const NSRect r = NSMakeRect(0, 0, arrowNormal.size.width, arrowNormal.size.height);
   
   if(self.isEnabled)
   {
     if(self.isHighlighted)
     {
-      [arrowHighlighted drawAtPoint: NSMakePoint(0, 1) fromRect: r operation: NSCompositeSourceOver fraction: 1.0];
+      [arrowHighlighted drawAtPoint: NSMakePoint(0, 1) fromRect: r operation: NSCompositeSourceOver fraction: 1];
     }
     else
     {
-      [arrowNormal drawAtPoint: NSMakePoint(0, 1) fromRect: r operation: NSCompositeSourceOver fraction: 1.0];
+      [arrowNormal drawAtPoint: NSMakePoint(0, 1) fromRect: r operation: NSCompositeSourceOver fraction: 1];
     }
   }
   else
   {
-    [arrowDisabled drawAtPoint: NSMakePoint(0, 1) fromRect: r operation: NSCompositeSourceOver fraction: 1.0];
+    [arrowDisabled drawAtPoint: NSMakePoint(0, 1) fromRect: r operation: NSCompositeSourceOver fraction: 1];
   }
-}
-
-- (NSRect) titleRectForBounds: (NSRect) bounds
-{
-  NSRect supers = [super titleRectForBounds: bounds];
-  
-  return NSMakeRect(bounds.size.width - supers.size.width, supers.origin.y, supers.size.width, supers.size.height);
 }
 
 @end

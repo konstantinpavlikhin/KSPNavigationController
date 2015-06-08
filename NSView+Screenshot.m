@@ -10,19 +10,21 @@
 
 @implementation NSView (Screenshot)
 
+#pragma mark - Public Methods
+
 - (NSImage*) ss_imageWithSubviews
 {
-  NSSize mySize = self.bounds.size;
+  const NSSize mySize = self.bounds.size;
   
-  NSSize imgSize = NSMakeSize(mySize.width, mySize.height);
+  const NSSize imgSize = NSMakeSize(mySize.width, mySize.height);
   
-  NSBitmapImageRep* bir = [self bitmapImageRepForCachingDisplayInRect: [self bounds]];
+  NSBitmapImageRep* const bir = [self bitmapImageRepForCachingDisplayInRect: self.bounds];
   
-  [bir setSize: imgSize];
+  bir.size = imgSize;
   
-  [self cacheDisplayInRect: [self bounds] toBitmapImageRep: bir];
+  [self cacheDisplayInRect: self.bounds toBitmapImageRep: bir];
   
-  NSImage* image = [[NSImage alloc] initWithSize: imgSize];
+  NSImage* const image = [[NSImage alloc] initWithSize: imgSize];
   
   [image addRepresentation: bir];
   
