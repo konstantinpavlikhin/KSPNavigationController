@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15B22c" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="KSPNavigationController">
@@ -23,12 +23,14 @@
                     <subviews>
                         <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="508" userLabel="MainViewTransitionHost">
                             <rect key="frame" x="0.0" y="24" width="400" height="176"/>
+                            <animations/>
                         </customView>
                         <customView identifier="Navigation toolbar host" translatesAutoresizingMaskIntoConstraints="NO" id="30" userLabel="NavigationToolbarHost">
                             <rect key="frame" x="0.0" y="0.0" width="400" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="322"/>
                             </constraints>
+                            <animations/>
                         </customView>
                     </subviews>
                     <constraints>
@@ -40,6 +42,7 @@
                         <constraint firstItem="30" firstAttribute="top" secondItem="508" secondAttribute="bottom" id="524"/>
                         <constraint firstItem="508" firstAttribute="top" secondItem="1" secondAttribute="top" id="0uu-x1-ZsI"/>
                     </constraints>
+                    <animations/>
                     <connections>
                         <outlet property="mainViewTransitionHost" destination="508" id="527"/>
                         <outlet property="navigationToolbarHost" destination="30" id="494"/>
@@ -52,6 +55,7 @@
                 <constraint firstItem="1" firstAttribute="bottom" secondItem="446" secondAttribute="bottom" id="490"/>
                 <constraint firstItem="1" firstAttribute="top" secondItem="446" secondAttribute="top" id="491"/>
             </constraints>
+            <animations/>
             <point key="canvasLocation" x="59" y="2"/>
         </customView>
     </objects>
