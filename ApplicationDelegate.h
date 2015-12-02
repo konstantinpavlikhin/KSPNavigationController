@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  ApplicationDelegate.h
 //  KSPNavigationController
 //
 //  Created by Konstantin Pavlikhin on 02/12/15.
@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface ApplicationDelegate : NSObject <NSApplicationDelegate>
 
 @end
