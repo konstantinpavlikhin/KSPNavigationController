@@ -6,17 +6,11 @@
 //  Copyright © 2015 Konstantin Pavlikhin. All rights reserved.
 //
 
-#import "ApplicationDelegate.h"
-
-@interface ApplicationDelegate ()
-
-@property (weak) IBOutlet NSWindow *window;
-
-@end
+#import "ApplicationDelegate+Private.h"
 
 @implementation ApplicationDelegate
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+- (void) applicationDidFinishLaunching: (NSNotification*) aNotification
 {
 }
 
