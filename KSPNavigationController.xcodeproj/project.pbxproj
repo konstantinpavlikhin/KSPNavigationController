@@ -23,6 +23,7 @@
 		B53532311C0F055A00E7AB33 /* KSPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532241C0F055A00E7AB33 /* KSPViewController.m */; };
 		B53532321C0F055A00E7AB33 /* NSView+Screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532271C0F055A00E7AB33 /* NSView+Screenshot.m */; };
 		B53532351C0F057400E7AB33 /* KSPNavigationController.strings in Resources */ = {isa = PBXBuildFile; fileRef = B53532331C0F057400E7AB33 /* KSPNavigationController.strings */; };
+		B53532451C0F1A8600E7AB33 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B53532441C0F1A8600E7AB33 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		B53532341C0F057400E7AB33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/KSPNavigationController.strings; sourceTree = "<group>"; };
 		B53532361C0F058100E7AB33 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/KSPNavigationController.strings; sourceTree = "<group>"; };
 		B53532401C0F196B00E7AB33 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		B53532441C0F1A8600E7AB33 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +213,7 @@
 		B535323F1C0F195300E7AB33 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B53532441C0F1A8600E7AB33 /* README.md */,
 				B53532401C0F196B00E7AB33 /* LICENSE.md */,
 			);
 			name = Resources;
@@ -296,6 +299,7 @@
 				B53532291C0F055A00E7AB33 /* KSPBackButtonCell.m in Sources */,
 				B535322F1C0F055A00E7AB33 /* KSPNavViewController.m in Sources */,
 				B53532311C0F055A00E7AB33 /* KSPViewController.m in Sources */,
+				B53532451C0F1A8600E7AB33 /* README.md in Sources */,
 				B53532071C0F04B200E7AB33 /* AppDelegate.m in Sources */,
 				B535322E1C0F055A00E7AB33 /* KSPNavigationView.m in Sources */,
 				B53532321C0F055A00E7AB33 /* NSView+Screenshot.m in Sources */,
