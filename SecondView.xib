@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="15C48a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="SecondViewController">
+            <connections>
+                <outlet property="centerNavigationBarView" destination="fhR-uX-hXj" id="IN1-wz-prw"/>
+                <outlet property="leftNavigationBarView" destination="G2h-cO-ECj" id="iad-ob-UIl"/>
+                <outlet property="navigationToolbar" destination="8WB-AE-DeI" id="4B1-HQ-H13"/>
+                <outlet property="rightNavigationBarView" destination="ick-Jo-YDf" id="xYu-jA-h22"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customView id="Hz6-mo-xeY" userLabel="SecondView">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="u6G-Vf-ZIA">
+                    <rect key="frame" x="222" y="128" width="37" height="17"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="f4r-EO-1Lx" userLabel="LabelCell">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="u6G-Vf-ZIA" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="1Np-OU-pR2"/>
+                <constraint firstItem="u6G-Vf-ZIA" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="p7d-Hg-Vtw"/>
+            </constraints>
+            <animations/>
+        </customView>
+        <button verticalHuggingPriority="750" id="G2h-cO-ECj" userLabel="LeftNavigationBarButton">
+            <rect key="frame" x="0.0" y="0.0" width="82" height="32"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <animations/>
+            <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2yH-8Q-muB" userLabel="LeftNavigationBarButtonCell">
+                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                <font key="font" metaFont="system"/>
+            </buttonCell>
+            <point key="canvasLocation" x="115" y="270.5"/>
+        </button>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="fhR-uX-hXj" userLabel="CenterNavigationBarLabel">
+            <rect key="frame" x="0.0" y="0.0" width="143" height="17"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <animations/>
+            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="SecondViewController" usesSingleLineMode="YES" id="CAQ-Ih-Tar" userLabel="CenterNavigationBarLabelCell">
+                <font key="font" metaFont="system"/>
+                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+            </textFieldCell>
+            <point key="canvasLocation" x="320.5" y="270.5"/>
+        </textField>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <button verticalHuggingPriority="750" id="ick-Jo-YDf" userLabel="RightNavigationBarButton">
+            <rect key="frame" x="0.0" y="0.0" width="82" height="32"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <animations/>
+            <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gH1-an-BCY" userLabel="RightNavigationBarButtonCell">
+                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                <font key="font" metaFont="system"/>
+            </buttonCell>
+            <point key="canvasLocation" x="525" y="270.5"/>
+        </button>
+        <customView id="8WB-AE-DeI" userLabel="NavigationToolbar">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="22"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <animations/>
+            <point key="canvasLocation" x="320" y="677"/>
+        </customView>
+    </objects>
+</document>

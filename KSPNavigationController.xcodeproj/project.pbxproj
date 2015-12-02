@@ -26,6 +26,8 @@
 		B53532451C0F1A8600E7AB33 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B53532441C0F1A8600E7AB33 /* README.md */; };
 		B535324D1C0F6ACD00E7AB33 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B535324B1C0F6ACD00E7AB33 /* FirstViewController.m */; };
 		B535324E1C0F6ACD00E7AB33 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B535324C1C0F6ACD00E7AB33 /* FirstView.xib */; };
+		B53532541C0F6CE700E7AB33 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532521C0F6CE700E7AB33 /* SecondViewController.m */; };
+		B53532551C0F6CE700E7AB33 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B53532531C0F6CE700E7AB33 /* SecondView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,10 @@
 		B535324B1C0F6ACD00E7AB33 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		B535324C1C0F6ACD00E7AB33 /* FirstView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstView.xib; sourceTree = "<group>"; };
 		B535324F1C0F6AFA00E7AB33 /* FirstViewController+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FirstViewController+Private.h"; sourceTree = "<group>"; };
+		B53532511C0F6CE600E7AB33 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		B53532521C0F6CE700E7AB33 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		B53532531C0F6CE700E7AB33 /* SecondView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondView.xib; sourceTree = "<group>"; };
+		B53532561C0F6D0700E7AB33 /* SecondViewController+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SecondViewController+Private.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +141,7 @@
 			children = (
 				B53532471C0F1DAF00E7AB33 /* ApplicationDelegate */,
 				B53532491C0F6A6E00E7AB33 /* FirstViewController */,
+				B53532501C0F6CD400E7AB33 /* SecondViewController */,
 				B53532061C0F04B200E7AB33 /* main.m */,
 				B535320E1C0F04F900E7AB33 /* Resources */,
 			);
@@ -247,6 +254,17 @@
 			name = FirstViewController;
 			sourceTree = "<group>";
 		};
+		B53532501C0F6CD400E7AB33 /* SecondViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B53532531C0F6CE700E7AB33 /* SecondView.xib */,
+				B53532511C0F6CE600E7AB33 /* SecondViewController.h */,
+				B53532561C0F6D0700E7AB33 /* SecondViewController+Private.h */,
+				B53532521C0F6CE700E7AB33 /* SecondViewController.m */,
+			);
+			name = SecondViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -307,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B535322D1C0F055A00E7AB33 /* KSPNavigationController.xib in Resources */,
+				B53532551C0F6CE700E7AB33 /* SecondView.xib in Resources */,
 				B535324E1C0F6ACD00E7AB33 /* FirstView.xib in Resources */,
 				B53532351C0F057400E7AB33 /* KSPNavigationController.strings in Resources */,
 				B535322A1C0F055A00E7AB33 /* KSPBackButtonCell.xcassets in Resources */,
@@ -332,6 +351,7 @@
 				B535324D1C0F6ACD00E7AB33 /* FirstViewController.m in Sources */,
 				B53532071C0F04B200E7AB33 /* ApplicationDelegate.m in Sources */,
 				B535322E1C0F055A00E7AB33 /* KSPNavigationView.m in Sources */,
+				B53532541C0F6CE700E7AB33 /* SecondViewController.m in Sources */,
 				B53532321C0F055A00E7AB33 /* NSView+Screenshot.m in Sources */,
 				B53532281C0F055A00E7AB33 /* KSPBackButton.m in Sources */,
 				B535322B1C0F055A00E7AB33 /* KSPHitTestView.m in Sources */,
