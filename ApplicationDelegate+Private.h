@@ -8,8 +8,12 @@
 
 #import "ApplicationDelegate.h"
 
-@interface ApplicationDelegate ()
+#import "KSPNavigationControllerDelegate.h"
+
+@interface ApplicationDelegate () <KSPNavigationControllerDelegate>
 
 @property(readwrite, strong, nonatomic) IBOutlet NSWindow* window;
+
+@property(readwrite, strong, nonatomic) IBOutlet NSView* navigationBarContainer;
 
 @end

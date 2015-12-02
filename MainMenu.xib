@@ -14,6 +14,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" userLabel="ApplicationDelegate" customClass="ApplicationDelegate">
             <connections>
+                <outlet property="navigationBarContainer" destination="uzs-Xd-9f7" id="pSc-du-gQg"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -675,6 +676,20 @@
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="uzs-Xd-9f7" userLabel="NavigationBarContainer">
+                        <rect key="frame" x="0.0" y="312" width="480" height="48"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="48" id="lTT-Vn-zdc"/>
+                        </constraints>
+                        <animations/>
+                    </customView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="uzs-Xd-9f7" secondAttribute="trailing" id="B5N-fd-Ng7"/>
+                    <constraint firstItem="uzs-Xd-9f7" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="InQ-gM-33o"/>
+                    <constraint firstItem="uzs-Xd-9f7" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="wVq-iy-NLu"/>
+                </constraints>
                 <animations/>
             </view>
         </window>
