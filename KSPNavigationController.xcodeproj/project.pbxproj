@@ -24,6 +24,8 @@
 		B53532321C0F055A00E7AB33 /* NSView+Screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532271C0F055A00E7AB33 /* NSView+Screenshot.m */; };
 		B53532351C0F057400E7AB33 /* KSPNavigationController.strings in Resources */ = {isa = PBXBuildFile; fileRef = B53532331C0F057400E7AB33 /* KSPNavigationController.strings */; };
 		B53532451C0F1A8600E7AB33 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B53532441C0F1A8600E7AB33 /* README.md */; };
+		B535324D1C0F6ACD00E7AB33 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B535324B1C0F6ACD00E7AB33 /* FirstViewController.m */; };
+		B535324E1C0F6ACD00E7AB33 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B535324C1C0F6ACD00E7AB33 /* FirstView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +65,10 @@
 		B53532401C0F196B00E7AB33 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		B53532441C0F1A8600E7AB33 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B53532461C0F1D1400E7AB33 /* ApplicationDelegate+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ApplicationDelegate+Private.h"; sourceTree = "<group>"; };
+		B535324A1C0F6ACD00E7AB33 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		B535324B1C0F6ACD00E7AB33 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		B535324C1C0F6ACD00E7AB33 /* FirstView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstView.xib; sourceTree = "<group>"; };
+		B535324F1C0F6AFA00E7AB33 /* FirstViewController+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FirstViewController+Private.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				B53532471C0F1DAF00E7AB33 /* ApplicationDelegate */,
+				B53532491C0F6A6E00E7AB33 /* FirstViewController */,
 				B53532061C0F04B200E7AB33 /* main.m */,
 				B535320E1C0F04F900E7AB33 /* Resources */,
 			);
@@ -229,6 +236,17 @@
 			name = ApplicationDelegate;
 			sourceTree = "<group>";
 		};
+		B53532491C0F6A6E00E7AB33 /* FirstViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B535324C1C0F6ACD00E7AB33 /* FirstView.xib */,
+				B535324A1C0F6ACD00E7AB33 /* FirstViewController.h */,
+				B535324F1C0F6AFA00E7AB33 /* FirstViewController+Private.h */,
+				B535324B1C0F6ACD00E7AB33 /* FirstViewController.m */,
+			);
+			name = FirstViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -289,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B535322D1C0F055A00E7AB33 /* KSPNavigationController.xib in Resources */,
+				B535324E1C0F6ACD00E7AB33 /* FirstView.xib in Resources */,
 				B53532351C0F057400E7AB33 /* KSPNavigationController.strings in Resources */,
 				B535322A1C0F055A00E7AB33 /* KSPBackButtonCell.xcassets in Resources */,
 				B53532081C0F04B200E7AB33 /* Assets.xcassets in Resources */,
@@ -310,6 +329,7 @@
 				B535322F1C0F055A00E7AB33 /* KSPNavViewController.m in Sources */,
 				B53532311C0F055A00E7AB33 /* KSPViewController.m in Sources */,
 				B53532451C0F1A8600E7AB33 /* README.md in Sources */,
+				B535324D1C0F6ACD00E7AB33 /* FirstViewController.m in Sources */,
 				B53532071C0F04B200E7AB33 /* ApplicationDelegate.m in Sources */,
 				B535322E1C0F055A00E7AB33 /* KSPNavigationView.m in Sources */,
 				B53532321C0F055A00E7AB33 /* NSView+Screenshot.m in Sources */,

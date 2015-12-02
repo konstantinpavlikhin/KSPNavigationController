@@ -10,6 +10,8 @@
 
 #import "KSPNavigationController.h"
 
+#import "FirstViewController.h"
+
 @implementation ApplicationDelegate
 {
   KSPNavigationController* _navigationController;
@@ -38,6 +40,12 @@
 
     [self.window.contentView addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: @"V:[NavigationBarContainer][NavigationControllerView]|" options: 0 metrics: nil views: views]];
   }}
+
+  // * * *.
+
+  FirstViewController* const firstViewController = [[FirstViewController alloc] initWithNibName: @"FirstView" bundle: nil];
+
+  [_navigationController setViewControllers: @[firstViewController] animated: NO];
 }
 
 - (void) applicationDidFinishLaunching: (NSNotification*) aNotification
