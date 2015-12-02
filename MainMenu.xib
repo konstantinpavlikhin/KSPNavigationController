@@ -677,7 +677,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="uzs-Xd-9f7" userLabel="NavigationBarContainer">
+                    <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uzs-Xd-9f7" userLabel="NavigationBarContainer">
                         <rect key="frame" x="0.0" y="312" width="480" height="48"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="48" id="lTT-Vn-zdc"/>
