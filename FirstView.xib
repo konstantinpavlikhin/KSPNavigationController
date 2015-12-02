@@ -54,14 +54,17 @@
             <point key="canvasLocation" x="320" y="265.5"/>
         </textField>
         <button verticalHuggingPriority="750" id="zaz-pn-BEO" userLabel="RightNavigationBarButton">
-            <rect key="frame" x="0.0" y="0.0" width="82" height="32"/>
+            <rect key="frame" x="0.0" y="0.0" width="97" height="32"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <animations/>
-            <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oEj-GW-muO" userLabel="RightNavigationBarButtonCell">
+            <buttonCell key="cell" type="push" title="Push Next" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oEj-GW-muO" userLabel="RightNavigationBarButtonCell">
                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                 <font key="font" metaFont="system"/>
             </buttonCell>
-            <point key="canvasLocation" x="525" y="265.5"/>
+            <connections>
+                <action selector="pushNextViewController:" target="-2" id="ERa-at-lNO"/>
+            </connections>
+            <point key="canvasLocation" x="517.5" y="265.5"/>
         </button>
         <customView id="aIb-KS-2fX" userLabel="NavigationToolbar">
             <rect key="frame" x="0.0" y="0.0" width="480" height="22"/>

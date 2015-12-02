@@ -8,6 +8,19 @@
 
 #import "FirstViewController+Private.h"
 
+#import "SecondViewController.h"
+
+#import "KSPNavigationController.h"
+
 @implementation FirstViewController
+
+#pragma mark - Interface Callbacks
+
+- (IBAction) pushNextViewController: (id) sender
+{
+  SecondViewController* const secondViewController = [[SecondViewController alloc] initWithNibName: @"SecondView" bundle: nil];
+
+  [self.navigationController pushViewController: secondViewController animated: YES];
+}
 
 @end
