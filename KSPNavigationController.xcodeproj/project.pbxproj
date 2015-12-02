@@ -1,0 +1,439 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B53532071C0F04B200E7AB33 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532001C0F04B200E7AB33 /* AppDelegate.m */; };
+		B53532081C0F04B200E7AB33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53532011C0F04B200E7AB33 /* Assets.xcassets */; };
+		B535320B1C0F04B200E7AB33 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532061C0F04B200E7AB33 /* main.m */; };
+		B535320D1C0F04DE00E7AB33 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B535320C1C0F04DE00E7AB33 /* MainMenu.xib */; };
+		B53532281C0F055A00E7AB33 /* KSPBackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532111C0F055A00E7AB33 /* KSPBackButton.m */; };
+		B53532291C0F055A00E7AB33 /* KSPBackButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532131C0F055A00E7AB33 /* KSPBackButtonCell.m */; };
+		B535322A1C0F055A00E7AB33 /* KSPBackButtonCell.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53532141C0F055A00E7AB33 /* KSPBackButtonCell.xcassets */; };
+		B535322B1C0F055A00E7AB33 /* KSPHitTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532161C0F055A00E7AB33 /* KSPHitTestView.m */; };
+		B535322C1C0F055A00E7AB33 /* KSPNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532181C0F055A00E7AB33 /* KSPNavigationController.m */; };
+		B535322D1C0F055A00E7AB33 /* KSPNavigationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B53532191C0F055A00E7AB33 /* KSPNavigationController.xib */; };
+		B535322E1C0F055A00E7AB33 /* KSPNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B535321D1C0F055A00E7AB33 /* KSPNavigationView.m */; };
+		B535322F1C0F055A00E7AB33 /* KSPNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B535321F1C0F055A00E7AB33 /* KSPNavViewController.m */; };
+		B53532301C0F055A00E7AB33 /* KSPView.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532221C0F055A00E7AB33 /* KSPView.m */; };
+		B53532311C0F055A00E7AB33 /* KSPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532241C0F055A00E7AB33 /* KSPViewController.m */; };
+		B53532321C0F055A00E7AB33 /* NSView+Screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532271C0F055A00E7AB33 /* NSView+Screenshot.m */; };
+		B53532351C0F057400E7AB33 /* KSPNavigationController.strings in Resources */ = {isa = PBXBuildFile; fileRef = B53532331C0F057400E7AB33 /* KSPNavigationController.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B53531EA1C0F03CB00E7AB33 /* KSPNavigationController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSPNavigationController.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B53531FF1C0F04B200E7AB33 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B53532001C0F04B200E7AB33 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B53532011C0F04B200E7AB33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B53532051C0F04B200E7AB33 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B53532061C0F04B200E7AB33 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B535320C1C0F04DE00E7AB33 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		B53532101C0F055A00E7AB33 /* KSPBackButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPBackButton.h; sourceTree = "<group>"; };
+		B53532111C0F055A00E7AB33 /* KSPBackButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPBackButton.m; sourceTree = "<group>"; };
+		B53532121C0F055A00E7AB33 /* KSPBackButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPBackButtonCell.h; sourceTree = "<group>"; };
+		B53532131C0F055A00E7AB33 /* KSPBackButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPBackButtonCell.m; sourceTree = "<group>"; };
+		B53532141C0F055A00E7AB33 /* KSPBackButtonCell.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = KSPBackButtonCell.xcassets; sourceTree = "<group>"; };
+		B53532151C0F055A00E7AB33 /* KSPHitTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPHitTestView.h; sourceTree = "<group>"; };
+		B53532161C0F055A00E7AB33 /* KSPHitTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPHitTestView.m; sourceTree = "<group>"; };
+		B53532171C0F055A00E7AB33 /* KSPNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPNavigationController.h; sourceTree = "<group>"; };
+		B53532181C0F055A00E7AB33 /* KSPNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPNavigationController.m; sourceTree = "<group>"; };
+		B53532191C0F055A00E7AB33 /* KSPNavigationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KSPNavigationController.xib; sourceTree = "<group>"; };
+		B535321A1C0F055A00E7AB33 /* KSPNavigationController+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KSPNavigationController+Private.h"; sourceTree = "<group>"; };
+		B535321B1C0F055A00E7AB33 /* KSPNavigationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPNavigationControllerDelegate.h; sourceTree = "<group>"; };
+		B535321C1C0F055A00E7AB33 /* KSPNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPNavigationView.h; sourceTree = "<group>"; };
+		B535321D1C0F055A00E7AB33 /* KSPNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPNavigationView.m; sourceTree = "<group>"; };
+		B535321E1C0F055A00E7AB33 /* KSPNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPNavViewController.h; sourceTree = "<group>"; };
+		B535321F1C0F055A00E7AB33 /* KSPNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPNavViewController.m; sourceTree = "<group>"; };
+		B53532201C0F055A00E7AB33 /* KSPNavViewController+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KSPNavViewController+Private.h"; sourceTree = "<group>"; };
+		B53532211C0F055A00E7AB33 /* KSPView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPView.h; sourceTree = "<group>"; };
+		B53532221C0F055A00E7AB33 /* KSPView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPView.m; sourceTree = "<group>"; };
+		B53532231C0F055A00E7AB33 /* KSPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPViewController.h; sourceTree = "<group>"; };
+		B53532241C0F055A00E7AB33 /* KSPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPViewController.m; sourceTree = "<group>"; };
+		B53532251C0F055A00E7AB33 /* KSPViewController+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KSPViewController+Private.h"; sourceTree = "<group>"; };
+		B53532261C0F055A00E7AB33 /* NSView+Screenshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+Screenshot.h"; sourceTree = "<group>"; };
+		B53532271C0F055A00E7AB33 /* NSView+Screenshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+Screenshot.m"; sourceTree = "<group>"; };
+		B53532341C0F057400E7AB33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/KSPNavigationController.strings; sourceTree = "<group>"; };
+		B53532361C0F058100E7AB33 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/KSPNavigationController.strings; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B53531E71C0F03CB00E7AB33 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B53531E11C0F03CB00E7AB33 = {
+			isa = PBXGroup;
+			children = (
+				B53532381C0F059E00E7AB33 /* KSPViewController */,
+				B53532371C0F059700E7AB33 /* KSPView */,
+				B53531FE1C0F045A00E7AB33 /* KSPNavigationController */,
+				B535320F1C0F051500E7AB33 /* SampleApp */,
+				B53531EB1C0F03CB00E7AB33 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B53531EB1C0F03CB00E7AB33 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B53531EA1C0F03CB00E7AB33 /* KSPNavigationController.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B53531FE1C0F045A00E7AB33 /* KSPNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				B535323E1C0F061900E7AB33 /* KSPHitTestView */,
+				B53532391C0F05AC00E7AB33 /* KSPNavigationView */,
+				B535323D1C0F05DC00E7AB33 /* NSView+Screenshot */,
+				B535323C1C0F05D300E7AB33 /* KSPBackButton */,
+				B535323A1C0F05B600E7AB33 /* KSPNavViewController */,
+				B53532191C0F055A00E7AB33 /* KSPNavigationController.xib */,
+				B535321B1C0F055A00E7AB33 /* KSPNavigationControllerDelegate.h */,
+				B53532171C0F055A00E7AB33 /* KSPNavigationController.h */,
+				B535321A1C0F055A00E7AB33 /* KSPNavigationController+Private.h */,
+				B53532181C0F055A00E7AB33 /* KSPNavigationController.m */,
+				B53532331C0F057400E7AB33 /* KSPNavigationController.strings */,
+			);
+			name = KSPNavigationController;
+			sourceTree = "<group>";
+		};
+		B535320E1C0F04F900E7AB33 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B535320C1C0F04DE00E7AB33 /* MainMenu.xib */,
+				B53532011C0F04B200E7AB33 /* Assets.xcassets */,
+				B53532051C0F04B200E7AB33 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		B535320F1C0F051500E7AB33 /* SampleApp */ = {
+			isa = PBXGroup;
+			children = (
+				B53531FF1C0F04B200E7AB33 /* AppDelegate.h */,
+				B53532001C0F04B200E7AB33 /* AppDelegate.m */,
+				B53532061C0F04B200E7AB33 /* main.m */,
+				B535320E1C0F04F900E7AB33 /* Resources */,
+			);
+			name = SampleApp;
+			sourceTree = "<group>";
+		};
+		B53532371C0F059700E7AB33 /* KSPView */ = {
+			isa = PBXGroup;
+			children = (
+				B53532211C0F055A00E7AB33 /* KSPView.h */,
+				B53532221C0F055A00E7AB33 /* KSPView.m */,
+			);
+			name = KSPView;
+			sourceTree = "<group>";
+		};
+		B53532381C0F059E00E7AB33 /* KSPViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B53532231C0F055A00E7AB33 /* KSPViewController.h */,
+				B53532251C0F055A00E7AB33 /* KSPViewController+Private.h */,
+				B53532241C0F055A00E7AB33 /* KSPViewController.m */,
+			);
+			name = KSPViewController;
+			sourceTree = "<group>";
+		};
+		B53532391C0F05AC00E7AB33 /* KSPNavigationView */ = {
+			isa = PBXGroup;
+			children = (
+				B535321C1C0F055A00E7AB33 /* KSPNavigationView.h */,
+				B535321D1C0F055A00E7AB33 /* KSPNavigationView.m */,
+			);
+			name = KSPNavigationView;
+			sourceTree = "<group>";
+		};
+		B535323A1C0F05B600E7AB33 /* KSPNavViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B535321E1C0F055A00E7AB33 /* KSPNavViewController.h */,
+				B53532201C0F055A00E7AB33 /* KSPNavViewController+Private.h */,
+				B535321F1C0F055A00E7AB33 /* KSPNavViewController.m */,
+			);
+			name = KSPNavViewController;
+			sourceTree = "<group>";
+		};
+		B535323B1C0F05C400E7AB33 /* KSPBackButtonCell */ = {
+			isa = PBXGroup;
+			children = (
+				B53532121C0F055A00E7AB33 /* KSPBackButtonCell.h */,
+				B53532131C0F055A00E7AB33 /* KSPBackButtonCell.m */,
+				B53532141C0F055A00E7AB33 /* KSPBackButtonCell.xcassets */,
+			);
+			name = KSPBackButtonCell;
+			sourceTree = "<group>";
+		};
+		B535323C1C0F05D300E7AB33 /* KSPBackButton */ = {
+			isa = PBXGroup;
+			children = (
+				B535323B1C0F05C400E7AB33 /* KSPBackButtonCell */,
+				B53532101C0F055A00E7AB33 /* KSPBackButton.h */,
+				B53532111C0F055A00E7AB33 /* KSPBackButton.m */,
+			);
+			name = KSPBackButton;
+			sourceTree = "<group>";
+		};
+		B535323D1C0F05DC00E7AB33 /* NSView+Screenshot */ = {
+			isa = PBXGroup;
+			children = (
+				B53532261C0F055A00E7AB33 /* NSView+Screenshot.h */,
+				B53532271C0F055A00E7AB33 /* NSView+Screenshot.m */,
+			);
+			name = "NSView+Screenshot";
+			sourceTree = "<group>";
+		};
+		B535323E1C0F061900E7AB33 /* KSPHitTestView */ = {
+			isa = PBXGroup;
+			children = (
+				B53532151C0F055A00E7AB33 /* KSPHitTestView.h */,
+				B53532161C0F055A00E7AB33 /* KSPHitTestView.m */,
+			);
+			name = KSPHitTestView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B53531E91C0F03CB00E7AB33 /* KSPNavigationController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B53531FB1C0F03CB00E7AB33 /* Build configuration list for PBXNativeTarget "KSPNavigationController" */;
+			buildPhases = (
+				B53531E61C0F03CB00E7AB33 /* Sources */,
+				B53531E71C0F03CB00E7AB33 /* Frameworks */,
+				B53531E81C0F03CB00E7AB33 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KSPNavigationController;
+			productName = KSPNavigationController;
+			productReference = B53531EA1C0F03CB00E7AB33 /* KSPNavigationController.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B53531E21C0F03CB00E7AB33 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = KSP;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Konstantin Pavlikhin";
+				TargetAttributes = {
+					B53531E91C0F03CB00E7AB33 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+				};
+			};
+			buildConfigurationList = B53531E51C0F03CB00E7AB33 /* Build configuration list for PBXProject "KSPNavigationController" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				ru,
+			);
+			mainGroup = B53531E11C0F03CB00E7AB33;
+			productRefGroup = B53531EB1C0F03CB00E7AB33 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B53531E91C0F03CB00E7AB33 /* KSPNavigationController */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B53531E81C0F03CB00E7AB33 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B535322D1C0F055A00E7AB33 /* KSPNavigationController.xib in Resources */,
+				B53532351C0F057400E7AB33 /* KSPNavigationController.strings in Resources */,
+				B535322A1C0F055A00E7AB33 /* KSPBackButtonCell.xcassets in Resources */,
+				B53532081C0F04B200E7AB33 /* Assets.xcassets in Resources */,
+				B535320D1C0F04DE00E7AB33 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B53531E61C0F03CB00E7AB33 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B53532301C0F055A00E7AB33 /* KSPView.m in Sources */,
+				B535322C1C0F055A00E7AB33 /* KSPNavigationController.m in Sources */,
+				B535320B1C0F04B200E7AB33 /* main.m in Sources */,
+				B53532291C0F055A00E7AB33 /* KSPBackButtonCell.m in Sources */,
+				B535322F1C0F055A00E7AB33 /* KSPNavViewController.m in Sources */,
+				B53532311C0F055A00E7AB33 /* KSPViewController.m in Sources */,
+				B53532071C0F04B200E7AB33 /* AppDelegate.m in Sources */,
+				B535322E1C0F055A00E7AB33 /* KSPNavigationView.m in Sources */,
+				B53532321C0F055A00E7AB33 /* NSView+Screenshot.m in Sources */,
+				B53532281C0F055A00E7AB33 /* KSPBackButton.m in Sources */,
+				B535322B1C0F055A00E7AB33 /* KSPHitTestView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B53532331C0F057400E7AB33 /* KSPNavigationController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B53532341C0F057400E7AB33 /* en */,
+				B53532361C0F058100E7AB33 /* ru */,
+			);
+			name = KSPNavigationController.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B53531F91C0F03CB00E7AB33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		B53531FA1C0F03CB00E7AB33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		B53531FC1C0F03CB00E7AB33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.konstantinpavlikhin.KSPNavigationController;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B53531FD1C0F03CB00E7AB33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.konstantinpavlikhin.KSPNavigationController;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B53531E51C0F03CB00E7AB33 /* Build configuration list for PBXProject "KSPNavigationController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B53531F91C0F03CB00E7AB33 /* Debug */,
+				B53531FA1C0F03CB00E7AB33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B53531FB1C0F03CB00E7AB33 /* Build configuration list for PBXNativeTarget "KSPNavigationController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B53531FC1C0F03CB00E7AB33 /* Debug */,
+				B53531FD1C0F03CB00E7AB33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B53531E21C0F03CB00E7AB33 /* Project object */;
+}
