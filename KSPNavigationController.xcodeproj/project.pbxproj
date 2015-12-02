@@ -59,6 +59,7 @@
 		B53532271C0F055A00E7AB33 /* NSView+Screenshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+Screenshot.m"; sourceTree = "<group>"; };
 		B53532341C0F057400E7AB33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/KSPNavigationController.strings; sourceTree = "<group>"; };
 		B53532361C0F058100E7AB33 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/KSPNavigationController.strings; sourceTree = "<group>"; };
+		B53532401C0F196B00E7AB33 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +79,7 @@
 				B53532381C0F059E00E7AB33 /* KSPViewController */,
 				B53532371C0F059700E7AB33 /* KSPView */,
 				B53531FE1C0F045A00E7AB33 /* KSPNavigationController */,
+				B535323F1C0F195300E7AB33 /* Resources */,
 				B535320F1C0F051500E7AB33 /* SampleApp */,
 				B53531EB1C0F03CB00E7AB33 /* Products */,
 			);
@@ -204,6 +206,14 @@
 				B53532161C0F055A00E7AB33 /* KSPHitTestView.m */,
 			);
 			name = KSPHitTestView;
+			sourceTree = "<group>";
+		};
+		B535323F1C0F195300E7AB33 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B53532401C0F196B00E7AB33 /* LICENSE.md */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
