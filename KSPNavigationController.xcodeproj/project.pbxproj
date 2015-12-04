@@ -31,7 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B53531EA1C0F03CB00E7AB33 /* KSPNavigationController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSPNavigationController.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B53531EA1C0F03CB00E7AB33 /* SampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53531FF1C0F04B200E7AB33 /* ApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationDelegate.h; sourceTree = "<group>"; };
 		B53532001C0F04B200E7AB33 /* ApplicationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationDelegate.m; sourceTree = "<group>"; };
 		B53532011C0F04B200E7AB33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 		B53531EB1C0F03CB00E7AB33 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B53531EA1C0F03CB00E7AB33 /* KSPNavigationController.app */,
+				B53531EA1C0F03CB00E7AB33 /* SampleApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -268,9 +268,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B53531E91C0F03CB00E7AB33 /* KSPNavigationController */ = {
+		B53531E91C0F03CB00E7AB33 /* SampleApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B53531FB1C0F03CB00E7AB33 /* Build configuration list for PBXNativeTarget "KSPNavigationController" */;
+			buildConfigurationList = B53531FB1C0F03CB00E7AB33 /* Build configuration list for PBXNativeTarget "SampleApp" */;
 			buildPhases = (
 				B53531E61C0F03CB00E7AB33 /* Sources */,
 				B53531E71C0F03CB00E7AB33 /* Frameworks */,
@@ -280,9 +280,9 @@
 			);
 			dependencies = (
 			);
-			name = KSPNavigationController;
+			name = SampleApp;
 			productName = KSPNavigationController;
-			productReference = B53531EA1C0F03CB00E7AB33 /* KSPNavigationController.app */;
+			productReference = B53531EA1C0F03CB00E7AB33 /* SampleApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -314,7 +314,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B53531E91C0F03CB00E7AB33 /* KSPNavigationController */,
+				B53531E91C0F03CB00E7AB33 /* SampleApp */,
 			);
 		};
 /* End PBXProject section */
@@ -488,7 +488,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B53531FB1C0F03CB00E7AB33 /* Build configuration list for PBXNativeTarget "KSPNavigationController" */ = {
+		B53531FB1C0F03CB00E7AB33 /* Build configuration list for PBXNativeTarget "SampleApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B53531FC1C0F03CB00E7AB33 /* Debug */,
