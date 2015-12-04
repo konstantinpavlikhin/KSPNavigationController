@@ -46,7 +46,7 @@ typedef NS_ENUM(NSUInteger, Side)
 
   // * * *.
 
-  self = [super initWithNibName: @"KSPNavigationController" bundle: nil];
+  self = [super initWithNibName: @"KSPNavigationController" bundle: [NSBundle bundleForClass: [self class]]];
   
   if(!self) return nil;
 
@@ -137,7 +137,7 @@ typedef NS_ENUM(NSUInteger, Side)
   
   if(!string)
   {
-    string = NSLocalizedStringFromTable(@"BackButtonTitle", NSStringFromClass([KSPNavigationController class]), nil);
+    string = NSLocalizedStringFromTableInBundle(@"BackButtonTitle", NSStringFromClass([KSPNavigationController class]), [NSBundle bundleForClass: [self class]], nil);
   }
   
   b.title = string;
