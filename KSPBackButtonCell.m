@@ -24,11 +24,11 @@ static NSImage *arrowHighlighted;
 
 + (void) initialize
 {
-  arrowDisabled = [NSImage imageNamed: @"Arrow-disabled"];
+  arrowDisabled = [[NSBundle bundleForClass: self] imageForResource: @"Arrow-disabled"];
   
-  arrowNormal = [NSImage imageNamed: @"Arrow-normal"];
+  arrowNormal = [[NSBundle bundleForClass: self] imageForResource: @"Arrow-normal"];
   
-  arrowHighlighted = [NSImage imageNamed: @"Arrow-highlighted"];
+  arrowHighlighted = [[NSBundle bundleForClass: self] imageForResource: @"Arrow-highlighted"];
 }
 
 #pragma mark - NSCell Overrides

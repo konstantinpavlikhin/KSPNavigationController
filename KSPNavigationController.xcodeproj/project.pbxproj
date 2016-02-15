@@ -15,6 +15,12 @@
 		B535324E1C0F6ACD00E7AB33 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B535324C1C0F6ACD00E7AB33 /* FirstView.xib */; };
 		B53532541C0F6CE700E7AB33 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532521C0F6CE700E7AB33 /* SecondViewController.m */; };
 		B53532551C0F6CE700E7AB33 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B53532531C0F6CE700E7AB33 /* SecondView.xib */; };
+		B5416C291C7226AC00C2C60A /* Arrow-disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = B5416C271C7226AC00C2C60A /* Arrow-disabled.png */; };
+		B5416C2A1C7226AC00C2C60A /* Arrow-disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5416C281C7226AC00C2C60A /* Arrow-disabled@2x.png */; };
+		B5416C2D1C7226B200C2C60A /* Arrow-highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = B5416C2B1C7226B200C2C60A /* Arrow-highlighted.png */; };
+		B5416C2E1C7226B200C2C60A /* Arrow-highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5416C2C1C7226B200C2C60A /* Arrow-highlighted@2x.png */; };
+		B5416C311C7226B800C2C60A /* Arrow-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B5416C2F1C7226B800C2C60A /* Arrow-normal.png */; };
+		B5416C321C7226B800C2C60A /* Arrow-normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5416C301C7226B800C2C60A /* Arrow-normal@2x.png */; };
 		B5EA98901C120E4C00937655 /* KSPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532241C0F055A00E7AB33 /* KSPViewController.m */; };
 		B5EA98911C120E4E00937655 /* KSPView.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532221C0F055A00E7AB33 /* KSPView.m */; };
 		B5EA98921C120E5200937655 /* KSPHitTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532161C0F055A00E7AB33 /* KSPHitTestView.m */; };
@@ -76,7 +82,6 @@
 		B53532111C0F055A00E7AB33 /* KSPBackButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPBackButton.m; sourceTree = "<group>"; };
 		B53532121C0F055A00E7AB33 /* KSPBackButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPBackButtonCell.h; sourceTree = "<group>"; };
 		B53532131C0F055A00E7AB33 /* KSPBackButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPBackButtonCell.m; sourceTree = "<group>"; };
-		B53532141C0F055A00E7AB33 /* KSPBackButtonCell.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = KSPBackButtonCell.xcassets; sourceTree = "<group>"; };
 		B53532151C0F055A00E7AB33 /* KSPHitTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPHitTestView.h; sourceTree = "<group>"; };
 		B53532161C0F055A00E7AB33 /* KSPHitTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPHitTestView.m; sourceTree = "<group>"; };
 		B53532171C0F055A00E7AB33 /* KSPNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPNavigationController.h; sourceTree = "<group>"; };
@@ -109,6 +114,12 @@
 		B53532521C0F6CE700E7AB33 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		B53532531C0F6CE700E7AB33 /* SecondView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondView.xib; sourceTree = "<group>"; };
 		B53532561C0F6D0700E7AB33 /* SecondViewController+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SecondViewController+Private.h"; sourceTree = "<group>"; };
+		B5416C271C7226AC00C2C60A /* Arrow-disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-disabled.png"; sourceTree = "<group>"; };
+		B5416C281C7226AC00C2C60A /* Arrow-disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-disabled@2x.png"; sourceTree = "<group>"; };
+		B5416C2B1C7226B200C2C60A /* Arrow-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-highlighted.png"; sourceTree = "<group>"; };
+		B5416C2C1C7226B200C2C60A /* Arrow-highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-highlighted@2x.png"; sourceTree = "<group>"; };
+		B5416C2F1C7226B800C2C60A /* Arrow-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-normal.png"; sourceTree = "<group>"; };
+		B5416C301C7226B800C2C60A /* Arrow-normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-normal@2x.png"; sourceTree = "<group>"; };
 		B5EA98881C120DD700937655 /* KSPNavigationController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSPNavigationController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5EA98A31C1212FF00937655 /* KSPNavigationController.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = KSPNavigationController.plist; sourceTree = "<group>"; };
 		B5EA98A61C121BC800937655 /* KSPNavigationControllerFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPNavigationControllerFramework.h; sourceTree = "<group>"; };
@@ -236,9 +247,9 @@
 		B535323B1C0F05C400E7AB33 /* KSPBackButtonCell */ = {
 			isa = PBXGroup;
 			children = (
+				B5416C1A1C72264600C2C60A /* Assets */,
 				B53532121C0F055A00E7AB33 /* KSPBackButtonCell.h */,
 				B53532131C0F055A00E7AB33 /* KSPBackButtonCell.m */,
-				B53532141C0F055A00E7AB33 /* KSPBackButtonCell.xcassets */,
 			);
 			name = KSPBackButtonCell;
 			sourceTree = "<group>";
@@ -311,6 +322,19 @@
 				B53532521C0F6CE700E7AB33 /* SecondViewController.m */,
 			);
 			name = SecondViewController;
+			sourceTree = "<group>";
+		};
+		B5416C1A1C72264600C2C60A /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				B5416C271C7226AC00C2C60A /* Arrow-disabled.png */,
+				B5416C281C7226AC00C2C60A /* Arrow-disabled@2x.png */,
+				B5416C2F1C7226B800C2C60A /* Arrow-normal.png */,
+				B5416C301C7226B800C2C60A /* Arrow-normal@2x.png */,
+				B5416C2B1C7226B200C2C60A /* Arrow-highlighted.png */,
+				B5416C2C1C7226B200C2C60A /* Arrow-highlighted@2x.png */,
+			);
+			name = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,8 +451,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5EA98981C120E7100937655 /* KSPNavigationController.xib in Resources */,
+				B5416C2D1C7226B200C2C60A /* Arrow-highlighted.png in Resources */,
 				B5EA98A41C1212FF00937655 /* KSPNavigationController.plist in Resources */,
+				B5416C2A1C7226AC00C2C60A /* Arrow-disabled@2x.png in Resources */,
+				B5416C321C7226B800C2C60A /* Arrow-normal@2x.png in Resources */,
 				B5EA989A1C120E7D00937655 /* KSPNavigationController.strings in Resources */,
+				B5416C291C7226AC00C2C60A /* Arrow-disabled.png in Resources */,
+				B5416C2E1C7226B200C2C60A /* Arrow-highlighted@2x.png in Resources */,
+				B5416C311C7226B800C2C60A /* Arrow-normal.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,6 +688,7 @@
 				B5EA988F1C120DD700937655 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
