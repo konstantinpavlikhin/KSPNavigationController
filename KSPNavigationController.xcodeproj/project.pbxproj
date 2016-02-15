@@ -40,7 +40,6 @@
 		B5EA98A01C12120E00937655 /* KSPNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = B53532171C0F055A00E7AB33 /* KSPNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B5EA98A11C12123900937655 /* KSPNavigationController+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = B535321A1C0F055A00E7AB33 /* KSPNavigationController+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B5EA98A21C12124400937655 /* KSPView.h in Headers */ = {isa = PBXBuildFile; fileRef = B53532211C0F055A00E7AB33 /* KSPView.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		B5EA98A41C1212FF00937655 /* KSPNavigationController.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5EA98A31C1212FF00937655 /* KSPNavigationController.plist */; };
 		B5EA98A71C121BC800937655 /* KSPNavigationControllerFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = B5EA98A61C121BC800937655 /* KSPNavigationControllerFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B5EA98AA1C121CC200937655 /* KSPNavigationController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5EA98881C120DD700937655 /* KSPNavigationController.framework */; };
 		B5EA98AC1C121CF400937655 /* KSPNavigationController.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = B5EA98881C120DD700937655 /* KSPNavigationController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -452,7 +451,6 @@
 			files = (
 				B5EA98981C120E7100937655 /* KSPNavigationController.xib in Resources */,
 				B5416C2D1C7226B200C2C60A /* Arrow-highlighted.png in Resources */,
-				B5EA98A41C1212FF00937655 /* KSPNavigationController.plist in Resources */,
 				B5416C2A1C7226AC00C2C60A /* Arrow-disabled@2x.png in Resources */,
 				B5416C321C7226B800C2C60A /* Arrow-normal@2x.png in Resources */,
 				B5EA989A1C120E7D00937655 /* KSPNavigationController.strings in Resources */,
