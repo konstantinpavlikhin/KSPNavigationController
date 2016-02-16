@@ -10,4 +10,9 @@
 
 @implementation SecondViewController
 
+- (void) awakeFromNib
+{
+  self.view.layer.backgroundColor = [[NSColor redColor] colorWithAlphaComponent: 0.9].CGColor;
+}
+
 @end

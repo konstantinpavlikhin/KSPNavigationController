@@ -23,4 +23,9 @@
   [self.navigationController pushViewController: secondViewController animated: YES];
 }
 
+- (void) awakeFromNib
+{
+  self.view.layer.backgroundColor = [[NSColor greenColor] colorWithAlphaComponent: 0.5].CGColor;
+}
+
 @end
