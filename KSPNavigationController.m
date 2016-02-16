@@ -107,9 +107,7 @@ typedef NS_ENUM(NSUInteger, Side)
   // * * *.
 
   self.navigationView.navigationBar = self.navigationBar;
-  
-  self.navigationView.mainViewTransitionHost.layer.opaque = YES;
-  
+
   self.navigationViewPrototype = [NSKeyedUnarchiver unarchiveObjectWithData: [NSKeyedArchiver archivedDataWithRootObject: self.navigationView]];
   
   // * * *.
@@ -590,9 +588,9 @@ typedef NS_ENUM(NSUInteger, Side)
     
     [allConstraints addObjectsFromArray: c];
     
-    const CGFloat m = (transitionStyle == KSPNavigationControllerTransitionStyleLengthy)? 1 : (1.0 / 3.0);
+    const CGFloat m = ((transitionStyle == KSPNavigationControllerTransitionStyleLengthy)? 1 : 3);
     
-    id const c2 = [NSLayoutConstraint constraintWithItem: mainView attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: navigationView attribute: NSLayoutAttributeLeading multiplier: -m constant: 0];
+    id const c2 = [NSLayoutConstraint constraintWithItem: mainView attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: navigationView attribute: NSLayoutAttributeLeading multiplier: 1 constant: -(navigationView.frame.size.width / m)];
     
     [allConstraints addObject: c2];
   }
@@ -636,153 +634,76 @@ typedef NS_ENUM(NSUInteger, Side)
 
 + (void) removeMainView: (NSView*) mainView fromNavigationView: (KSPNavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated transitionStyle: (KSPNavigationControllerTransitionStyle) transitionStyle
 {
-  // 1. Создать screenshot mainView.
-  NSImageView* const screenshot = [[NSImageView alloc] initWithFrame: NSZeroRect];
-  
-  screenshot.translatesAutoresizingMaskIntoConstraints = NO;
-  
-  screenshot.image = [mainView ss_imageWithSubviews];
-  
-  // 2. Выкинуть mainView.
-  [mainView removeFromSuperview];
-  
-  // 3. Внедрить screenshot в mainViewTransitionHost на стартовую позицию.
-  [navigationView.mainViewTransitionHost addSubview: screenshot];
-  
-  NSMutableArray* const startConstraints = [NSMutableArray array];
-  
-  NSDictionary* const views = NSDictionaryOfVariableBindings(screenshot);
-  
-  [startConstraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat: @"H:|[screenshot]|" options: 0 metrics: nil views: views]];
-  
-  [startConstraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[screenshot]|" options: 0 metrics: nil views: views]];
-  
-  [navigationView.mainViewTransitionHost addConstraints: startConstraints];
-  
-  // Тут надо какой-то перерасчет.
-  [navigationView.mainViewTransitionHost layoutSubtreeIfNeeded];
-  
-  // Выкидываем временную константу.
-  [navigationView.mainViewTransitionHost removeConstraints: startConstraints];
-  
-  // Окончательное условие.
-  NSMutableArray* const finishConstraints = [NSMutableArray array];
-  
-  NSView* const mainViewTransitionHost = navigationView.mainViewTransitionHost;
-  
-  NSDictionary* const views2 = NSDictionaryOfVariableBindings(screenshot, mainViewTransitionHost);
-  
-  if(side == Forward)
-  {
-    id c = [NSLayoutConstraint constraintsWithVisualFormat: @"H:[mainViewTransitionHost][screenshot]" options: 0 metrics: nil views: views2];
-    
-    [finishConstraints addObjectsFromArray: c];
-  }
-  else
-  {
-    const CGFloat divider = ((transitionStyle == KSPNavigationControllerTransitionStyleLengthy)? 1.0 : 3.0);
-    
-    id const c2 = [NSLayoutConstraint constraintWithItem: screenshot attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: mainViewTransitionHost attribute: NSLayoutAttributeLeading multiplier: 1 constant: -(mainViewTransitionHost.frame.size.width / divider)];
-    
-    [finishConstraints addObject: c2];
-  }
-  
-  [finishConstraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[screenshot]" options: 0 metrics: nil views: views2]];
-  
-  [navigationView.mainViewTransitionHost addConstraints: finishConstraints];
-  
-  // Сама анимация.
+  [mainView removeFromSuperviewWithoutNeedingDisplay];
+
+  // * * *.
+
+  mainView.translatesAutoresizingMaskIntoConstraints = NO;
+
+  [navigationView addSubview: mainView];
+
+  // * * *.
+
+  NSArray* const startConstraints = [[self class] constraintsForMainView: mainView inNavigationView: navigationView];
+
+  [navigationView addConstraints: startConstraints];
+
+  [navigationView layoutSubtreeIfNeeded];
+
+  [navigationView removeConstraints: startConstraints];
+
+  // * * *.
+
+  NSArray* const finishConstraints = [[self class] constraintsForMainView: mainView inNavigationView: navigationView complementaryPositionSide: side transitionStyle: transitionStyle];
+
+  [navigationView addConstraints: finishConstraints];
+
+  // * * *.
+
   [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* const context)
   {
     context.allowsImplicitAnimation = YES;
     
-    [navigationView.mainViewTransitionHost layoutSubtreeIfNeeded];
+    [navigationView layoutSubtreeIfNeeded];
   }
   completionHandler: ^
   {
-    [screenshot removeFromSuperviewWithoutNeedingDisplay];
+    [mainView removeFromSuperview];
   }];
 }
 
 + (void) insertMainView: (NSView*) mainView inNavigationView: (KSPNavigationView*) navigationView slideTo: (Side) side animated: (BOOL) animated transitionStyle: (KSPNavigationControllerTransitionStyle) transitionStyle
 {
-  // 1. Добавить mainView в navigationView.
   mainView.translatesAutoresizingMaskIntoConstraints = NO;
   
-  [navigationView addSubview: mainView positioned: NSWindowAbove relativeTo: navigationView.mainViewTransitionHost];
-  
-  [navigationView addConstraints: [self constraintsForMainView: mainView inNavigationView: navigationView]];
-  
-  [mainView layoutSubtreeIfNeeded];
-  
-  // 2. Создать screenshot mainView.
-  NSImageView* const screenshot = [[NSImageView alloc] initWithFrame: NSZeroRect];
-  
-  screenshot.translatesAutoresizingMaskIntoConstraints = NO;
-  
-  screenshot.image = [mainView ss_imageWithSubviews];
-  
-  [mainView removeFromSuperviewWithoutNeedingDisplay];
-  
-  // 3. Внедрить screenshot в mainViewTransitionHost на стартовую позицию.
-  [navigationView.mainViewTransitionHost addSubview: screenshot positioned: (side == Forward? NSWindowBelow : NSWindowAbove) relativeTo: navigationView.mainViewTransitionHost.subviews.lastObject];
-  
-  NSMutableArray* const startConstraints = [NSMutableArray array];
-  
-  NSView* const mainViewTransitionHost = navigationView.mainViewTransitionHost;
-  
-  NSDictionary* const views2 = NSDictionaryOfVariableBindings(screenshot, mainViewTransitionHost);
-  
-  if(side == Backward)
-  {
-    id const c = [NSLayoutConstraint constraintsWithVisualFormat: @"H:[mainViewTransitionHost][screenshot]" options: 0 metrics: nil views: views2];
-    
-    [startConstraints addObjectsFromArray: c];
-  }
-  else
-  {
-    const CGFloat divider = ((transitionStyle == KSPNavigationControllerTransitionStyleLengthy)? 1.0 : 3.0);
-    
-    id const c2 = [NSLayoutConstraint constraintWithItem: screenshot attribute: NSLayoutAttributeLeading relatedBy: NSLayoutRelationEqual toItem: mainViewTransitionHost attribute: NSLayoutAttributeLeading multiplier: 1 constant: -(mainViewTransitionHost.frame.size.width / divider)];
-    
-    [startConstraints addObject: c2];
-  }
-  
-  [startConstraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[screenshot]" options: 0 metrics: nil views: views2]];
-  
-  [navigationView.mainViewTransitionHost addConstraints: startConstraints];
-  
-  // Тут надо какой-то перерасчет.
-  [navigationView.mainViewTransitionHost layoutSubtreeIfNeeded];
-  
-  // Выкидываем временную константу.
-  [navigationView.mainViewTransitionHost removeConstraints: startConstraints];
-  
-  // Окончательное условие.
-  NSMutableArray* const finishConstraints = [NSMutableArray array];
-  
-  NSDictionary* const views3 = NSDictionaryOfVariableBindings(screenshot);
-  
-  [finishConstraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat: @"H:|[screenshot]|" options: 0 metrics: nil views: views3]];
-  
-  [finishConstraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat: @"V:|[screenshot]|" options: 0 metrics: nil views: views3]];
-  
-  [navigationView.mainViewTransitionHost addConstraints: finishConstraints];
-  
-  // Сама анимация.
+  [navigationView addSubview: mainView positioned: ((side == Forward)? NSWindowBelow : NSWindowAbove) relativeTo: nil];
+
+  // * * *.
+
+  NSArray* const startConstraints = [[self class] constraintsForMainView: mainView inNavigationView: navigationView complementaryPositionSide: INVERT_SIDE(side) transitionStyle: transitionStyle];
+
+  [navigationView addConstraints: startConstraints];
+
+  [navigationView layoutSubtreeIfNeeded];
+
+  [navigationView removeConstraints: startConstraints];
+
+  // * * *.
+
+  NSArray* const finishConstraints = [[self class] constraintsForMainView: mainView inNavigationView: navigationView];
+
+  [navigationView addConstraints: finishConstraints];
+
+  // * * *.
+
   [NSAnimationContext runAnimationGroup: ^(NSAnimationContext* const context)
   {
     context.allowsImplicitAnimation = YES;
     
-    [navigationView.mainViewTransitionHost layoutSubtreeIfNeeded];
+    [navigationView layoutSubtreeIfNeeded];
   }
   completionHandler: ^
   {
-    [screenshot removeFromSuperviewWithoutNeedingDisplay];
-    
-    [navigationView addSubview: mainView positioned: NSWindowAbove relativeTo: navigationView.mainViewTransitionHost];
-    
-    [navigationView addConstraints: [self constraintsForMainView: mainView inNavigationView: navigationView]];
   }];
 }
 

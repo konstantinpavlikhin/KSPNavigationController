@@ -14,8 +14,6 @@
 
 @property(readwrite, strong, nonatomic) IBOutlet KSPHitTestView* navigationBar;
 
-@property(readwrite, strong, nonatomic) IBOutlet NSView* mainViewTransitionHost;
-
 @property(readwrite, strong, nonatomic) IBOutlet NSView* navigationToolbarHost;
 
 @end

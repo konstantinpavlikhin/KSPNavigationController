@@ -21,9 +21,7 @@
   // * * *.
 
   _navigationBar = [aDecoder decodeObjectOfClass: [NSView class] forKey: @"NavigationBar"];
-  
-  _mainViewTransitionHost = [aDecoder decodeObjectOfClass: [NSView class] forKey: @"MainViewTransitionHost"];
-  
+
   _navigationToolbarHost = [aDecoder decodeObjectOfClass: [NSView class] forKey: @"NavigationToolbarHost"];
 
   // * * *.
@@ -38,9 +36,7 @@
   // * * *.
 
   [aCoder encodeObject: self.navigationBar forKey: @"NavigationBar"];
-  
-  [aCoder encodeObject: self.mainViewTransitionHost forKey: @"MainViewTransitionHost"];
-  
+
   [aCoder encodeObject: self.navigationToolbarHost forKey: @"NavigationToolbarHost"];
 }
 
