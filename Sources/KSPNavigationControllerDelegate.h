@@ -3,7 +3,7 @@
 //  KSPNavigationController
 //
 //  Created by Konstantin Pavlikhin on 2/12/13.
-//  Copyright (c) 2013 Konstantin Pavlikhin. All rights reserved.
+//  Copyright (c) 2016 Konstantin Pavlikhin. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

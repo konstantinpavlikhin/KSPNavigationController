@@ -3,7 +3,7 @@
 //  KSPNavigationController
 //
 //  Created by Konstantin Pavlikhin on 08.06.15.
-//  Copyright (c) 2015 Konstantin Pavlikhin. All rights reserved.
+//  Copyright (c) 2016 Konstantin Pavlikhin. All rights reserved.
 //
 
 #import "KSPNavViewController.h"
