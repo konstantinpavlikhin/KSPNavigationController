@@ -15,14 +15,14 @@ FOUNDATION_EXPORT double KSPNavigationControllerVersionNumber;
 FOUNDATION_EXPORT const unsigned char KSPNavigationControllerVersionString[];
 
 // In this header, you should import all the public headers of your framework.
-#import <KSPViewController.h>
+#import "KSPViewController.h"
 
-#import <KSPViewController+Private.h>
+#import "KSPViewController+Private.h"
 
-#import <KSPNavViewController.h>
+#import "KSPNavViewController.h"
 
-#import <KSPNavViewController+Private.h>
+#import "KSPNavViewController+Private.h"
 
-#import <KSPNavigationControllerDelegate.h>
+#import "KSPNavigationControllerDelegate.h"
 
-#import <KSPNavigationController.h>
+#import "KSPNavigationController.h"

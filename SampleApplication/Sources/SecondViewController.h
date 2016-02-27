@@ -6,7 +6,7 @@
 //  Copyright © 2015 Konstantin Pavlikhin. All rights reserved.
 //
 
-#import "KSPNavViewController+Private.h"
+@import KSPNavigationController.KSPNavViewController_Private;
 
 @interface SecondViewController : KSPNavViewController
 

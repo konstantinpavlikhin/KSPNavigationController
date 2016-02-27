@@ -120,6 +120,7 @@
 		B587C4471C8199E500D0AD1E /* KSPNavigationController.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = KSPNavigationController.plist; path = Resources/KSPNavigationController.plist; sourceTree = "<group>"; };
 		B587C4491C819BC900D0AD1E /* KSPNavigationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KSPNavigationController.xib; path = Resources/KSPNavigationController.xib; sourceTree = "<group>"; };
 		B587C44B1C819E7900D0AD1E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Sources/main.m; sourceTree = "<group>"; };
+		B587C44D1C81A09700D0AD1E /* KSPNavigationController.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = KSPNavigationController.modulemap; sourceTree = "<group>"; };
 		B5EA98881C120DD700937655 /* KSPNavigationController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSPNavigationController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5EA98A61C121BC800937655 /* KSPNavigationControllerFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSPNavigationControllerFramework.h; path = Sources/KSPNavigationControllerFramework.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,6 +147,7 @@
 		B53531E11C0F03CB00E7AB33 = {
 			isa = PBXGroup;
 			children = (
+				B587C44D1C81A09700D0AD1E /* KSPNavigationController.modulemap */,
 				B5EA98A61C121BC800937655 /* KSPNavigationControllerFramework.h */,
 				B53532381C0F059E00E7AB33 /* KSPViewController */,
 				B53532371C0F059700E7AB33 /* KSPView */,
@@ -630,6 +632,7 @@
 				INFOPLIST_FILE = Resources/KSPNavigationController.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = KSPNavigationController.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = com.konstantinpavlikhin.KSPNavigationController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -651,6 +654,7 @@
 				INFOPLIST_FILE = Resources/KSPNavigationController.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = KSPNavigationController.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = com.konstantinpavlikhin.KSPNavigationController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

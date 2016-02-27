@@ -10,7 +10,7 @@
 
 #import "SecondViewController.h"
 
-#import "KSPNavigationController.h"
+@import KSPNavigationController.KSPNavigationController;
 
 @implementation FirstViewController
 
