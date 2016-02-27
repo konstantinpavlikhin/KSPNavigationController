@@ -21,6 +21,7 @@
 		B5416C2E1C7226B200C2C60A /* Arrow-highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5416C2C1C7226B200C2C60A /* Arrow-highlighted@2x.png */; };
 		B5416C311C7226B800C2C60A /* Arrow-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B5416C2F1C7226B800C2C60A /* Arrow-normal.png */; };
 		B5416C321C7226B800C2C60A /* Arrow-normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5416C301C7226B800C2C60A /* Arrow-normal@2x.png */; };
+		B587C44A1C819BC900D0AD1E /* KSPNavigationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B587C4491C819BC900D0AD1E /* KSPNavigationController.xib */; };
 		B5EA98901C120E4C00937655 /* KSPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532241C0F055A00E7AB33 /* KSPViewController.m */; };
 		B5EA98911C120E4E00937655 /* KSPView.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532221C0F055A00E7AB33 /* KSPView.m */; };
 		B5EA98921C120E5200937655 /* KSPHitTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532161C0F055A00E7AB33 /* KSPHitTestView.m */; };
@@ -29,7 +30,6 @@
 		B5EA98951C120E5E00937655 /* KSPBackButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532131C0F055A00E7AB33 /* KSPBackButtonCell.m */; };
 		B5EA98961C120E6500937655 /* KSPBackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532111C0F055A00E7AB33 /* KSPBackButton.m */; };
 		B5EA98971C120E6900937655 /* KSPNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B535321F1C0F055A00E7AB33 /* KSPNavViewController.m */; };
-		B5EA98981C120E7100937655 /* KSPNavigationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B53532191C0F055A00E7AB33 /* KSPNavigationController.xib */; };
 		B5EA98991C120E7900937655 /* KSPNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B53532181C0F055A00E7AB33 /* KSPNavigationController.m */; };
 		B5EA989A1C120E7D00937655 /* KSPNavigationController.strings in Resources */ = {isa = PBXBuildFile; fileRef = B53532331C0F057400E7AB33 /* KSPNavigationController.strings */; };
 		B5EA989B1C1211B300937655 /* KSPNavigationControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B535321B1C0F055A00E7AB33 /* KSPNavigationControllerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -77,29 +77,28 @@
 		B53532051C0F04B200E7AB33 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B53532061C0F04B200E7AB33 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B535320C1C0F04DE00E7AB33 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
-		B53532101C0F055A00E7AB33 /* KSPBackButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPBackButton.h; sourceTree = "<group>"; };
-		B53532111C0F055A00E7AB33 /* KSPBackButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPBackButton.m; sourceTree = "<group>"; };
-		B53532121C0F055A00E7AB33 /* KSPBackButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPBackButtonCell.h; sourceTree = "<group>"; };
-		B53532131C0F055A00E7AB33 /* KSPBackButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPBackButtonCell.m; sourceTree = "<group>"; };
-		B53532151C0F055A00E7AB33 /* KSPHitTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPHitTestView.h; sourceTree = "<group>"; };
-		B53532161C0F055A00E7AB33 /* KSPHitTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPHitTestView.m; sourceTree = "<group>"; };
-		B53532171C0F055A00E7AB33 /* KSPNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPNavigationController.h; sourceTree = "<group>"; };
-		B53532181C0F055A00E7AB33 /* KSPNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPNavigationController.m; sourceTree = "<group>"; };
-		B53532191C0F055A00E7AB33 /* KSPNavigationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KSPNavigationController.xib; sourceTree = "<group>"; };
-		B535321A1C0F055A00E7AB33 /* KSPNavigationController+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KSPNavigationController+Private.h"; sourceTree = "<group>"; };
-		B535321B1C0F055A00E7AB33 /* KSPNavigationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPNavigationControllerDelegate.h; sourceTree = "<group>"; };
-		B535321C1C0F055A00E7AB33 /* KSPNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPNavigationView.h; sourceTree = "<group>"; };
-		B535321D1C0F055A00E7AB33 /* KSPNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPNavigationView.m; sourceTree = "<group>"; };
-		B535321E1C0F055A00E7AB33 /* KSPNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPNavViewController.h; sourceTree = "<group>"; };
-		B535321F1C0F055A00E7AB33 /* KSPNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPNavViewController.m; sourceTree = "<group>"; };
-		B53532201C0F055A00E7AB33 /* KSPNavViewController+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KSPNavViewController+Private.h"; sourceTree = "<group>"; };
-		B53532211C0F055A00E7AB33 /* KSPView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPView.h; sourceTree = "<group>"; };
-		B53532221C0F055A00E7AB33 /* KSPView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPView.m; sourceTree = "<group>"; };
-		B53532231C0F055A00E7AB33 /* KSPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPViewController.h; sourceTree = "<group>"; };
-		B53532241C0F055A00E7AB33 /* KSPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPViewController.m; sourceTree = "<group>"; };
-		B53532251C0F055A00E7AB33 /* KSPViewController+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KSPViewController+Private.h"; sourceTree = "<group>"; };
-		B53532261C0F055A00E7AB33 /* NSView+Screenshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+Screenshot.h"; sourceTree = "<group>"; };
-		B53532271C0F055A00E7AB33 /* NSView+Screenshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+Screenshot.m"; sourceTree = "<group>"; };
+		B53532101C0F055A00E7AB33 /* KSPBackButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSPBackButton.h; path = Sources/KSPBackButton.h; sourceTree = "<group>"; };
+		B53532111C0F055A00E7AB33 /* KSPBackButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSPBackButton.m; path = Sources/KSPBackButton.m; sourceTree = "<group>"; };
+		B53532121C0F055A00E7AB33 /* KSPBackButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSPBackButtonCell.h; path = Sources/KSPBackButtonCell.h; sourceTree = "<group>"; };
+		B53532131C0F055A00E7AB33 /* KSPBackButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSPBackButtonCell.m; path = Sources/KSPBackButtonCell.m; sourceTree = "<group>"; };
+		B53532151C0F055A00E7AB33 /* KSPHitTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSPHitTestView.h; path = Sources/KSPHitTestView.h; sourceTree = "<group>"; };
+		B53532161C0F055A00E7AB33 /* KSPHitTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSPHitTestView.m; path = Sources/KSPHitTestView.m; sourceTree = "<group>"; };
+		B53532171C0F055A00E7AB33 /* KSPNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSPNavigationController.h; path = Sources/KSPNavigationController.h; sourceTree = "<group>"; };
+		B53532181C0F055A00E7AB33 /* KSPNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSPNavigationController.m; path = Sources/KSPNavigationController.m; sourceTree = "<group>"; };
+		B535321A1C0F055A00E7AB33 /* KSPNavigationController+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "KSPNavigationController+Private.h"; path = "Sources/KSPNavigationController+Private.h"; sourceTree = "<group>"; };
+		B535321B1C0F055A00E7AB33 /* KSPNavigationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSPNavigationControllerDelegate.h; path = Sources/KSPNavigationControllerDelegate.h; sourceTree = "<group>"; };
+		B535321C1C0F055A00E7AB33 /* KSPNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSPNavigationView.h; path = Sources/KSPNavigationView.h; sourceTree = "<group>"; };
+		B535321D1C0F055A00E7AB33 /* KSPNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSPNavigationView.m; path = Sources/KSPNavigationView.m; sourceTree = "<group>"; };
+		B535321E1C0F055A00E7AB33 /* KSPNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSPNavViewController.h; path = Sources/KSPNavViewController.h; sourceTree = "<group>"; };
+		B535321F1C0F055A00E7AB33 /* KSPNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSPNavViewController.m; path = Sources/KSPNavViewController.m; sourceTree = "<group>"; };
+		B53532201C0F055A00E7AB33 /* KSPNavViewController+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "KSPNavViewController+Private.h"; path = "Sources/KSPNavViewController+Private.h"; sourceTree = "<group>"; };
+		B53532211C0F055A00E7AB33 /* KSPView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSPView.h; path = Sources/KSPView.h; sourceTree = "<group>"; };
+		B53532221C0F055A00E7AB33 /* KSPView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSPView.m; path = Sources/KSPView.m; sourceTree = "<group>"; };
+		B53532231C0F055A00E7AB33 /* KSPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSPViewController.h; path = Sources/KSPViewController.h; sourceTree = "<group>"; };
+		B53532241C0F055A00E7AB33 /* KSPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSPViewController.m; path = Sources/KSPViewController.m; sourceTree = "<group>"; };
+		B53532251C0F055A00E7AB33 /* KSPViewController+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "KSPViewController+Private.h"; path = "Sources/KSPViewController+Private.h"; sourceTree = "<group>"; };
+		B53532261C0F055A00E7AB33 /* NSView+Screenshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSView+Screenshot.h"; path = "Sources/NSView+Screenshot.h"; sourceTree = "<group>"; };
+		B53532271C0F055A00E7AB33 /* NSView+Screenshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSView+Screenshot.m"; path = "Sources/NSView+Screenshot.m"; sourceTree = "<group>"; };
 		B53532341C0F057400E7AB33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/KSPNavigationController.strings; sourceTree = "<group>"; };
 		B53532361C0F058100E7AB33 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/KSPNavigationController.strings; sourceTree = "<group>"; };
 		B53532401C0F196B00E7AB33 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
@@ -113,15 +112,16 @@
 		B53532521C0F6CE700E7AB33 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		B53532531C0F6CE700E7AB33 /* SecondView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondView.xib; sourceTree = "<group>"; };
 		B53532561C0F6D0700E7AB33 /* SecondViewController+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SecondViewController+Private.h"; sourceTree = "<group>"; };
-		B5416C271C7226AC00C2C60A /* Arrow-disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-disabled.png"; sourceTree = "<group>"; };
-		B5416C281C7226AC00C2C60A /* Arrow-disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-disabled@2x.png"; sourceTree = "<group>"; };
-		B5416C2B1C7226B200C2C60A /* Arrow-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-highlighted.png"; sourceTree = "<group>"; };
-		B5416C2C1C7226B200C2C60A /* Arrow-highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-highlighted@2x.png"; sourceTree = "<group>"; };
-		B5416C2F1C7226B800C2C60A /* Arrow-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-normal.png"; sourceTree = "<group>"; };
-		B5416C301C7226B800C2C60A /* Arrow-normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-normal@2x.png"; sourceTree = "<group>"; };
+		B5416C271C7226AC00C2C60A /* Arrow-disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Arrow-disabled.png"; path = "Resources/Arrow-disabled.png"; sourceTree = "<group>"; };
+		B5416C281C7226AC00C2C60A /* Arrow-disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Arrow-disabled@2x.png"; path = "Resources/Arrow-disabled@2x.png"; sourceTree = "<group>"; };
+		B5416C2B1C7226B200C2C60A /* Arrow-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Arrow-highlighted.png"; path = "Resources/Arrow-highlighted.png"; sourceTree = "<group>"; };
+		B5416C2C1C7226B200C2C60A /* Arrow-highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Arrow-highlighted@2x.png"; path = "Resources/Arrow-highlighted@2x.png"; sourceTree = "<group>"; };
+		B5416C2F1C7226B800C2C60A /* Arrow-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Arrow-normal.png"; path = "Resources/Arrow-normal.png"; sourceTree = "<group>"; };
+		B5416C301C7226B800C2C60A /* Arrow-normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Arrow-normal@2x.png"; path = "Resources/Arrow-normal@2x.png"; sourceTree = "<group>"; };
+		B587C4471C8199E500D0AD1E /* KSPNavigationController.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = KSPNavigationController.plist; path = Resources/KSPNavigationController.plist; sourceTree = "<group>"; };
+		B587C4491C819BC900D0AD1E /* KSPNavigationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KSPNavigationController.xib; path = Resources/KSPNavigationController.xib; sourceTree = "<group>"; };
 		B5EA98881C120DD700937655 /* KSPNavigationController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSPNavigationController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5EA98A31C1212FF00937655 /* KSPNavigationController.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = KSPNavigationController.plist; sourceTree = "<group>"; };
-		B5EA98A61C121BC800937655 /* KSPNavigationControllerFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPNavigationControllerFramework.h; sourceTree = "<group>"; };
+		B5EA98A61C121BC800937655 /* KSPNavigationControllerFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSPNavigationControllerFramework.h; path = Sources/KSPNavigationControllerFramework.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,7 +173,7 @@
 				B535323D1C0F05DC00E7AB33 /* NSView+Screenshot */,
 				B535323C1C0F05D300E7AB33 /* KSPBackButton */,
 				B535323A1C0F05B600E7AB33 /* KSPNavViewController */,
-				B53532191C0F055A00E7AB33 /* KSPNavigationController.xib */,
+				B587C4491C819BC900D0AD1E /* KSPNavigationController.xib */,
 				B535321B1C0F055A00E7AB33 /* KSPNavigationControllerDelegate.h */,
 				B53532171C0F055A00E7AB33 /* KSPNavigationController.h */,
 				B535321A1C0F055A00E7AB33 /* KSPNavigationController+Private.h */,
@@ -286,7 +286,7 @@
 			children = (
 				B53532441C0F1A8600E7AB33 /* README.md */,
 				B53532401C0F196B00E7AB33 /* LICENSE.md */,
-				B5EA98A31C1212FF00937655 /* KSPNavigationController.plist */,
+				B587C4471C8199E500D0AD1E /* KSPNavigationController.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -449,13 +449,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5EA98981C120E7100937655 /* KSPNavigationController.xib in Resources */,
 				B5416C2D1C7226B200C2C60A /* Arrow-highlighted.png in Resources */,
 				B5416C2A1C7226AC00C2C60A /* Arrow-disabled@2x.png in Resources */,
 				B5416C321C7226B800C2C60A /* Arrow-normal@2x.png in Resources */,
 				B5EA989A1C120E7D00937655 /* KSPNavigationController.strings in Resources */,
 				B5416C291C7226AC00C2C60A /* Arrow-disabled.png in Resources */,
 				B5416C2E1C7226B200C2C60A /* Arrow-highlighted@2x.png in Resources */,
+				B587C44A1C819BC900D0AD1E /* KSPNavigationController.xib in Resources */,
 				B5416C311C7226B800C2C60A /* Arrow-normal.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -508,6 +508,7 @@
 				B53532361C0F058100E7AB33 /* ru */,
 			);
 			name = KSPNavigationController.strings;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -626,7 +627,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = KSPNavigationController.plist;
+				INFOPLIST_FILE = Resources/KSPNavigationController.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.konstantinpavlikhin.KSPNavigationController;
@@ -647,7 +648,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = KSPNavigationController.plist;
+				INFOPLIST_FILE = Resources/KSPNavigationController.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.konstantinpavlikhin.KSPNavigationController;
