@@ -70,6 +70,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B525C4EC1C8475000017E4A4 /* KSPNavigationController.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KSPNavigationController.podspec; sourceTree = "<group>"; };
 		B53531EA1C0F03CB00E7AB33 /* SampleApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53531FF1C0F04B200E7AB33 /* ApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApplicationDelegate.h; path = Sources/ApplicationDelegate.h; sourceTree = "<group>"; };
 		B53532001C0F04B200E7AB33 /* ApplicationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ApplicationDelegate.m; path = Sources/ApplicationDelegate.m; sourceTree = "<group>"; };
@@ -286,9 +287,10 @@
 		B535323F1C0F195300E7AB33 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B525C4EC1C8475000017E4A4 /* KSPNavigationController.podspec */,
+				B587C4471C8199E500D0AD1E /* KSPNavigationController.plist */,
 				B53532441C0F1A8600E7AB33 /* README.md */,
 				B53532401C0F196B00E7AB33 /* LICENSE.md */,
-				B587C4471C8199E500D0AD1E /* KSPNavigationController.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
