@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   spec.name = 'KSPNavigationController'
 
-  spec.version = '0.1.0'
+  spec.version = '0.1'
 
   spec.cocoapods_version = '>= 1.0.0.beta.5'
 
